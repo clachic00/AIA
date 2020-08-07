@@ -131,20 +131,26 @@
 
 	<insert id="insertMember"
 		parameterType="com.ci.op.member.model.Member"
-		useGeneratedKeys="true"
-		keyProperty="uidx"
+	
 		>
 
 		
 		
 		insert into finalproject.member (uid, upw, uname, uphoto, uphone) values
 		(#{uid}, #{upw}, #{uname}, #{uphoto}, #{uphone})
+		
+		
+		
+		
 	</insert>
 
+		<!-- useGeneratedKeys="true"
+		keyProperty="uidx" -->
 
-
-
-
+<!--
+<![CDATA[ idx<10 and idx>1 ]]> 
+	엘리먼트 <> 를 엘리먼트의 시작과 끝으로 인식하지 않도록 처리 
+		즉 테그(엘리먼트로) 로 인식하는것을 무시하는것 -->
 
 
 

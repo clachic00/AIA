@@ -73,12 +73,27 @@ public class Member {
 	public Date getUregdate() {
 		return uregdate;
 	}
+	
+	
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	public void setUregdate(Date uregdate) {
 		this.uregdate = uregdate;
 	}
+	
+//	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	public java.util.Date getToDate(){
 		return new java.util.Date(uregdate.getTime());
 	}
+	
+	// Member -> LoginInfo : 로그인 처리시 저장할 데이터
+		public LoginInfo toLoginInfo() {
+			return new LoginInfo(uid, uname, uphoto) ;
+		}
+	
+	
+	
+	
+	
 	
 	
 	

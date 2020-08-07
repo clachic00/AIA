@@ -83,12 +83,13 @@ public class MemberRegRequest {
 
 
 
-	public MemberRegRequest(String uid, String upw, String uname, String uphone, MultipartFile photo) {
+	public MemberRegRequest(String uid, String upw, String uname,  MultipartFile photo, String uphone) {
 		this.uid = uid;
 		this.upw = upw;
 		this.uname = uname;
-		this.uphone = uphone;
 		this.photo = photo;
+		this.uphone = uphone;
+		
 	}
 
 

@@ -73,7 +73,13 @@ public class MemberRegService {
 				member.setUphoto("defalult.png");
 			}
 			
+			System.out.println("1"+member);
+
+			
 			result = dao.insertMember(member);
+			
+			System.out.println("2"+member);
+			
 			
 		
 		} catch (IllegalStateException e) {
