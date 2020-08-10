@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
 
 <form id="regForm" method="post" enctype="multipart/form-data">
 

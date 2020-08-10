@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>멤버 정보</title>
+<title>Insert title here</title>
 </head>
 <body>
 
 
-<div>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
-${member}
 
-</div>
+${loginInfo }
+
+
 
 
 </body>
