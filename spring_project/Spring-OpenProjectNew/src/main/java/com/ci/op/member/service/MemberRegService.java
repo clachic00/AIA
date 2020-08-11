@@ -37,6 +37,9 @@ public class MemberRegService {
 			MemberRegRequest regRequest,
 			HttpServletRequest request
 			) {
+		
+		dao=sessionTemplate.getMapper(MemberDaoInterface.class);
+		
 		int result = 0;
 		
 		Member member = regRequest.toMember();
@@ -73,12 +76,10 @@ public class MemberRegService {
 				member.setUphoto("defalult.png");
 			}
 			
-			System.out.println("1"+member);
 
 			
 			result = dao.insertMember(member);
 			
-			System.out.println("2"+member);
 			
 			
 		

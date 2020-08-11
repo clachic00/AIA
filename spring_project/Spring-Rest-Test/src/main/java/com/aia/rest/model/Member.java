@@ -22,7 +22,6 @@ public class Member {
 		this.name = name;
 		this.email = email;
 		this.photo = photo;
-		
 		this.regdate = regdate;
 	}
 
