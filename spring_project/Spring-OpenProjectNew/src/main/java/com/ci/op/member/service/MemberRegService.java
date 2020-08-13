@@ -63,7 +63,7 @@ public class MemberRegService {
 				String realPath = request.getSession().getServletContext().getRealPath(uri);
 				// 저장할 이미지 파일의 새로운 이름 생성
 				String newFileName = System.nanoTime() + "_" + file.getOriginalFilename();
-
+				
 				// 서버의 저장소에 실제 저장
 				File saveFile = new File(realPath, newFileName);
 				file.transferTo(saveFile);

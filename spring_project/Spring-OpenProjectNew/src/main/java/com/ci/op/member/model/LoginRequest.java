@@ -6,7 +6,7 @@ public class LoginRequest {
 	private String upw;
 	private String redirecUri;
 	private String remember;
-
+	
 	public String getUid() {
 		return uid;
 	}
