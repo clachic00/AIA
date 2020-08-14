@@ -105,7 +105,7 @@ console.log(end);
 
 
 
-var betweenDay = (end.getTime() - curr.getTime()) / 1000 / 60 / 60 / 24;
+var betweenDay = (end.getTime() - curr.getTime())/1000/60/60/24;
 
 console.log(curr.getTime());
 console.log(end.getTime());
@@ -115,13 +115,8 @@ console.log(betweenDay);
 console.log(curr.getFullYear()+','+curr.getMonth()+','+curr.getDate());
 while (betweenDay > 0) {
 betweenDay--;
-
-
 curr.setDate(curr.getDate() + 1);
 console.log(curr.getFullYear()+','+curr.getMonth()+','+curr.getDate());
-
-
-
 }	
 
 
@@ -141,7 +136,7 @@ call( );
 </head>
 <body>
 
-		<form method="post">
+		<form method="post" >
 		제목을 입력해주세요<input type="text" name="ptitle">
 		<p>StartDate : <input type="text" id="datepicker" name="startdate" onchange="call()" autocomplete="off"></p>
     	<p>EndDate : <input type="text" id="datepicker2" name ="enddate" onchange="call()" autocomplete="off"></p>

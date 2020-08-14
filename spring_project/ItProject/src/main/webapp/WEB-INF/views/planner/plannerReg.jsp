@@ -41,7 +41,7 @@ console.log(end);
 
 
 
-var betweenDay = (end.getTime() - curr.getTime()) / 1000 / 60 / 60 / 24;
+var betweenDay = (end.getTime() - curr.getTime())/1000/60/60/24;
 
 console.log(curr.getTime());
 console.log(end.getTime());
@@ -49,11 +49,13 @@ console.log(end.getTime());
 console.log(betweenDay);
 
 console.log(curr.getFullYear()+','+curr.getMonth()+','+curr.getDate());
+
 while (betweenDay > 0) {
 betweenDay--;
 
 
 curr.setDate(curr.getDate() + 1);
+
 console.log(curr.getFullYear()+','+curr.getMonth()+','+curr.getDate());
 
 
