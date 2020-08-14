@@ -26,6 +26,9 @@ public class PlannerRegController {
 								Planner planner,
 								Model model) {
 		model.addAttribute("result", regService.plannerReg(planner, request));
+		model.addAttribute("startdate", request.getParameter("startdate"));
+		model.addAttribute("enddate", request.getParameter("enddate"));
+
 		return "planner/plannerReg";
 	}
 }

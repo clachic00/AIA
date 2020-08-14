@@ -23,6 +23,7 @@ public class PlannerRegService {
 		
 		int result = 0;
 		
+		
 		result = dao.insertPlanner(planner);
 		
 		return result;
