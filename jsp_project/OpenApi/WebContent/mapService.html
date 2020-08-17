@@ -12,6 +12,8 @@
     <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
     <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
     <script>
@@ -94,6 +96,8 @@
                                                     '</div>'
                                                     
                                                     ;
+                                                    
+                                                 
                                         // 마커를 클릭한 위치에 표시합니다 
                                         marker.setPosition(mouseEvent.latLng);
                                         
@@ -105,6 +109,8 @@
                                         // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                                         infowindow.setContent(content);
                                         infowindow.open(map, marker); 
+                                        $('#Lng').html(marker.getPosition().getLng());
+                                        $('#Lat').html(marker.getPosition().getLat());
                                     }   
                                 });
                             });
@@ -171,8 +177,10 @@
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
     <div class="hAddr">
-        <span class="title">지도중심기준 행정동 주소정보</span>
         <span id="centerAddr"></span>
+        <span id="Lng"></span><br>
+        <span id="Lat"></span>
+        
     </div>
 </div>
 </body>
