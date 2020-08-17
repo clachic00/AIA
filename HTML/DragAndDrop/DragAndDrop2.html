@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+	<script>
+
+		$(document).ready(function () {
+
+			console.log("ready!");
+
+			$(".parent").sortable({
+
+				flow: 'horizontal',
+
+				axis: "x",
+
+				revert: false, // Whether the sortable items should revert to their new positions using a smooth animation.
+
+				scroll: false,
+
+				containment: "parent",
+
+				placeholder: "sortable-placeholder",
+
+				cursor: "move",
+
+				cursorAt: { left: 5 },
+
+				sort: function (e, div) {
+
+					$(div.placeholder).html('<img src=\'/경로1/이미지파일.png\' style=\'float:left;\' />'); // 아이템 사이 구분하는 구분자.
+
+				},
+
+				change: function (event, ui) {
+
+					//alert('change');
+
+				},
+
+				stop: function (e, ui) {
+
+					//alert('stop');
+
+				},
+
+				update: function (event, ui) {
+
+					var arrFileName = new Array();
+
+					// 아이템 추출. ui.item.
+
+					$('.son').each(function (index) {
+
+						var fileName = $(this).attr('파일명');
+
+						arrFileName.push(fileName);
+
+					});
+
+
+
+					$.ajax({
+
+						type: "POST",
+
+						url: "<c:url value=" / "/>",
+
+						data: { "arr_file_name": arrFileName.toString() },
+
+						dataType: "json",
+
+						success: function (data) {
+
+							if (data.result > 0) {
+
+								fnAlert("순서가 변경되었습니다.");
+
+							}
+
+							else {
+
+								fnAlert("순서 변경 처리중 에러가 발생했습니다.\n잠시후 다시 시도해 주세요.");
+
+							}
+
+						},
+
+						error: function (e) {
+
+							fnAlert("순서 변경 중 에러가 발생했습니다.\n잠시후 다시 시도해 주세요.");
+
+						}
+
+					});
+
+				}
+
+
+
+			});
+
+
+
+
+
+		});
+
+	</script>
+
+
+
+	<style>
+		.parent {
+			position: relative;
+			height: 110px;
+		}
+
+		.parent.son {
+			left: 0;
+			float: left;
+			margin-left: 2px;
+			margin-right: 2px;
+		}
+	</style>
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+	<div class="parent">
+
+		<div class="son" id="image_0" data-fileName='파일명'>
+
+			<img src="../image/Twiter.jpg" />30000
+
+		</div>
+
+		<div class="son" id="image_1" data-fileName='파일명'>
+
+			<img src="../image/logo.png" />300000
+
+		</div>
+
+
+
+		<div class="son" id="image_6" data-fileName='파일명'>
+
+			<img src="../image/sam.jpg" />300000000
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>
