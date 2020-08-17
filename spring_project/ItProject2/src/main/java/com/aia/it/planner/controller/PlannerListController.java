@@ -1,0 +1,36 @@
+package com.aia.it.planner.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.aia.it.planner.model.Planner;
+import com.aia.it.planner.service.PlannerEditService;
+import com.aia.it.planner.service.PlannerListService;
+
+@Controller
+@RequestMapping("/planner/plannerList")
+public class PlannerListController {
+
+	@Autowired
+	PlannerListService listService;
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String getPlannerRegForm() {
+		return "planner/plannerEditForm";
+	}
+	@RequestMapping(method = RequestMethod.POST)
+	public String getPlannerReg (HttpServletRequest request,
+								Planner planner,
+								Model model) {
+		System.out.println(planner);
+		model.addAttribute("result", listService.plannerList(planner, request));
+		return "planner/plannerEdit";
+	}
+	
+	
+}

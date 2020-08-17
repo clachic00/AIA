@@ -12,6 +12,15 @@
     padding:10px;
     margin-bottom:10px;
 }
+
+.itemBox2 {
+    border:solid 1px black;
+    width:400px;
+    height:50px;
+    padding:10px;
+    margin-bottom:10px;
+}
+
 .itemBoxHighlight {
     border:solid 1px black;
     width:400px;
@@ -66,7 +75,7 @@ function validateItem() {
 /** UI 설정 */
 $(function() {
     $(".please").sortable({
-        placeholder:"itemBoxHighlight",
+        // placeholder:"itemBoxHighlight",
 
         connectWith:".please",
 
@@ -98,21 +107,29 @@ function reorder() {
     $(".itemBox").each(function(i, box) {
         $(box).find(".itemNum").html(i + 1);
     });
+    $(".itemBox2").each(function(i, box) {
+        $(box).find(".itemNum").html(i + 1);
+    });
+
+
 }
+
+
+
 
 /** 아이템 추가 */
 function createItem() {
     $(createBox())
     .appendTo("#itemBoxWrap")
     .hover(
-        function() {
-            $(this).css('backgroundColor', '#f9f9f5');
-            $(this).find('.deleteBox').show();
-        },
-        function() {
-            $(this).css('background', 'none');
-            $(this).find('.deleteBox').hide();
-        }
+        // function() {
+        //     $(this).css('backgroundColor', '#f9f9f5');
+        //     $(this).find('.deleteBox').show();
+        // },
+        // function() {
+        //     $(this).css('background', 'none');
+        //     $(this).find('.deleteBox').hide();
+        // }
     )
       .append("<div class='deleteBox'>[삭제]</div>")
       .find(".deleteBox").click(function() {
@@ -133,18 +150,24 @@ function createItem() {
     });
     // 숫자를 다시 붙인다.
     reorder();
+
+    setColor();
+    getColor();
+
+
+
 }
 
 /** 아이템 추가 */
 function createItem2() {
-    $(createBox())
+    $(createBox2())
     .appendTo("#itemBoxWrap2")
     .hover(
         function() {
             $(this).css('backgroundColor', '#f9f9f5');
             $(this).find('.deleteBox').show();
         },
-        function() {
+             function() {
             $(this).css('background', 'none');
             $(this).find('.deleteBox').hide();
         }
@@ -165,11 +188,13 @@ function createItem2() {
             $(this).parent().remove();
             reorder();
         }
+      
+
     });
     // 숫자를 다시 붙인다.
     reorder();
+    getColor();
 }
-
 
 
 /** 아이템 박스 작성 */
@@ -190,7 +215,7 @@ function createItem2() {
 function createBox() {
 
     var contents =         
-                  "<li class='itemBox'>"
+                  "<li class='itemBox' id='"+MyIDvariable+"'>"
                  + "<div style='float:left;'>"
                  + "<span class='itemNum'></span> "
                  + "<input type='text' name='item' style='width:300px;'/>"
@@ -200,7 +225,37 @@ function createBox() {
     return contents;
 }
 
+function createBox2() {
+
+var contents =         
+              "<li class='itemBox' id='itemBox2'>"
+             + "<div style='float:left;'>"
+             + "<span class='itemNum'></span> "
+             + "<input type='text' name='item' style='width:300px;'/>"
+             + "</div>"
+             + "</li>";
+          
+return contents;
+}
+
+
 //]]>
+
+
+function getColor(){
+
+
+}
+
+
+function setColor(){
+    var box = document.getElementById("itemBox");
+$(box).css('background-color','red');
+
+
+}
+
+
 
 
 
@@ -219,8 +274,10 @@ function createBox() {
 
     </div>
 </div>
+
+
 <br />
-<ul id="itemBoxWrap"  class="please" value="1"></ul>
+<ul id="itemBoxWrap"  class="please" value="${d.color}"></ul>
 <ul id="itemBoxWrap2"  class="please" value="2"></ul>
 <br />
 <ul id="sortable">
