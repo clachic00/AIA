@@ -163,22 +163,22 @@
 </script>
 <body>
 	<form action="plannerReg" method="post">
-	<input type="text" name="uidx" value="${uidx}">
-	<input type="text" name="pstartdate" value="${datepicker}">/<input type="text" name="datepicker2" value="${enddate}">
-	<input type="text" name="ptitle">
+	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
+	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
+	제목<input type="text" name="ptitle" value="${ptitle}">
 		<div id="sortable">
 			<c:forEach items="${dateList}" var="list">
 				<div class="please" name="dailytable">${list}
 					<div class="itembox">
 						<a href="../daily/dailyReg">+</a>
 					</div>
-					<div class="itembox"></div>
-					<div class="itembox"></div>
-					<div class="itembox"></div>
+						<div class="itembox"></div>
+						<div class="itembox"></div>
+						<div class="itembox"></div>
 				</div>
 			</c:forEach>
 		</div>
-		<input type="submit" value="완료">
+		
 	</form>
 </body>
 </html>

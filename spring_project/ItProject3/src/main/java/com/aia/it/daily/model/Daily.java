@@ -11,8 +11,15 @@ public class Daily {
 	private String dtype;
 	private int pidx;
 
+	
+	
+	
+	public Daily() {
+
+	}
+
 	public Daily(String dloc, String dloclon, String dloclat, String dmsg, String dtype, int pidx) {
-		this(0,dloc,dloclon,dloclat,dmsg,null,dtype, pidx);
+		this(0,dloc,dloclon,dloclat,dmsg,null,dtype,pidx);
 	}
 
 	public Daily(int didx, String dloc, String dloclon, String dloclat, String dmsg, String dphoto, String dtype, int pidx) {
