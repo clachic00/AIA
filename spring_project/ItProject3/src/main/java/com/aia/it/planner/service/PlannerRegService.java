@@ -26,7 +26,14 @@ public class PlannerRegService {
 		
 		int result = 0;
 		
+		
+		
+		
 		result = dao.insertPlanner(planner);
+		
+		System.out.println(planner.getPidx());
+		
+		
 		
 		return result;
 	}

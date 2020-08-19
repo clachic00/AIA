@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<form action="dailyReg" method="post" enctype="multipart/form-data">
+<form action="<c:url value='/daily/dailyReg'/>" method="post" enctype="multipart/form-data">
+		pidx		<input type="text" name="pidx" value="${planner.pidx}">	<br>
 
 		dloc		<input type="text" name="dloc">	<br>
 		dloclon		<input type="text" name="dloclon"><br>
@@ -26,7 +26,7 @@
 				
 					</select>
 					<br>
-		pidx		<input type="text" name="pidx"><br>
+		pidx		<input type="text" name="pidx" ><br>
 		ddate(날짜)	<input type="text" name="ddate"><br>
 		ddidx(날짜순서)<input type="text" name="ddidx"><br>
 		

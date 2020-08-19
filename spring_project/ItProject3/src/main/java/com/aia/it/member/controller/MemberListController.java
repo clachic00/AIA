@@ -27,6 +27,4 @@ public class MemberListController {
 		return "member/memberList";
 	}
 	
-	
-
 }

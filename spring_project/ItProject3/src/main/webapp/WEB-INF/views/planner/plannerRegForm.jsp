@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
 
+<%   %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,23 +164,107 @@
 	
 </script>
 <body>
-	<form action="plannerReg" method="post">
+
+
+						</div>
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
 	제목<input type="text" name="ptitle" value="${ptitle}">
 		<div id="sortable">
 			<c:forEach items="${dateList}" var="list">
 				<div class="please" name="dailytable">${list}
+				
+				
 					<div class="itembox">
-						<a href="../daily/dailyReg">+</a>
+					<span class="addDaily">등록</span>
+						<div class="content" id="vv"></div>
 					</div>
-						<div class="itembox"></div>
-						<div class="itembox"></div>
-						<div class="itembox"></div>
 				</div>
 			</c:forEach>
 		</div>
 		
-	</form>
+	
+	<hr>
+	
+		<form action="dailyList" method="post">
+	
+		uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
+	
+		<input type="submit" value="리스트뽑기">
+		<input type="text" value="${planner.pidx}">
+	
+		</form>
+	
+		<div>
+		
+		
+		               <c:forEach items="${listView.dailyList}" var="daily">
+                  <tr>
+                     <td>${daily.ptitle}</td>
+                   
+                     <td>${daily.dloc}</td>
+                     <td></td>
+                     <td><a href="${daliy.didx}">${daliy.didx}</a></td>
+                     <td></td>
+                     
+                  </tr>
+               </c:forEach>
+		
+		
+		
+		
+		
+		
+		</div>
+	
+	
+	
+	
+	
+	
 </body>
+
+
+
+
 </html>
+
+<script type="text/javascript">
+
+
+console.log($('.itembox').length);
+		
+		
+		
+		
+		
+		
+		$('.addDaily').click(function () {
+			
+			
+			
+			var z = $(this).next();
+			
+			var t=	$('.addDaily').next();
+		
+			var html='';
+			html+='dloc		<input type="text" name="dloc">	<br>';
+			html+='	dloclon		<input type="text" name="dloclon"><br>';
+			html+='	dloclat		<input type="text" name="dloclat"><br>';
+			html+='dmsg		<input type="text" name="dmsg"><br>';
+			html+='	dphoto		<input type="file" name="dphoto"><br>';
+			
+			t.empty();
+			z.html(html);
+							
+			
+		});
+		
+	
+
+
+
+
+
+
+</script>

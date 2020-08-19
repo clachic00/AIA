@@ -12,9 +12,8 @@ public class DailyRegRequest {
 	private String dmsg;
 	private MultipartFile dphoto;
 	private String dtype;
-	private Date ddate;
+	private String ddate;
 	private int ddidx;
-	
 	private int pidx;
 	
 	public Daily toDaily() {
@@ -78,15 +77,29 @@ public class DailyRegRequest {
 		this.pidx = pidx;
 	}
 
+	public String getDdate() {
+		return ddate;
+	}
+
+	public void setDdate(String ddate) {
+		this.ddate = ddate;
+	}
+
+	public int getDdidx() {
+		return ddidx;
+	}
+
+	public void setDdidx(int ddidx) {
+		this.ddidx = ddidx;
+	}
+
 	@Override
 	public String toString() {
 		return "DailyRegRequest [dloc=" + dloc + ", dloclon=" + dloclon + ", dloclat=" + dloclat + ", dmsg=" + dmsg
-				+ ", dphoto=" + dphoto + ", dtype=" + dtype + ", pidx=" + pidx + "]";
+				+ ", dphoto=" + dphoto + ", dtype=" + dtype + ", ddate=" + ddate + ", ddidx=" + ddidx + ", pidx=" + pidx
+				+ "]";
 	}
 
-	
-	
-	
 	
 	
 	

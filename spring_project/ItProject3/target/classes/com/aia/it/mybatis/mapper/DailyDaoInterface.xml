@@ -16,24 +16,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dmsg" column="dmsg" />
 		<result property="dphoto" column="dphoto" />
 		<result property="dtype" column="dtype" />
+		<result property="ddate" column="ddate" />
+		<result property="ddidx" column="ddidx" />
 		<result property="pidx" column="pidx" />		
-	</resultMap>
+		</resultMap>
 
 
 
 
 
-
-	<insert id="insertDaily"
+	<!-- 데일리 등록  -->
+	<insert id="insertDaily" 
 		parameterType="com.aia.it.daily.model.Daily" 
 		useGeneratedKeys="true"
 		keyProperty="didx">
 
 
-		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, dmsg, dphoto , dtype, pidx)
-		VALUES (#{dloc},#{dloclon},#{dloclat},#{dmsg},#{dphoto},#{dtype},#{pidx})
+		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, dmsg, dphoto, dtype, ddate, ddidx, pidx)
+		VALUES (#{dloc},#{dloclon},#{dloclat},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
 		
 
 	</insert>
+
+	
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

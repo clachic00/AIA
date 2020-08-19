@@ -14,7 +14,7 @@ public class BoardViewController {
 	@Autowired
 	private BoardViewService viewService;
 	
-	//사용자가 요청하는거 : http://localhost:8080/it/board/view/숫자
+	//사용자가 요청하는거 : http://localhost:8080/it/board/view/8
 	@RequestMapping("/board/{bidx}")
 	public String getBoardInfo(
 			@PathVariable("bidx") int bidx,

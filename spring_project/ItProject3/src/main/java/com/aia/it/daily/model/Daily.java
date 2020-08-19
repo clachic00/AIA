@@ -11,7 +11,7 @@ public class Daily {
 	private String dmsg;
 	private String dphoto;
 	private String dtype;
-	private Date ddate;
+	private String ddate;
 	private int ddidx;
 	private int pidx;
 
@@ -22,12 +22,12 @@ public class Daily {
 
 	}
 
-	public Daily(String dloc, String dloclon, String dloclat, String dmsg, String dtype, Date ddate, int ddidx, int pidx) {
+	public Daily(String dloc, String dloclon, String dloclat, String dmsg, String dtype, String ddate, int ddidx, int pidx) {
 		this(0,dloc,dloclon,dloclat,dmsg,null,dtype, ddate, ddidx ,pidx);
 	}
 
 	public Daily(int didx, String dloc, String dloclon, String dloclat, String dmsg, String dphoto, String dtype,
-			Date ddate, int ddidx, int pidx) {
+			String ddate, int ddidx, int pidx) {
 		super();
 		this.didx = didx;
 		this.dloc = dloc;
@@ -105,11 +105,11 @@ public class Daily {
 		this.pidx = pidx;
 	}
 	
-	public Date getDdate() {
+	public String getDdate() {
 		return ddate;
 	}
 
-	public void setDdate(Date ddate) {
+	public void setDdate(String ddate) {
 		this.ddate = ddate;
 	}
 
