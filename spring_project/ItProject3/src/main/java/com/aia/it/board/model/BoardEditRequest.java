@@ -13,8 +13,6 @@ public class BoardEditRequest {
 	private String oldFile2;
 	private int uidx;//회원 닉네임
 
-		
-	
 	
 	public int getBidx() {
 		return bidx;

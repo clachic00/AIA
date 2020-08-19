@@ -1,5 +1,7 @@
 package com.aia.it.daily.model;
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class DailyRegRequest {
@@ -10,11 +12,13 @@ public class DailyRegRequest {
 	private String dmsg;
 	private MultipartFile dphoto;
 	private String dtype;
+	private Date ddate;
+	private int ddidx;
 	
 	private int pidx;
 	
 	public Daily toDaily() {
-		return new Daily(dloc,dloclon,dloclat,dmsg,dtype,pidx);
+		return new Daily(dloc,dloclon,dloclat,dmsg,dtype, ddate, ddidx, pidx);
 	}
 
 	public String getDloc() {
@@ -65,7 +69,6 @@ public class DailyRegRequest {
 		this.dtype = dtype;
 	}
 
-	
 	
 	public int getPidx() {
 		return pidx;
