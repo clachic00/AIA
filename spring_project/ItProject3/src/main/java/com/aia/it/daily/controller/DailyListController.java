@@ -29,7 +29,7 @@ public class DailyListController {
 					) {
 			
 //			int idx = Integer.parseInt(uidx);
-			System.out.println(uidx);
+			System.out.println("uidx : "+uidx);
 			model.addAttribute("listView", listService.getView(request, uidx));
 			
 			return "planner/plannerRegForm";

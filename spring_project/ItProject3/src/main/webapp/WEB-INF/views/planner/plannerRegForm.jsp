@@ -158,6 +158,7 @@
 	}
 	//]]>
 </script>
+
 <title>Insert title here</title>
 </head>
 <script>
@@ -166,7 +167,7 @@
 <body>
 
 
-						</div>
+						
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
 	제목<input type="text" name="ptitle" value="${ptitle}">
@@ -186,7 +187,13 @@
 	
 	<hr>
 	
-		<form action="dailyList" method="post">
+	
+<span id="dailyList"></span>
+	
+	
+	
+	
+<%-- 		<form action="dailyList" method="post">
 	
 		uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	
@@ -195,13 +202,10 @@
 	
 		</form>
 	
-		<div>
-		
-		
+			<div>
 		               <c:forEach items="${listView.dailyList}" var="daily">
                   <tr>
                      <td>${daily.ptitle}</td>
-                   
                      <td>${daily.dloc}</td>
                      <td></td>
                      <td><a href="${daliy.didx}">${daliy.didx}</a></td>
@@ -211,17 +215,9 @@
                </c:forEach>
 		
 		
-		
-		
-		
-		
-		</div>
+			</div> --%>
 	
-	
-	
-	
-	
-	
+
 </body>
 
 
@@ -229,18 +225,21 @@
 
 </html>
 
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 
 
 console.log($('.itembox').length);
 		
 		
-		
-		
-		
-		
 		$('.addDaily').click(function () {
-			
 			
 			
 			var z = $(this).next();
@@ -257,12 +256,61 @@ console.log($('.itembox').length);
 			t.empty();
 			z.html(html);
 							
+			});
+		
+		
+		$(document).ready(function(){
+			
+			dailyList();
 			
 		});
 		
-	
+		
+		
+		function dailyList() {
+			
+			$.ajax({
+				url: 'http://localhost:8080/it/planner/dailyList' ,
+				type: 'POST',
+				data: {
+					
+				uidx : '${loginInfo.uidx}'
+				
+				
+				},
+				success: function(data){
+					alert(data);
+					//alert(JSON.stringify(data));
+					
+					//$('#memberList').html(JSON.stringify(data));
+					
+					var html = '';
+					
+					for(var i=0; i<data.length; i++){
+						
+						
+						html += '<div class="card">';
+						html += '	<ul>';
+						html += '		<li>ptitle : '+data[i].ptitle+'</li>';
+				/* 		html += '		<li>uid : '+data[i].uid+'</li>';
+						html += '		<li>upw : '+data[i].upw+'</li>';
+						html += '		<li>uName : '+data[i].uname+'</li>';
+						html += '		<li>uPhoto :'+data[i].uphoto+'</li>';
+						html += '		<li><input type="button" value="수정" onclick="editForm('+data[i].idx+')"> ';
+						html += '		<input type="button" value="삭제" onclick="deleteMember('+data[i].idx+')"></li>'; */
+						html += '	</ul>';
+						html += '</div>';
+					
+						/* if (.value=ddate) */
+							$('#dailyList').html(html);
+							
+					}
+			
+				} 
+			});
 
-
+		
+		}
 
 
 

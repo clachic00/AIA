@@ -10,7 +10,7 @@ where m.uidx=3
 select *
 from planit.planner p left outer join planit.daily_plan d
 on p.pidx=d.pidx 
-where p.uidx=5
+where p.uidx=3
 ;
 
 
