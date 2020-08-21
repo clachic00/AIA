@@ -37,7 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</resultMap>
 
 	<insert id="insertPlanner"
-		parameterType="com.aia.it.planner.model.Planner" useGeneratedKeys="true"
+		parameterType="com.aia.it.planner.model.Planner" 
+		useGeneratedKeys="true"
 		keyProperty="pidx">
 		
 		INSERT INTO planit.planner (ptitle, pstartdate, penddate, uidx)

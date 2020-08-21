@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>데일리 등록</title>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+
 </head>
 <body>
 <form action="<c:url value='/daily/dailyReg'/>" method="post" enctype="multipart/form-data">

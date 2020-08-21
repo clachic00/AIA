@@ -28,9 +28,12 @@ public class PlannerRegService {
 		
 		
 		
-		
+		System.out.println(planner.getPidx());
+
 		result = dao.insertPlanner(planner);
 		
+		
+		request.setAttribute("pidx", planner.getPidx());
 		System.out.println(planner.getPidx());
 		
 		

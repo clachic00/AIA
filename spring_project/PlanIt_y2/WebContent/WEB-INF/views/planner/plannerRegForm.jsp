@@ -27,7 +27,7 @@
 		}
 		alert("등록");
 	}
-	/** 아이템 체크 */
+	/** 아이템 체크 */ 
 	function validateItem() {
 		var items = $("input[type='text'][name='item']");
 		if (items.length == 0) {
@@ -44,21 +44,21 @@
 		}
 		return flag;
 	}
-	/** UI 설정 */
+	/** UI 설정 */"#sortable-5, #sortable-6"  
 	$(function() {
-		$(".please2").sortable({
+		$(".sortable").sortable({
 			placeholder : "itemBoxHighlight",
-			connectWith : ".please",
+			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
+			
 			start : function(event, ui) {
 				ui.item.data('start_pos', ui.item.index());
 			},
 			stop : function(event, ui) {
 				var spos = ui.item.data('start_pos');
 				var epos = ui.item.index();
-				reorder();
+				/* reorder(); */
 			}
 		});
-		//$("#itemBoxWrap").disableSelection();
 		$("#sortable").sortable();
 		$("#sortable").disableSelection();
 	});
@@ -77,35 +77,36 @@
 	//     return contents;
 	// }
 	/** 아이템 박스 작성 */
-	function createBox() {
-		var contents = "<li class='itemBox'>" + "<div style='float:left;'>"
+/* 	function createBox() {
+		var contents = "<li class='itemBox'>" 
+				+ "<div style='float:left;'>"
 				+ "<span class='itemNum'></span> "
 				+ "<input type='text' name='item' style='width:300px;'/>"
 				+ "</div>" + "</li>";
 		return contents;
-	}
+	} */
+	
+	
 	//]]>
 </script>
-<title>Insert title here</title>
+<title>플래너 작성</title>
 </head>
 <script>
 	
 </script>
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-
-<h1>캘린더 저장후 이리 온다. 일단 경로 잡아둠</h1>
+		pidx <input type="text" name="pidx" value="${pidx}"><br>
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
 	제목<input type="text" name="ptitle" value="${ptitle}">
 		<div id="sortable">
 			<c:forEach items="${dateList}" var="list">
-				<div class="please" name="dailytable"><div class="ddateList">${list}</div>
-				<div class="please2"></div>
-					<div class="itembox">
-						<a href="../daily/dailyReg">+</a>
-					</div>
-						<div class="itembox"></div>
+				<div class="sortable" name="dailytable">
+				
+					<div class="ddateList" class="sortable">${list}</div>
+					<div class="sortable"></div>
+					<div class="addDailyButton" ><a href="../daily/dailyReg">+</a></div>
 						
 				</div>
 			</c:forEach>
@@ -113,29 +114,7 @@
 		
 		<span id="dailyList"></span>
 	
-	<%-- 		<form action="dailyList" method="post">
 	
-		uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
-	
-		<input type="submit" value="리스트뽑기">
-		<input type="text" value="${planner.pidx}">
-	
-		</form>
-	
-			<div>
-		               <c:forEach items="${listView.dailyList}" var="daily">
-                  <tr>
-                     <td>${daily.ptitle}</td>
-                     <td>${daily.dloc}</td>
-                     <td></td>
-                     <td><a href="${daliy.didx}">${daliy.didx}</a></td>
-                     <td></td>
-                     
-                  </tr>
-               </c:forEach>
-		
-		
-			</div> --%>
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
@@ -197,7 +176,7 @@ console.log($('.itembox').length);
 		
 		
 		
-		var please = document.getElementsByClassName("please");
+		var sortable = document.getElementsByClassName("sortable");
 		
 		
 		
@@ -215,9 +194,9 @@ console.log($('.itembox').length);
 						
 			
 						
-					 	html += '<div>';
-						html += '	<ul>';
-						html += '		<li>ptitle : '+data[i].ptitle+'</li>';
+					 	html += '<div class="sortableBox" class="sortable">';
+						html += '	<ul class="sortable">';
+						html += '		<li class="sortable">ptitle : '+data[i].ptitle+'</li>';
 						html += '		<li>ddate : '+data[i].ddate+'</li>';
 
 			
