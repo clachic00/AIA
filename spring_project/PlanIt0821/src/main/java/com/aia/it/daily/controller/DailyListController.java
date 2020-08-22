@@ -5,12 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aia.it.daily.model.DailyRegRequest;
 import com.aia.it.daily.service.DailyListService;
+import com.aia.it.daily.service.DailyRegService;
 import com.aia.it.planner.model.PlannerJoinDaily;
 
 @RestController
@@ -20,26 +22,36 @@ public class DailyListController {
 		@Autowired
 		private DailyListService listService;
 		
-		/* @RequestMapping(method = RequestMethod.POST) */
-		@GetMapping
-		public List<PlannerJoinDaily> getBoardList(
-				int uidx,
-					Model model,
-					HttpServletRequest request
-					) {
+		@Autowired
+		DailyRegService regService;
+		
+		@PostMapping
+		public int getDailyReg (DailyRegRequest regRequest,
+				HttpServletRequest request
+									) {
 			
-//			int idx = Integer.parseInt(uidx);
-			System.out.println(uidx);
-			/* model.addAttribute("listView", listService.getView(request, uidx)); */
+			System.out.println("Daily REG controller : "+regRequest);
 			
-			return listService.getView(request, uidx);
-			
+			return regService.dailyReg(regRequest, request);
 		}
 			
 	
+		
 	
-	
-	
+		
+		
+		@GetMapping
+		public List<PlannerJoinDaily> getDailyList(
+				int uidx,
+				int pidx,
+				HttpServletRequest request
+					) {
+			
+			System.out.println("uidx : "+uidx+" pidx : "+pidx);
+			
+			return listService.getView(request, uidx, pidx);
+			
+		}
 	
 	
 }

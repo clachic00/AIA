@@ -8,18 +8,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-	rel="stylesheet" type="text/css" /> -->
+
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 	
-<style>
-</style>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
+		<!-- 모달  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+
+		<!-- jquery  -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+		<!-- SORTABLE  -->
+	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+
+<script>
+
+	/* @@@@SORTABLE@@@@ */
+	
 	/** 아이템을 등록한다. */
 	function submitItem() {
 		if (!validateItem()) {
@@ -27,6 +36,7 @@
 		}
 		alert("등록");
 	}
+	
 	/** 아이템 체크 */ 
 	function validateItem() {
 		var items = $("input[type='text'][name='item']");
@@ -56,46 +66,71 @@
 			stop : function(event, ui) {
 				var spos = ui.item.data('start_pos');
 				var epos = ui.item.index();
-				/* reorder(); */
+				 reorder();  //순서 조정
 			}
 		});
 		$("#sortable").sortable();
 		$("#sortable").disableSelection();
 	});
 
-	/** 아이템 박스 작성 */
-	// function createBox() {
-	//     var contents = "<div class='date'> 날짜"
-	//     contents +=         
-	//                   "<div class='itemBox'>"
-	//                  + "<div style='float:left;'>"
-	//                  + "<span class='itemNum'></span> "
-	//                  + "<input type='text' name='item' style='width:300px;'/>"
-	//                  + "</div>"
-	//                  + "</div>";
-	//                  contents     += "</div>"
-	//     return contents;
-	// }
-	/** 아이템 박스 작성 */
-/* 	function createBox() {
-		var contents = "<li class='itemBox'>" 
-				+ "<div style='float:left;'>"
-				+ "<span class='itemNum'></span> "
-				+ "<input type='text' name='item' style='width:300px;'/>"
-				+ "</div>" + "</li>";
-		return contents;
-	} */
+	
+	/* 순서 조정 */
+	function reorder() {
+	    $(".sortableBox").each(function(i, box) {
+	        $(box).find("#reorder").html(i + 1);
+	    });
+	   
+
+
+	}
 	
 	
-	//]]>
+	
+	
+	
+	
 </script>
 <title>플래너 작성</title>
 </head>
-<script>
-	
-</script>
+
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+	
+  <div id="dailyModal" class="modal" >
+  
+  	<h2>데일리 작성</h2>
+  
+   <form id="dailyRegForm" onsubmit="return false;" >
+   <%-- action="<c:url value='/planner/dailyList'/>" --%>    
+		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
+
+		dloc		<input type="text" name="dloc" id="dloc">	<br>
+		dloclon		<input type="text" name="dloclon" id="dloclon"><br>
+		dloclat		<input type="text" name="dloclat" id="dloclat"><br>
+		dmsg		<input type="text" name="dmsg" id="dmsg"><br>
+		dphoto		<input type="file" name="dphoto" id="dphoto"><br>
+		dtype		<select name="dtype" id="dtype">
+					<option value="1">빨강</option>
+					<option value="2">파랑</option>
+					<option value="3">초록</option>
+					<option value="4">분홍</option>
+					<option value="5">하양</option>
+				
+					</select>
+					<br>
+		ddate(날짜)	<input type="text" name="ddate" id="ddate"><br>
+		ddidx(날짜순서)<input type="text" name="ddidx" id="ddidx"><br>
+		
+		
+			<input type="submit" value="제출" onclick="regDaily(); ">
+</form>
+        <a href="#" rel="modal:close">닫기</a>
+      </div>
+       
+      
+
+	
+	
 		pidx <input type="text" name="pidx" value="${pidx}"><br>
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
@@ -106,7 +141,7 @@
 				
 					<div class="ddateList" class="sortable">${list}</div>
 					<div class="sortable"></div>
-					<div class="addDailyButton" ><a href="../daily/dailyReg">+</a></div>
+					<div class="addDailyButton" ><a href="<c:url value="/daily/dailyReg"/>">+</a></div>
 						
 				</div>
 			</c:forEach>
@@ -118,13 +153,10 @@
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
-</body>
-</html>
-
-<script type="text/javascript">
+	<script type="text/javascript">
 
 
-console.log($('.itembox').length);
+/* console.log($('.itembox').length);
 		
 		
 		$('.addDaily').click(function () {
@@ -145,7 +177,7 @@ console.log($('.itembox').length);
 			
 			z.html(html);
 							
-			});
+			}); */
 		
 		
 		
@@ -163,20 +195,15 @@ console.log($('.itembox').length);
 				type: 'GET',
 				
 				data: {
-				uidx : '${loginInfo.uidx}',
-				pidx : '${pidx}'
-				
+					uidx : '${loginInfo.uidx}',
+					pidx : '${pidx}'
 				},
 				success: function(data){
 			var html = '';
 			
 		console.log(data);
 		console.log(data[1].ptitle);
-		console.log("${listView.dailyList.ptitle}");
 
-		
-		
-		
 		
 		var sortable = document.getElementsByClassName("sortable");
 		
@@ -189,54 +216,76 @@ console.log($('.itembox').length);
 		
 		console.log(ddate);
 
-		
-		
 
 		for(var i=0; i<data.length; i++){
-						
-			
-						
-					 	html += '<div class="sortableBox" class="sortable">';
-						html += '	<ul class="sortable">';
-						html += '		<li class="sortable">ptitle : '+data[i].ptitle+'</li>';
-						html += '		<li>ddate : '+data[i].ddate+'</li>';
+					
+				 	html += '<div class="sortableBox" class="sortable">';
+				 
+					html += '	<ul class="sortable" >';
+					html += '		<li id="reorder">'+data[i].ddix+'</li>';
+					html += '		<li class="sortable">ptitle : '+data[i].ptitle+'</li>';
+					html += '		<li>ddate : '+data[i].ddate+'</li>';
+					html += '	</ul>';
+					html += '</div>'; 
 
-			
-						html += '	</ul>';
-						html += '</div>'; 
-						/* html += '<c:if test="${'+data[i].ddate+' eq '+ddate+' }">';
-						html += '맞습니다';"'+data[i].ddate+'")'
-						html += '</c:if>';  */
-						$( '.ddateList:contains("'+data[i].ddate+'")').next().append(html);
-						
-						$('#dailyList').append(html);
-						html='';
+					$( '.ddateList:contains("'+data[i].ddate+'")').next().append(html);
+					$('#dailyList').append(html);
+					html='';
+
 					}
-						
-		
-			
-		
-		
-		
-		
-		
-/* 			$( '.ddateList:contains("'+data[3].ddate+'")').css( 'color', 'blue' );
- */
-					alert(html);
-							
-					/*  $( document ).ready( function() {
-					        $( '.ddateList:contains("'+ddate+'")').css( 'color', 'red' );
-					      } ); */
-					
-					 /* if (.value=ddate) */ 
-					
-				} 
-			
-
-		
-		});
+		reorder();
+				}
+			});
 		}
 		
+			function regDaily(){
+				
+				var regFormData = new FormData();
+				regFormData.append('pidx', $('#pidx').val());
+				regFormData.append('dloc', $('#dloc').val());
+				regFormData.append('dloclon', $('#dloclon').val());
+				regFormData.append('dloclat', $('#dloclat').val());
+				regFormData.append('dmsg', $('#dmsg').val());
+				regFormData.append('dphoto', $('#dphoto').val());
 
+				// 파일 첨부
+				/* if($('#dphoto')[0].files[0] != null){
+					regFormData.append('dphoto',$('#dphoto')[0].files[0]);
+				} */
+				regFormData.append('dtype', $('#dtype').val());
+				regFormData.append('ddate', $('#ddate').val());
+				regFormData.append('ddidx', $('#ddidx').val());
+				
+				console.log(regFormData);
+				console.log($('#ddate').val());
+				$.ajax({
+					/* http://localhost:8080/it/daily/dailyReg */
+					url : 'dailyList2',
+					type : 'POST',
+					processData: false, // File 전송시 필수
+					contentType: false, // multipart/form-data
+					data : regFormData,
+					
+					success : function(data){
+						alert(data); 
+						dailyList();
+						document.getElementById('dailyRegForm').reset();
+						
+
+					}
+				});
+				
+			}
+		
+		 	
+		 	
+
+			
 
 </script>
+	
+	
+	
+</body>
+</html>
+
