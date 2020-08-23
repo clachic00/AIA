@@ -54,6 +54,7 @@
 </head>
 <body>
 
+	<!-- 지도API  -->
 <form action="<c:url value='/daily/dailyReg'/>" method="post" enctype="multipart/form-data">
 		
 		pidx		<input type="text" name="pidx" value="${planner.pidx}">	<br>
@@ -105,7 +106,7 @@
     
 </div>
 
-
+	<!-- 지도API  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다

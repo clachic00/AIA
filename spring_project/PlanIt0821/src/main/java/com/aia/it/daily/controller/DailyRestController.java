@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +17,8 @@ import com.aia.it.daily.service.DailyRegService;
 import com.aia.it.planner.model.PlannerJoinDaily;
 
 @RestController
-@RequestMapping("/planner/dailyList")
-public class DailyListController {
+@RequestMapping("/planner/dailyRest")
+public class DailyRestController {
 
 		@Autowired
 		private DailyListService listService;
@@ -43,13 +44,13 @@ public class DailyListController {
 		@GetMapping
 		public List<PlannerJoinDaily> getDailyList(
 				int uidx,
-				int pidx,
-				HttpServletRequest request
+				int pidx
+			
 					) {
 			
 			System.out.println("uidx : "+uidx+" pidx : "+pidx);
 			
-			return listService.getView(request, uidx, pidx);
+			return listService.getView( uidx, pidx);
 			
 		}
 	
