@@ -77,19 +77,39 @@
 	/* 순서 조정 */
 	function reorder() {
 	    $(".sortableBox").each(function(i, box) {
-	        $(box).find("#reorder").html(i + 1);
+	        $(box).find("#reorder").val(i + 1);
+
 	    });
-	   
+	/*  $(".sortableBox").each(function(i, box) {
+		console.log($(".dayOfPlan").eq(i).val());
+		 $(box).find(".ddate").val($(".dayOfPlan").eq(i).val()); 
+	
+	    }); */
 
-
+	
+		for(var i=0; i<$(".dayOfPlan").length; i++){
+					
+		$(".dayOfPlan").eq(i).parent('div').next('div').find("input.ddate").val($(".dayOfPlan").eq(i).val());
+		
+		}
+		
 	}
 	
 	
-	
-	
-	
-	
 </script>
+
+<style>
+
+.sortable{
+
+	border: 0.5px solid black;
+	text-align: center;
+	width : 500px;
+	
+}
+
+</style>
+
 <title>플래너 작성</title>
 </head>
 
@@ -139,7 +159,7 @@
 			<c:forEach items="${dateList}" var="list">
 				<div class="sortable" name="dailytable">
 				
-					<div class="ddateList" class="sortable">${list}</div>
+					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
 					<div class="sortable"></div>
 					<div class="addDailyButton" ><a href="<c:url value="/daily/dailyReg"/>">+</a></div>
 						
@@ -205,31 +225,54 @@
 		console.log(data[1].ptitle);
 
 		
-		var sortable = document.getElementsByClassName("sortable");
-		
+/* 		var sortable = document.getElementsByClassName("sortable");
+ */		
 		
 		
 		console.log($(document.getElementsByClassName("ddateList")).html());
 		
-		var ddate = $(document.getElementsByClassName("ddateList"));
+/* 		var ddate = $(document.getElementsByClassName("ddateList"));
+ */		
 		
-		
-		console.log(ddate);
 
 
 		for(var i=0; i<data.length; i++){
 					
 				 	html += '<div class="sortableBox" class="sortable">';
 				 
-					html += '	<ul class="sortable" >';
-					html += '		<li id="reorder">'+data[i].ddix+'</li>';
-					html += '		<li class="sortable">ptitle : '+data[i].ptitle+'</li>';
-					html += '		<li>ddate : '+data[i].ddate+'</li>';
-					html += '	</ul>';
-					html += '</div>'; 
+					html += '	<div class="sortable" >';
+					
+					html += '		<input type="text" id="reorder" value="'+data[i].ddix+'">';
+					html += '		<input type="text" class="ddate" value="'+data[i].ddate+'">';
+					html += '		<input type="text" value="'+data[i].dix+'">';
+					html += '		<input type="text" value="'+data[i].dloc+'">';
+					html += '		<input type="text" value="'+data[i].dloclon+'">';
+					html += '		<input type="text" value="'+data[i].dloclat+'">';
+					html += '		<input type="text" value="'+data[i].dphoto+'">';
+					html += '		<input type="text" value="'+data[i].dtype+'">';
+					
+					html += '		<input type="text" value="'+data[i].pidx+'">';
 
-					$( '.ddateList:contains("'+data[i].ddate+'")').next().append(html);
-					$('#dailyList').append(html);
+					html += '	</div>';
+					html += '	<a href="https://naver.com">경로찾기</a>';
+
+					
+					html += '</div>'; 
+					/* console.log($('.dayOfPlan').eq(i).val()); */
+					/* console.log(data[i].ddate); */
+					
+					for(var j=0; j<$('.dayOfPlan').length;j++)
+						
+						
+					if($('.dayOfPlan').eq(j).val() == data[i].ddate){
+						/* console.log("찾았다"); */
+						$('.dayOfPlan').eq(j).parent('div').next().append(html);
+					}
+					
+					
+					
+					/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
+					/* $('#dailyList').append(html); */
 					html='';
 
 					}

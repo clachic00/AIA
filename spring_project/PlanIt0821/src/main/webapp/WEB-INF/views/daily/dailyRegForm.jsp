@@ -53,6 +53,7 @@
 
 </head>
 <body>
+
 <form action="<c:url value='/daily/dailyReg'/>" method="post" enctype="multipart/form-data">
 		
 		pidx		<input type="text" name="pidx" value="${planner.pidx}">	<br>
@@ -77,7 +78,6 @@
 			<input type="submit" value="등록">
 		
 </form>
-
 
 
 <div class="map_wrap" style="height:500px">
