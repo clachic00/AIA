@@ -634,7 +634,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 					html += '		<input type="text" value="'+data[i].pidx+'">';
 
 					html += '	</div>';
-					html += '	<a href="https://naver.com">경로찾기</a>';
+					html += '	<a href="https://map.kakao.com/?sName=%27+37.51119865054613,127.02165424220854+%27&eName=%27+37.5705756133826,126.98531278713301">경로찾기</a>';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					
 					html += '</div>'; 
@@ -698,9 +698,6 @@ function searchDetailAddrFromCoords(coords, callback) {
 			}
 		
 		 	
-		 	
-
-			
 
 </script>
 	
