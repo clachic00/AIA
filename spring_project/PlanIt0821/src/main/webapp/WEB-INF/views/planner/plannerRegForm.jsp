@@ -54,6 +54,7 @@
 		}
 		return flag;
 	}
+	
 	/** UI 설정 */"#sortable-5, #sortable-6"  
 	$(function() {
 		$(".sortable").sortable({
@@ -620,7 +621,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 					
 				 	html += '<div class="sortableBox" class="sortable">';
 				 
-					html += '	<div class="sortable" >';
+					/* html += '	<div class="sortable" >'; */
 					
 					html += '		<input type="text" id="reorder" value="'+data[i].ddidx+'">';
 					html += '		<input type="text" class="ddate" value="'+data[i].ddate+'">';
@@ -637,7 +638,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 					html += '	<a href="https://map.kakao.com/?sName=%27+37.51119865054613,127.02165424220854+%27&eName=%27+37.5705756133826,126.98531278713301">경로찾기</a>';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					
-					html += '</div>'; 
+/* 					html += '</div>';  */
 					/* console.log($('.dayOfPlan').eq(i).val()); */
 					/* console.log(data[i].ddate); */
 					
