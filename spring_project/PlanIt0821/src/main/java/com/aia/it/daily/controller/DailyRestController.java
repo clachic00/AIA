@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +25,8 @@ public class DailyRestController {
 		@Autowired
 		DailyRegService regService;
 		
+		
+		
 		@PostMapping
 		public int getDailyReg (DailyRegRequest regRequest,
 				HttpServletRequest request
@@ -36,10 +37,6 @@ public class DailyRestController {
 			return regService.dailyReg(regRequest, request);
 		}
 			
-	
-		
-	
-		
 		
 		@GetMapping
 		public List<PlannerJoinDaily> getDailyList(
@@ -54,5 +51,8 @@ public class DailyRestController {
 			
 		}
 	
+	
+		
+		
 	
 }

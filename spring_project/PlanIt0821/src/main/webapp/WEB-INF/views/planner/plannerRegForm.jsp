@@ -1,3 +1,4 @@
+<%@page import="com.aia.it.daily.model.DailyOrderEditForm"%>
 <%@ page import="com.aia.it.planner.model.PlannerJoinDaily"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -22,7 +23,8 @@
 
 		<!-- SORTABLE  -->
 	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> -->
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
 
 
 <script>
@@ -67,18 +69,27 @@
 			stop : function(event, ui) {
 				var spos = ui.item.data('start_pos');
 				var epos = ui.item.index();
-				 reorder();  //순서 조정
+				 	reorder();  //순서 조정
+				 
+				 
+				 
+				 editDailyOrder();
+
 			}
+			
+
+			
+			
 		});
-		$("#sortable").sortable();
 		$("#sortable").disableSelection();
+		
 	});
 
 	
 	/* 순서 조정 */
 	function reorder() {
 	    $(".sortableBox").each(function(i, box) {
-	        $(box).find("#reorder").val(i + 1);
+	        $(box).find(".ddidx").val(i + 1);
 
 	    });
 	/*  $(".sortableBox").each(function(i, box) {
@@ -99,6 +110,7 @@
 </script>
 
 <style>
+
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
@@ -136,6 +148,7 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
+
 <style>
 
 .sortable{
@@ -151,8 +164,16 @@
 <title>플래너 작성</title>
 </head>
 
+
+
+
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+
+
+
+
+	<a type="submit" onclick="editDailyOrder();">에디트 저장</a>
 	
   <div id="dailyModal" class="modal" >
   
@@ -162,7 +183,7 @@
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
 
-		dloc		<input type="text" name="dloc" id="dloc">	<br>
+		dloc		<input type="text" name="dloc" >	<br>
 		dloclon		<input type="text" name="dloclon" id="dloclon"><br>
 		dloclat		<input type="text" name="dloclat" id="dloclat"><br>
 		dmsg		<input type="text" name="dmsg" id="dmsg"><br>
@@ -199,7 +220,7 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-            <input type="button" onclick="showItemEl();" name="back" value="검색">
+            <input type="submit" onclick="showItemEl();" name="back" value="검색">
     
     <hr>
     <span id="Lat"></span>
@@ -244,6 +265,176 @@
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
+	
+
+
+
+<!-- 비동기 통신  -->
+
+	<script type="text/javascript">
+
+		 $(document).ready(function(){
+			
+			dailyList();
+			
+		}); 
+		 
+		
+		 /* 데일리 리스트 출력 */
+		 	function dailyList() {
+			
+			$.ajax({
+				url: 'http://localhost:8080/it/planner/dailyRest',
+				type: 'GET',
+				
+				data: {
+					uidx : '${loginInfo.uidx}',
+					pidx : '${pidx}'
+				},
+				success: function(data){
+			var html = '';
+			
+		console.log(data);
+		console.log(data[1].ptitle);
+
+		
+/* 		var sortable = document.getElementsByClassName("sortable");
+ */		
+		
+		
+		console.log($(document.getElementsByClassName("ddateList")).html());
+		
+/* 		var ddate = $(document.getElementsByClassName("ddateList"));
+ */		
+		
+
+
+		for(var i=0; i<data.length; i++){
+					
+				 	html += '<div class="sortableBox" class="sortable">';
+				 
+					html += '	<div class="sortable" >'; 
+					html += '		<input type="text" class="ddidx" value="'+data[i].ddidx+'">';
+					html += '		<input type="text" class="ddate" id="ddate" value="'+data[i].ddate+'">';
+					html += '		<input type="text" class="didx" value="'+data[i].didx+'">';
+					html += '		<input type="text" value="'+data[i].dloc+'">';
+					html += '		<input type="text" value="'+data[i].dloclon+'">';
+					html += '		<input type="text" value="'+data[i].dloclat+'">';
+					html += '		<input type="text" value="'+data[i].dphoto+'">';
+					html += '		<input type="text" value="'+data[i].dtype+'">';
+					
+					html += '		<input type="text" value="'+data[i].pidx+'">';
+					html += '	</div>';
+					html += '	<a href="https://map.kakao.com/?sName=%27+37.51119865054613,127.02165424220854+%27&eName=%27+37.5705756133826,126.98531278713301">경로찾기</a>';
+					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
+					
+ 					html += '</div>'; 
+					/* console.log($('.dayOfPlan').eq(i).val()); */
+					/* console.log(data[i].ddate); */
+					
+					for(var j=0; j<$('.dayOfPlan').length;j++)
+						
+					if($('.dayOfPlan').eq(j).val() == data[i].ddate){
+						$('.dayOfPlan').eq(j).parent('div').next().append(html);
+					}
+					
+					
+					/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
+					/* $('#dailyList').append(html); */
+					html='';
+
+					}
+		reorder();
+				}
+			});
+		}
+		
+		 	/* 데일리 등록 */
+			function regDaily(){
+				
+				var regFormData = new FormData();
+				regFormData.append('pidx', $('#pidx').val());
+				regFormData.append('dloc', $('#dloc').val());
+				regFormData.append('dloclon', $('#dloclon').val());
+				regFormData.append('dloclat', $('#dloclat').val());
+				regFormData.append('dmsg', $('#dmsg').val());
+				/* regFormData.append('dphoto', $('#dphoto').val()); */
+
+				// 파일 첨부
+				 if($('#dphoto')[0].files[0] != null){
+					regFormData.append('dphoto',$('#dphoto')[0].files[0]);
+				} 
+				regFormData.append('dtype', $('#dtype').val());
+				regFormData.append('ddate', $('#ddate').val());
+				regFormData.append('ddidx', $('#ddidx').val());
+				
+				console.log(regFormData);
+				console.log($('#ddate').val());
+				$.ajax({
+					url : 'http://localhost:8080/it/planner/dailyRest',
+					type : 'post',
+					processData: false, // File 전송시 필수
+					contentType: false, // multipart/form-data
+					data : regFormData,
+					
+					success : function(data){
+						alert(data); 
+						dailyList();
+						document.getElementById('dailyRegForm').reset();
+						
+
+					}
+				});
+				
+			}
+		
+		 	/* 데일리 순서 등록 */
+		function editDailyOrder(){
+				
+				var DailyOrderEdit = new FormData();
+				
+				
+				
+				 for(var i=0; i<=$('.didx').length-1;i++){
+					 
+					 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
+					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
+					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val());
+				
+				console.log($('.ddidx').eq(i).val());
+				} 
+				
+				 
+				 
+				 
+				 
+				 
+				 $.ajax({
+					url : 'http://localhost:8080/it/planner/dailyOrderEdit',
+					type : 'post',
+					datatype : 'json',
+					data : DailyOrderEdit,
+					
+					success : function(data){
+						alert(data); 
+						
+
+					}
+				}); 
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+</script>
+	
 	<!-- 지도API  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
 <script>
@@ -253,7 +444,7 @@ var markers = [];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 4 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -280,6 +471,15 @@ function relayout() {
 resizeMap();
 relayout();
 
+function zoomIn() {        
+    // 현재 지도의 레벨을 얻어옵니다
+    var level = map.getLevel();
+    
+    // 지도를 1레벨 내립니다 (지도가 확대됩니다)
+    map.setLevel(level - 9);
+    
+    
+}    
 
 
 
@@ -355,7 +555,7 @@ function displayPlaces(places) {
                                                         
                 var content = '<div class="bAddr">' +
                                 '<span class="title">주소정보</span>' + 
-                                detailAddr +'<input type="submit" id="submitAddress" value="선택하기">'+
+                                detailAddr +
                             '</div>'
                             
                             ;
@@ -374,8 +574,7 @@ function displayPlaces(places) {
                 infowindow.open(map, marker); 
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
-                
-                
+                relayout();
             }   
         });
     });
@@ -410,6 +609,7 @@ function displayPlaces(places) {
                 displayInfowindow(marker, title);
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
+                relayout();
             });
 
             
@@ -435,7 +635,7 @@ function displayPlaces(places) {
                 
                 $("#menu_wrap").css("display","none");
 
-                
+                relayout();
                 
                 };
             
@@ -575,132 +775,10 @@ function searchDetailAddrFromCoords(coords, callback) {
 }
  
 
-</script>
-
-
-
-<!-- 비동기 통신  -->
-	<script type="text/javascript">
-
-		 $(document).ready(function(){
-			
-			dailyList();
-			
-		}); 
-		 
-		
-		 	function dailyList() {
-			
-			$.ajax({
-				url: 'http://localhost:8080/it/planner/dailyRest',
-				type: 'GET',
-				
-				data: {
-					uidx : '${loginInfo.uidx}',
-					pidx : '${pidx}'
-				},
-				success: function(data){
-			var html = '';
-			
-		console.log(data);
-		console.log(data[1].ptitle);
-
-		
-/* 		var sortable = document.getElementsByClassName("sortable");
- */		
-		
-		
-		console.log($(document.getElementsByClassName("ddateList")).html());
-		
-/* 		var ddate = $(document.getElementsByClassName("ddateList"));
- */		
-		
-
-
-		for(var i=0; i<data.length; i++){
-					
-				 	html += '<div class="sortableBox" class="sortable">';
-				 
-					/* html += '	<div class="sortable" >'; */
-					
-					html += '		<input type="text" id="reorder" value="'+data[i].ddidx+'">';
-					html += '		<input type="text" class="ddate" value="'+data[i].ddate+'">';
-					html += '		<input type="text" value="'+data[i].didx+'">';
-					html += '		<input type="text" value="'+data[i].dloc+'">';
-					html += '		<input type="text" value="'+data[i].dloclon+'">';
-					html += '		<input type="text" value="'+data[i].dloclat+'">';
-					html += '		<input type="text" value="'+data[i].dphoto+'">';
-					html += '		<input type="text" value="'+data[i].dtype+'">';
-					
-					html += '		<input type="text" value="'+data[i].pidx+'">';
-
-					html += '	</div>';
-					html += '	<a href="https://map.kakao.com/?sName=%27+37.51119865054613,127.02165424220854+%27&eName=%27+37.5705756133826,126.98531278713301">경로찾기</a>';
-					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
-					
-/* 					html += '</div>';  */
-					/* console.log($('.dayOfPlan').eq(i).val()); */
-					/* console.log(data[i].ddate); */
-					
-					for(var j=0; j<$('.dayOfPlan').length;j++)
-						
-					if($('.dayOfPlan').eq(j).val() == data[i].ddate){
-						$('.dayOfPlan').eq(j).parent('div').next().append(html);
-					}
-					
-					
-					
-					/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
-					/* $('#dailyList').append(html); */
-					html='';
-
-					}
-		reorder();
-				}
-			});
-		}
-		
-			function regDaily(){
-				
-				var regFormData = new FormData();
-				regFormData.append('pidx', $('#pidx').val());
-				regFormData.append('dloc', $('#dloc').val());
-				regFormData.append('dloclon', $('#dloclon').val());
-				regFormData.append('dloclat', $('#dloclat').val());
-				regFormData.append('dmsg', $('#dmsg').val());
-				/* regFormData.append('dphoto', $('#dphoto').val()); */
-
-				// 파일 첨부
-				 if($('#dphoto')[0].files[0] != null){
-					regFormData.append('dphoto',$('#dphoto')[0].files[0]);
-				} 
-				regFormData.append('dtype', $('#dtype').val());
-				regFormData.append('ddate', $('#ddate').val());
-				regFormData.append('ddidx', $('#ddidx').val());
-				
-				console.log(regFormData);
-				console.log($('#ddate').val());
-				$.ajax({
-					url : 'http://localhost:8080/it/planner/dailyRest',
-					type : 'post',
-					processData: false, // File 전송시 필수
-					contentType: false, // multipart/form-data
-					data : regFormData,
-					
-					success : function(data){
-						alert(data); 
-						dailyList();
-						document.getElementById('dailyRegForm').reset();
-						
-
-					}
-				});
-				
-			}
-		
-		 	
+ 
 
 </script>
+	
 	
 	
 	

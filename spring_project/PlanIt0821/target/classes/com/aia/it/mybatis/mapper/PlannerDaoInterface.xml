@@ -65,6 +65,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	
 	<delete id="deletePlannerByIdx">
 	
 	delete from planit.planner where pidx=#{pidx};
