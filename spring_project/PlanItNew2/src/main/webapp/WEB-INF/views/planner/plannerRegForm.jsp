@@ -312,46 +312,47 @@
 		 	/* 데일리 순서 등록 */
  		function editDailyOrder(){
 				
-				var DailyOrderEdit = [];
+				
 				var Data = [];
 				
 				
 				
-				 for(var i=0; i<$('.didx').length;i++){
+				/*  for(var i=0; i<$('.didx').length;i++){ */
 					 
 				/* 	 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
 					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
 					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val()); */
 				
-				console.log($('.ddidx').eq(i).val());
+				/* console.log($('.ddidx').eq(i).val()); */
 					 
 					 
 					Data = {
 							 
-							 "DailyOrderEdit[0].didx" : $('.didx').eq(i).val(),
-							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(i).val(),
-							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(i).val()
-
+							 "DailyOrderEdit[0].didx" : $('.didx').eq(0).val(),
+							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(0).val(),
+							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val() 						
 							 
 							 
 							 
 							 
-					 }
+					 } 
 					 
 					 
+					 console.log(Data);
+					
 					 
-					 
-					 
-					 
-				} 
+					 var jsonText = JSON.stringify(Data);
+				//} 
 				
-				 var DailyOrderEdit = JSON.stringify(DailyOrderEdit);
+				 
+				 
+
 				 
 				 $.ajax({
 					url : 'http://localhost:8080/it/planner/dailyOrderEdit',
 					type : 'post',
-					datatype : 'json',
-					data : DailyOrderEdit,
+				
+					data : jsonText,
 					
 					success : function(data){
 						alert(data); 
