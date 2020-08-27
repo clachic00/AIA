@@ -326,19 +326,22 @@
 				/* console.log($('.ddidx').eq(i).val()); */
 					 
 					 
-					Data = {
+					Data.push({
+							 
+							/* "DailyOrderEdit[0].didx" : $('.didx').eq(0).val(),
+							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(0).val(),
+							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val()  */						
 							 
 							 "DailyOrderEdit[0].didx" : $('.didx').eq(0).val(),
 							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(0).val(),
-							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val() 						
+							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val() 
 							 
-							 
-							 
-							 
-					 } 
-					 
-					 
-					 console.log(Data);
+						 
+					 }); 
+		
+				
+				
+					 console.log(Data[0]);
 					
 					 
 					 var jsonText = JSON.stringify(Data);

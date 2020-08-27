@@ -2,9 +2,9 @@ package com.aia.it.daily.model;
 
 public class DailyOrderEditForm {
 
-	private int didx;
+	private String didx;
 	private String ddate;
-	private int ddidx;
+	private String ddidx;
 	
 	
 	
@@ -12,17 +12,17 @@ public class DailyOrderEditForm {
 	}
 	
 	
-	public DailyOrderEditForm(int didx, String ddate, int ddidx) {
+	public DailyOrderEditForm(String didx, String ddate, String ddidx) {
 		this.didx = didx;
 		this.ddate = ddate;
 		this.ddidx = ddidx;
 	}
 
 
-	public int getDidx() {
+	public String getDidx() {
 		return didx;
 	}
-	public void setDidx(int didx) {
+	public void setDidx(String didx) {
 		this.didx = didx;
 	}
 	public String getDdate() {
@@ -31,10 +31,10 @@ public class DailyOrderEditForm {
 	public void setDdate(String ddate) {
 		this.ddate = ddate;
 	}
-	public int getDdidx() {
+	public String getDdidx() {
 		return ddidx;
 	}
-	public void setDdidx(int ddidx) {
+	public void setDdidx(String ddidx) {
 		this.ddidx = ddidx;
 	}
 
