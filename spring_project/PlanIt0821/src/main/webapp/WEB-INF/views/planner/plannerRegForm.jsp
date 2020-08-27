@@ -1,4 +1,3 @@
-<%@page import="com.aia.it.daily.model.DailyOrderEditForm"%>
 <%@ page import="com.aia.it.planner.model.PlannerJoinDaily"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -360,24 +359,17 @@
 		function editDailyOrder(){
 			
 				
+				/* regFormData.append('didx', $('.didx').val()); */
+			/* 	regFormData.append('ddate', $('.ddate').val());
+				regFormData.append('ddidx', $('.ddidx').val());
+				
+				console.log($('.ddate').val());
+				console.log($('.ddidx').val());			
+				regFormData.get(ddidx);
+				regFormData.get(ddate);	 */	
 				
 				
 				
-				
-			var regFormData = new FormData();
-			
-			
-			
-			
-			
-			/* regFormData.append('didx', $('.didx').val()); */
-		/* 	regFormData.append('ddate', $('.ddate').val());
-			regFormData.append('ddidx', $('.ddidx').val());
-			
-			console.log($('.ddate').val());
-			console.log($('.ddidx').val());			
-			regFormData.get(ddidx);
-			regFormData.get(ddate);	 */
 			
 			
 			 $.ajax({  
