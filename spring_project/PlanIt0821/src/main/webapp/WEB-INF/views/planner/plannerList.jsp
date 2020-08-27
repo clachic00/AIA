@@ -53,12 +53,11 @@ function plannerList() {
 			//$('#memberList').html(JSON.stringify(data));
 			
 			var html = '';
-			
+				
 			for(var i=0; i<data.length; i++){
 				html += '<div>';
 				html += '	<ul>';
 				html += '		<li>pidx : '+data[i].pidx+'</li>';
-				html += '		<li>ptitle : '+data[i].ptitle+'</li>';
 				html += '		<li>pstartdate : '+data[i].pstartdate+'</li>';
 				html += '		<li>penddate : '+data[i].penddate+'</li>';
 				html += '		<li>uidx :'+data[i].uidx+'</li>';

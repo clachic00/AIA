@@ -2,6 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
     
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -47,8 +52,23 @@
 
 </head>
 <body>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<div class="map_wrap" style="height:500px">
+
+    
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+         
+         <div class="map_wrap" style="height:500px">
     <!-- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> -->
     <div id="map" style="height:500px;position:relative;overflow:hidden;"> 클릭1 </div>
 
@@ -70,18 +90,69 @@
     <hr>
     <span id="Lat"></span>
 	<span id="Lng"></span>
-    
-    
-    
-    
+         
+         
+         
+         
+         
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
-<script>
-// 마커를 담을 배열입니다
-var markers = [];
+<!-- Buttons -->
+<button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button>
+ 
+<!-- Links -->
+<a data-toggle="modal" href="#myModal">Open Modal</a>
+ 
+<!-- Other elements -->
+<p data-toggle="modal" data-target="#myModal">Open Modal</p>
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+
+
+    
+    
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
+
+<script>
+
+
+
+	
+	
+	function setCenter() {            
+	    // 이동할 위도 경도 위치를 생성합니다 
+	    var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
+	    
+	    // 지도 중심을 이동 시킵니다
+	    map.setCenter(moveLatLon);
+	    
+	    
+	    /* var maplevel =  new kakao.maps.level(3); */
+	    
+	    
+	    
+	}
+
+	
+	
+	
+	
+	
+	
+	// 마커를 담을 배열입니다
+	var markers = [];
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
@@ -89,6 +160,14 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	
+	
+
+
+
+
+
 
 //주소-좌표 변환 객체를 생성
 var geocoder = new daum.maps.services.Geocoder();
@@ -402,7 +481,7 @@ function searchDetailAddrFromCoords(coords, callback) {
     // 좌표로 법정동 상세 주소 정보를 요청합니다
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
- 
+
  
 </script>
 

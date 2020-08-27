@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aia.it.daily.dao.DailyDaoInterface;
-import com.aia.it.daily.model.DailyOrderEdit;
+import com.aia.it.daily.model.DailyOrderEditForm;
 
 @Service
 public class DailyOrderEditService {
@@ -16,12 +16,12 @@ public class DailyOrderEditService {
 
 	
 	@Autowired
-	SqlSessionTemplate template;
+	private SqlSessionTemplate template;
 	
 	
-	public int editOrder (DailyOrderEdit dailyOrderEdit) {
+	public int editOrder (DailyOrderEditForm dailyOrderEdit) {
 		
-		int result = 0;
+		
 		
 		dao=template.getMapper(DailyDaoInterface.class);
 	
@@ -29,7 +29,8 @@ public class DailyOrderEditService {
 		
 		
 		System.out.println(dailyOrderEdit);
-		System.out.println(dailyOrderEdit.getOrderEdit());
+		
+		/* System.out.println(dailyOrderEdit.getOrderEdit()); */
 
 		
 		
@@ -48,7 +49,9 @@ public class DailyOrderEditService {
 		 */
 		 
 		
-		return result;
+		
+		
+		return dao.editDailyOrder(dailyOrderEdit);
 		
 	}
 	

@@ -13,101 +13,37 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 	
 		<!-- 모달  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	
 
-
-		<!-- jquery  -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
+		 <!-- jquery  -->
+ 	<!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
+ 	 	<script src="http://code.jquery.com/jquery-1.7.js"></script>
+ 	
+ 	
+	<!-- <script>
+ 	 var jq = jQuery.noConflict();
+	</script> -->
+ 
 		<!-- SORTABLE  -->
-	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> -->
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
-
-
-<script>
-
-	/* @@@@SORTABLE@@@@ */
+	<!-- <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script> -->
 	
-	/** 아이템을 등록한다. */
-	function submitItem() {
-		if (!validateItem()) {
-			return;
-		}
-		alert("등록");
-	}
-	
-	/** 아이템 체크 */ 
-	function validateItem() {
-		var items = $("input[type='text'][name='item']");
-		if (items.length == 0) {
-			alert("작성된 아이템이 없습니다.");
-			return false;
-		}
-		var flag = true;
-		for (var i = 0; i < items.length; i++) {
-			if ($(items.get(i)).val().trim() == "") {
-				flag = false;
-				alert("내용을 입력하지 않은 항목이 있습니다.");
-				break;
-			}
-		}
-		return flag;
-	}
-	
-	/** UI 설정 */"#sortable-5, #sortable-6"  
-	$(function() {
-		$(".sortable").sortable({
-			placeholder : "itemBoxHighlight",
-			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
-			
-			start : function(event, ui) {
-				ui.item.data('start_pos', ui.item.index());
-			},
-			stop : function(event, ui) {
-				var spos = ui.item.data('start_pos');
-				var epos = ui.item.index();
-				 	reorder();  //순서 조정
-				 
-				 
-				 
-				 editDailyOrder();
 
-			}
-			
 
-			
-			
-		});
-		$("#sortable").disableSelection();
-		
-	});
 
+	<!-- SORTABLE  -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	/* 순서 조정 */
-	function reorder() {
-	    $(".sortableBox").each(function(i, box) {
-	        $(box).find(".ddidx").val(i + 1);
-
-	    });
-	/*  $(".sortableBox").each(function(i, box) {
-		console.log($(".dayOfPlan").eq(i).val());
-		 $(box).find(".ddate").val($(".dayOfPlan").eq(i).val()); 
 	
-	    }); */
-
+<!-- 	<script>
+ 	 var st = jQuery.noConflict();
+	</script> -->
 	
-		for(var i=0; i<$(".dayOfPlan").length; i++){
-					
-		$(".dayOfPlan").eq(i).parent('div').next('div').find("input.ddate").val($(".dayOfPlan").eq(i).val());
-		
-		}
-		
-	}
-	
-</script>
 
 <style>
 
@@ -325,7 +261,7 @@
 					
 					html += '		<input type="text" value="'+data[i].pidx+'">';
 					html += '	</div>';
-					html += '	<a href="https://map.kakao.com/?sName=%27+37.51119865054613,127.02165424220854+%27&eName=%27+37.5705756133826,126.98531278713301">경로찾기</a>';
+					html += '	<a href="https://map.kakao.com/?sName=%27+종각+%27&eName=%27+홍대입구역 2호선">경로찾기</a>';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					
  					html += '</div>'; 
@@ -389,7 +325,7 @@
 			}
 		
 		 	/* 데일리 순서 등록 */
-		function editDailyOrder(){
+/* 		function editDailyOrder(){
 				
 				var DailyOrderEdit = new FormData();
 				
@@ -405,10 +341,6 @@
 				} 
 				
 				 
-				 
-				 
-				 
-				 
 				 $.ajax({
 					url : 'http://localhost:8080/it/planner/dailyOrderEdit',
 					type : 'post',
@@ -422,10 +354,51 @@
 					}
 				}); 
 				
-			}
+			} */
+			
+			/* 데일리등록 낱개 연습  */
+		function editDailyOrder(){
+			
+				
+				
+				
+				
+				
+			var regFormData = new FormData();
 			
 			
 			
+			
+			
+			/* regFormData.append('didx', $('.didx').val()); */
+		/* 	regFormData.append('ddate', $('.ddate').val());
+			regFormData.append('ddidx', $('.ddidx').val());
+			
+			console.log($('.ddate').val());
+			console.log($('.ddidx').val());			
+			regFormData.get(ddidx);
+			regFormData.get(ddate);	 */
+			
+			
+			 $.ajax({  
+				url : 'http://localhost:8080/it/planner/dailyOrderEdit/'+$('.didx').val(),
+				type : 'post',
+
+				data : {
+					didx : $('.didx').val() ,
+					ddate : $('.ddate').val() ,
+					ddidx : $('.ddidx').val()
+					
+				},
+				
+				success : function(data){
+					alert(data); 
+					
+
+				}
+			}); 
+			
+		}
 			
 			
 			
@@ -467,6 +440,25 @@ function relayout() {
     // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
     map.relayout();
 }
+function setCenter() {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
+    
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+}
+
+function panTo() {
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(33.450580, 126.574942);
+    
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);            
+}     
+
+
+
 
 resizeMap();
 relayout();
@@ -560,21 +552,28 @@ function displayPlaces(places) {
                             
                             ;
                             
+                            
+                            
+                            
+                            
                          
                 // 마커를 클릭한 위치에 표시합니다 
                 marker.setPosition(mouseEvent.latLng);
                 
                 marker.setMap(map);
-				
-           //     console.log(marker.getPosition().getLng());
-           //     console.log(marker.getPosition().getLat());
+			
 
-                // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                 infowindow.setContent(content);
                 infowindow.open(map, marker); 
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
+
                 relayout();
+                var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
+                map.panTo(moveLatLon);
+                
+                
+                
             }   
         });
     });
@@ -596,26 +595,44 @@ function displayPlaces(places) {
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
         
-        
          
-     
-        			
-        
-        
-        
-        
-        (function(marker, title) {
+             //마크 클릭
+       (function(marker, title) {
             kakao.maps.event.addListener(marker, 'click', function() {
                 displayInfowindow(marker, title);
-                $('#dloclon').val(marker.getPosition().getLng());
+                
                 $('#dloclat').val(marker.getPosition().getLat());
+                $('#dloclon').val(marker.getPosition().getLng());
+                console.log('1번');
                 relayout();
-            });
+            	map.setLevel(4);    
+  				var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
+                map.panTo(moveLatLon);
+
+            }); 
 
             
+         
+            //목록에서 클릭
+            itemEl.onclick =  function () {
+                displayInfowindow(marker, title);
+                
+                $('#dloclat').val(marker.getPosition().getLat());
+                $('#dloclon').val(marker.getPosition().getLng());
+                
+                $("#menu_wrap").css("display","none");
+                
+                console.log('2번');
+
+                relayout();
+            	map.setLevel(4);    
+                var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
+                map.panTo(moveLatLon);
+                
+                
+                }; 
             
-            
-         /*    kakao.maps.event.addListener(marker, 'mouseout', function() {
+                /*    kakao.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             }); */
 
@@ -626,20 +643,6 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };  */
-            
-            itemEl.onclick =  function () {
-                displayInfowindow(marker, title);
-                
-                $('#dloclon').val(marker.getPosition().getLng());
-                $('#dloclat').val(marker.getPosition().getLat());
-                
-                $("#menu_wrap").css("display","none");
-
-                relayout();
-                
-                };
-            
-           
             
                 
                 
@@ -778,7 +781,63 @@ function searchDetailAddrFromCoords(coords, callback) {
  
 
 </script>
+	<script>
+
+	/* @@@@SORTABLE@@@@ */
 	
+	
+	/** UI 설정 */ 
+	$(function() {
+		$(".sortable").sortable({
+			placeholder : "itemBoxHighlight",
+			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
+			
+			start : function(event, ui) {
+				ui.item.data('start_pos', ui.item.index());
+			},
+			stop : function(event, ui) {
+				var spos = ui.item.data('start_pos');
+				var epos = ui.item.index();
+				 	reorder();  //순서 조정
+				 
+				 	
+				 
+				 editDailyOrder();
+
+			}
+			
+
+			
+			
+		});
+		$("#sortable").disableSelection();
+		
+	});
+
+	
+	/* 순서 조정 */
+	function reorder() {
+	   $(".sortableBox").each(function(i, box) {
+	        $(box).find(".ddidx").val(i + 1);
+
+	    });
+	/*  $(".sortableBox").each(function(i, box) {
+		console.log($(".dayOfPlan").eq(i).val());
+		 $(box).find(".ddate").val($(".dayOfPlan").eq(i).val()); 
+	
+	    }); */
+
+	
+		for(var i=0; i<$(".dayOfPlan").length; i++){
+					
+		$(".dayOfPlan").eq(i).parent('div').next('div').find("input.ddate").val($(".dayOfPlan").eq(i).val());
+		
+		}
+	    
+		
+	}
+	
+</script>
 	
 	
 	
