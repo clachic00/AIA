@@ -55,16 +55,20 @@ function plannerList() {
 			var html = '';
 				
 			for(var i=0; i<data.length; i++){
+				html += '<form action="http://localhost:8080/it/planner/plannerEdit" method="post">'
 				html += '<div>';
 				html += '	<ul>';
-				html += '		<li>pidx : '+data[i].pidx+'</li>';
-				html += '		<li>pstartdate : '+data[i].pstartdate+'</li>';
-				html += '		<li>penddate : '+data[i].penddate+'</li>';
-				html += '		<li>uidx :'+data[i].uidx+'</li>';
-				/* html += '		<li><input type="button" value="수정" onclick="editForm('+data[i].pidx+')"> '; */
+				html += '		<li>pidx : <input type="text" name="pidx" value="'+data[i].pidx+'" readonly></li>';
+				html += '       <li>ptitle: <input type="text" name="ptitle" value="'+data[i].ptitle+'" readonly></li>';
+				html += '		<li>pstartdate : <input type="text" name="pstartdate" value="'+data[i].pstartdate+'" readonly></li>';
+				html += '		<li>penddate : <input type="text" name="penddate" value="'+data[i].penddate+'" readonly></li>';
+				html += '		<li>uidx : <input type="text" name="uidx" value="'+data[i].uidx+'" readonly></li>';
+				html += '		<li><input type="submit" value="수정"> '; 
 				html += '		<input type="button" value="삭제" onclick="deletePlanner('+data[i].pidx+')"></li>';
 				html += '	</ul>';
 				html += '</div>';
+				html += '</form>'
+
 			}
 			
 			$('#plannerList').html(html);
@@ -72,16 +76,18 @@ function plannerList() {
 		} 
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
 </script>
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
