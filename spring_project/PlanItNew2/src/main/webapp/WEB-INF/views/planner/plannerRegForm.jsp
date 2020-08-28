@@ -112,7 +112,7 @@
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
 
-		dloc		<input type="text" name="dloc" >	<br>
+		dloc		<input type="text" name="dloc" id="dloc" >	<br>
 		dloclon		<input type="text" name="dloclon" id="dloclon"><br>
 		dloclat		<input type="text" name="dloclat" id="dloclat"><br>
 		dmsg		<input type="text" name="dmsg" id="dmsg"><br>
@@ -125,7 +125,7 @@
 					<option value="white">하양</option>
 					</select>
 					<br>
-		ddate(날짜)	<input type="text" name="ddate" id="ddate"><br>
+		ddate(날짜)	<input type="text" name="ddate" id="ddate1"><br>
 		ddidx(날짜순서)<input type="text" name="ddidx" id="ddidx"><br>
 		
 		
@@ -296,8 +296,9 @@
 		if ($('#dphoto')[0].files[0] != null) {
 			regFormData.append('dphoto', $('#dphoto')[0].files[0]);
 		}
+		
 		regFormData.append('dtype', $('#dtype').val());
-		regFormData.append('ddate', $('#ddate').val());
+		regFormData.append('ddate', $('#ddate1').val());
 		regFormData.append('ddidx', $('#ddidx').val());
 
 		console.log(regFormData);
