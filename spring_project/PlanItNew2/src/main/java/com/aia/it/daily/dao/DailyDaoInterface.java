@@ -15,7 +15,6 @@ public interface DailyDaoInterface {
 	public List<Daily> selectTotalList(int pidx);
 
 	public int editDailyOrder(DailyOrderEditForm editDailyOrder);
-	
-	
+
 	
 }

@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 데일리 리스트 출력  -->
 	<select id="selectDailyList" resultMap="resultPlannerJoinDaily">
-		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{uidx}
+		select * from planit.planner p left outer join planit.daily_plan d on p.pidx=d.pidx where p.uidx=#{param1} and p.pidx=#{param2}
 
 	</select>
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aia.it.daily.model.DailyRegRequest;
@@ -40,14 +41,14 @@ public class DailyRestController {
 		
 		@GetMapping
 		public List<PlannerJoinDaily> getDailyList(
-				int uidx,
-				int pidx
+				@RequestParam("uidx") int uidx,
+				@RequestParam("pidx") int pidx
 			
 					) {
 			
-			System.out.println("uidx : "+uidx+" pidx : "+pidx);
+			System.out.println("u3555idx : "+uidx+" pidx : "+pidx);
 			
-			return listService.getView( uidx, pidx);
+			return listService.getView(uidx, pidx);
 			
 		}
 	

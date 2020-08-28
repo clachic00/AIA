@@ -57,27 +57,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		
 	<!-- 데일리 순서 수정 -->
-	<update id="editMember"
+	<update id="editDailyOrder"
 			parameterType="com.aia.it.daily.model.DailyOrderEditForm"
 	>
 	
-	update planit.member set ddate=#{ddate} , ddidx=#{ddidx} where didx=#{didx}
+	update planit.daily_plan set ddate=#{ddate} , ddidx=#{ddidx} where didx=#{didx} 
 	
 	</update>
-	
-	
-	
-	
+
 	
 	<!-- 데일리 목록 출력 -->
 	<select id="selectTotalList"
 			resultMap="resultDaily">
 		select count(*) from planit.planner p left outer join planit.daily_plan d  
-		on p.pidx=d.pidx where p.pidx=#{pidx}
+		on p.pidx=d.pidx where p.uidx=#{param2} and p.pidx=#{param1}
 	</select>
 
 
-
+	<!-- 데일리 목록 출력 -->
+	<select id="selectTotalListQ"
+			resultMap="resultDaily">
+		select count(*) from planit.planner p left outer join planit.daily_plan d  
+		on p.pidx=d.pidx where p.pidx=#{pidx}
+	</select>
 
 
 

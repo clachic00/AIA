@@ -2,6 +2,8 @@ package com.aia.it.daily.service;
 
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -57,6 +59,16 @@ public class DailyOrderEditService {
 		 * dao.editDailyOrder(dailyOrderEdit.getOrderEdit().get(0));
 		 */		
 		
+		
+		
+		
+		for(int i=0; i >= daily.getDailyOrderEdit().size(); i++) {
+			
+		result=dao.editDailyOrder(daily.getDailyOrderEdit().get(i));
+		
+		System.out.println("나서비스"+daily.getDailyOrderEdit().get(i).getDidx());
+		
+		}
 		
 		return result;
 		

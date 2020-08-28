@@ -80,6 +80,14 @@
 	
 }
 
+
+.handle{
+	border: 0.5px solid black;
+	text-align: center;
+	float : right;
+
+}
+
 </style>
 
 <title>플래너 작성</title>
@@ -157,24 +165,26 @@
       
 
 	
-	
+	<div id="">
 		pidx <input type="text" name="pidx" value="${pidx}"><br>
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
 	제목<input type="text" name="ptitle" value="${ptitle}">
-		<div id="sortable">
+		</div>
+		<form id="serialize">
 			<c:forEach items="${dateList}" var="list">
-				<div class="sortable" name="dailytable">
+				
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
+					
 					<div class="sortable"></div>
-					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div>
-					<%-- <a href="<c:url value="/daily/dailyReg"/>"> --%>
-				</div>
+					
+					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div> 
+
+				
 			</c:forEach>
-		</div>
+		</form>
 		
-		<span id="dailyList"></span>
 	
 
 
@@ -191,224 +201,206 @@
 
 
 <!-- 비동기 통신  -->
-
-	<script type="text/javascript">
-
-		 $(document).ready(function(){
-			
-			dailyList();
-			
+<script>
+	$(document).ready(function(){
+		dailyList();
 		}); 
 		 
+	/* 데일리 리스트 출력 */
+	
+	function dailyList() {
 		
-		 /* 데일리 리스트 출력 */
-		 	function dailyList() {
-			
-			$.ajax({
-				url: 'http://localhost:8080/it/planner/dailyRest',
-				type: 'GET',
+		
+		console.log(${loginInfo.uidx});
+		console.log(${pidx});		
+		
+		
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest',
+			type : 'GET',
+			data : {
+				uidx : '${loginInfo.uidx}',
+				pidx : '${pidx}'
+			},
+			success : function(data) {
+				var html = '';
+
 				
-				data: {
-					uidx : '${loginInfo.uidx}',
-					pidx : '${pidx}'
-				},
-				success: function(data){
-			var html = '';
-			
-		console.log(data);
-		console.log(data[1].ptitle);
+				console.log($(
+						document.getElementsByClassName("ddateList"))
+						.html());
 
-		
-/* 		var sortable = document.getElementsByClassName("sortable");
- */		
-		
-		
-		console.log($(document.getElementsByClassName("ddateList")).html());
-		
-/* 		var ddate = $(document.getElementsByClassName("ddateList"));
- */		
-		
+				for (var i = 0; i < data.length; i++) {
 
-
-		for(var i=0; i<data.length; i++){
 					
-				 	html += '<div class="sortableBox" class="sortable">';
-				 
-					html += '	<div class="sortable" >'; 
-					html += '		<input type="text" class="ddidx" value="'+data[i].ddidx+'">';
-					html += '		<input type="text" class="ddate" id="ddate" value="'+data[i].ddate+'">';
-					html += '		<input type="text" class="didx" value="'+data[i].didx+'">';
-					html += '		<input type="text" value="'+data[i].dloc+'">';
-					html += '		<input type="text" value="'+data[i].dloclon+'">';
-					html += '		<input type="text" value="'+data[i].dloclat+'">';
-					html += '		<input type="text" value="'+data[i].dphoto+'">';
-					html += '		<input type="text" value="'+data[i].dtype+'">';
+
 					
-					html += '		<input type="text" value="'+data[i].pidx+'">';
-					html += '	</div>';
+
+					
+					
+					html += '<div class="sortableBox" class="sortable">';
+
+					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'"><br>';
+					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'"><br>';
+					html += '	didx	<input type="text" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'"><br>';
+					html += '	dloc	<input type="text" value="'+data[i].dloc+'"><br>';
+					html += '	dloclon	<input type="text" value="'+data[i].dloclon+'"><br>';
+					html += '	dloclat	<input type="text" value="'+data[i].dloclat+'"><br>';
+					html += '	dphoto	<input type="text" value="'+data[i].dphoto+'"><br>';
+					html += '	dtype	<input type="text" value="'+data[i].dtype+'"><br>';
+					html += '	pidx	<input type="text" value="'+data[i].pidx+'"><br>';
 					html += '	<a href="https://map.kakao.com/?sName=%27+종각+%27&eName=%27+홍대입구역 2호선">경로찾기</a>';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
+					html += '<span class="handle">↕</span>'
+					html += '</div>';
 					
- 					html += '</div>'; 
-					/* console.log($('.dayOfPlan').eq(i).val()); */
-					/* console.log(data[i].ddate); */
-					
-					for(var j=0; j<$('.dayOfPlan').length;j++)
+					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
+
+						if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
+							
+							$('.dayOfPlan').eq(i).parent('div').next().html(html);
+
+							html = '';
+						}
+							
 						
-					if($('.dayOfPlan').eq(j).val() == data[i].ddate){
-						$('.dayOfPlan').eq(j).parent('div').next().append(html);
-					}
-					
-					
-					/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
-					/* $('#dailyList').append(html); */
-					html='';
-
-					}
-		reorder();
-				}
-			});
-		}
-		
-		 	/* 데일리 등록 */
-			function regDaily(){
-				
-				var regFormData = new FormData();
-				regFormData.append('pidx', $('#pidx').val());
-				regFormData.append('dloc', $('#dloc').val());
-				regFormData.append('dloclon', $('#dloclon').val());
-				regFormData.append('dloclat', $('#dloclat').val());
-				regFormData.append('dmsg', $('#dmsg').val());
-				/* regFormData.append('dphoto', $('#dphoto').val()); */
-
-				// 파일 첨부
-				 if($('#dphoto')[0].files[0] != null){
-					regFormData.append('dphoto',$('#dphoto')[0].files[0]);
-				} 
-				regFormData.append('dtype', $('#dtype').val());
-				regFormData.append('ddate', $('#ddate').val());
-				regFormData.append('ddidx', $('#ddidx').val());
-				
-				console.log(regFormData);
-				console.log($('#ddate').val());
-				$.ajax({
-					url : 'http://localhost:8080/it/planner/dailyRest',
-					type : 'post',
-					processData: false, // File 전송시 필수
-					contentType: false, // multipart/form-data
-					data : regFormData,
-					
-					success : function(data){
-						alert(data); 
-						dailyList();
-						document.getElementById('dailyRegForm').reset();
 						
+						
+						
+						
+					 }
 
-					}
-				});
+					
+					
+							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
+							/* $('#dailyList').append(html); */
 				
+				reorder();
 			}
+		}
+	});
+}
+
+	/* 데일리 등록 */
+	function regDaily() {
+
+		var regFormData = new FormData();
+		regFormData.append('pidx', $('#pidx').val());
+		regFormData.append('dloc', $('#dloc').val());
+		regFormData.append('dloclon', $('#dloclon').val());
+		regFormData.append('dloclat', $('#dloclat').val());
+		regFormData.append('dmsg', $('#dmsg').val());
+		/* regFormData.append('dphoto', $('#dphoto').val()); */
+
+		// 파일 첨부
+		if ($('#dphoto')[0].files[0] != null) {
+			regFormData.append('dphoto', $('#dphoto')[0].files[0]);
+		}
+		regFormData.append('dtype', $('#dtype').val());
+		regFormData.append('ddate', $('#ddate').val());
+		regFormData.append('ddidx', $('#ddidx').val());
+
+		console.log(regFormData);
+		console.log($('#ddate').val());
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest',
+			type : 'post',
+			processData : false, // File 전송시 필수
+			contentType : false, // multipart/form-data
+			data : regFormData,
+
+			success : function(data) {
+				alert(data);
+				dailyList();
+				document.getElementById('dailyRegForm').reset();
+
+			}
+		});
+
+	}
+
+	/* 데일리 순서 등록 */
+	function editDailyOrder() {
+
+		var params = $("#serialize").serialize();
+		var param = $("#serialize").serializeArray();
+
+		console.log(params);
+		console.log(param);
 		
-		 	/* 데일리 순서 등록 */
- 		function editDailyOrder(){
-				
-				
-				var Data = [];
-				
-				
-				
-				/*  for(var i=0; i<$('.didx').length;i++){ */
-					 
-				/* 	 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
-					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
-					 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val()); */
-				
-				/* console.log($('.ddidx').eq(i).val()); */
-					 
-					 
-					Data.push({
-							 
-							/* "DailyOrderEdit[0].didx" : $('.didx').eq(0).val(),
-							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(0).val(),
-							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val()  */						
-							 
-							 "DailyOrderEdit[0].didx" : $('.didx').eq(0).val(),
-							 "DailyOrderEdit[0].ddate" : $('.ddate').eq(0).val(),
-							 "DailyOrderEdit[0].ddidx" : $('.ddidx').eq(0).val() 
-							 
-						 
-					 }); 
+		//var regFormData = new FormData();
+		//for (var i = 0; i < $('.didx').length; i++) {
+
+			/* 	 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
+				 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
+				 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val()); */
+
+			/* console.log($('.ddidx').eq(i).val()); */
+
+			/* regFormData.append(
+				 
+			
+			
+				param[i].name, param[i].value
+			 
+			);  
+			
+			
+			
+			console.log(regFormData); */
+
+		//}
+		/* var formData = new FormData(document.getElementById('serialize'));
+
+		alert(formData);
+		console.log(formData); */
+
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyOrderEdit',
+			type : 'post',
+			/* processData: false, 
+			contentType: false,  */
+			data : param,
+			//data: regFormData,
+			success : function(data) {
+				alert(data);
+
+			}
+		});
+
+	}
+
+	/* 데일리등록 낱개 연습  */
+	/* function editDailyOrder(){ */
+
+	/* regFormData.append('didx', $('.didx').val()); */
+	/* 	regFormData.append('ddate', $('.ddate').val());
+		regFormData.append('ddidx', $('.ddidx').val());
 		
-				
-				
-					 console.log(Data[0]);
-					
-					 
-					 var jsonText = JSON.stringify(Data);
-				//} 
-				
-				 
-				 
+		console.log($('.ddate').val());
+		console.log($('.ddidx').val());			
+		regFormData.get(ddidx);
+		regFormData.get(ddate);	 */
 
-				 
-				 $.ajax({
-					url : 'http://localhost:8080/it/planner/dailyOrderEdit',
-					type : 'post',
-				
-					data : jsonText,
-					
-					success : function(data){
-						alert(data); 
-						
+	/*  $.ajax({  
+		url : 'http://localhost:8080/it/planner/dailyOrderEdit/'+$('.didx').val(),
+		type : 'post',
 
-					}
-				}); 
-				
-			} 
+		data : {
+			didx : $('.didx').val() ,
+			ddate : $('.ddate').val() ,
+			ddidx : $('.ddidx').val()
 			
-			/* 데일리등록 낱개 연습  */
-		/* function editDailyOrder(){ */
-			
-				
-				/* regFormData.append('didx', $('.didx').val()); */
-			/* 	regFormData.append('ddate', $('.ddate').val());
-				regFormData.append('ddidx', $('.ddidx').val());
-				
-				console.log($('.ddate').val());
-				console.log($('.ddidx').val());			
-				regFormData.get(ddidx);
-				regFormData.get(ddate);	 */	
-				
-				
-				
-			
-			
-			/*  $.ajax({  
-				url : 'http://localhost:8080/it/planner/dailyOrderEdit/'+$('.didx').val(),
-				type : 'post',
-
-				data : {
-					didx : $('.didx').val() ,
-					ddate : $('.ddate').val() ,
-					ddidx : $('.ddidx').val()
-					
-				},
-				
-				success : function(data){
-					alert(data); 
-					
-
-				}
-			}); 
-			
-		} */
-			
-			
-			
-			
-			
+		},
+		
+		success : function(data){
+			alert(data); 
 			
 
+		}
+	}); 
+	
+	} */
 </script>
 	
 	<!-- 지도API  -->
@@ -794,7 +786,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 		$(".sortable").sortable({
 			placeholder : "itemBoxHighlight",
 			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
-			
+			/* handle: ".handle", */
 			start : function(event, ui) {
 				ui.item.data('start_pos', ui.item.index());
 			},
@@ -833,7 +825,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 	
 		for(var i=0; i<$(".dayOfPlan").length; i++){
 					
-		$(".dayOfPlan").eq(i).parent('div').next('div').find("input.ddate").val($(".dayOfPlan").eq(i).val());
+		$(".dayOfPlan").eq(i).parent('div').next().find("input.ddate").val($(".dayOfPlan").eq(i).val());
 		
 		}
 	    
@@ -841,7 +833,6 @@ function searchDetailAddrFromCoords(coords, callback) {
 	}
 	
 </script>
-	
 	
 	
 </body>

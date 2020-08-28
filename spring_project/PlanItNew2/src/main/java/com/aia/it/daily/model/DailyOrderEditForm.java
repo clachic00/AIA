@@ -2,57 +2,40 @@ package com.aia.it.daily.model;
 
 public class DailyOrderEditForm {
 
-	private String didx;
+	private int didx;
 	private String ddate;
-	private String ddidx;
-	
-	
-	
+	private int ddidx;
+
 	public DailyOrderEditForm() {
 	}
-	
-	
-	public DailyOrderEditForm(String didx, String ddate, String ddidx) {
-		this.didx = didx;
-		this.ddate = ddate;
-		this.ddidx = ddidx;
-	}
 
-
-	public String getDidx() {
+	public int getDidx() {
 		return didx;
 	}
-	public void setDidx(String didx) {
+
+	public void setDidx(int didx) {
 		this.didx = didx;
 	}
+
 	public String getDdate() {
 		return ddate;
 	}
+
 	public void setDdate(String ddate) {
 		this.ddate = ddate;
 	}
-	public String getDdidx() {
+
+	public int getDdidx() {
 		return ddidx;
 	}
-	public void setDdidx(String ddidx) {
+
+	public void setDdidx(int ddidx) {
 		this.ddidx = ddidx;
 	}
-
 
 	@Override
 	public String toString() {
 		return "DailyEditOrder [didx=" + didx + ", ddate=" + ddate + ", ddidx=" + ddidx + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
