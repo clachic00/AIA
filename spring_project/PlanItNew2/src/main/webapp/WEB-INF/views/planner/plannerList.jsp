@@ -9,9 +9,14 @@
 <meta charset="UTF-8">
 <title>플래너 리스트</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+
+
+
 	<h1>플래너 리스트</h1>
 	<hr>
 	<div id="plannerList"></div>

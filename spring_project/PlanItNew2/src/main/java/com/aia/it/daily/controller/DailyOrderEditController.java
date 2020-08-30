@@ -33,8 +33,9 @@ public class DailyOrderEditController {
 
 
 	
-	daily.getDailyOrderEdit().set(0, daily.getDailyOrderEdit().get(0));
-
+	/*
+	 * daily.getDailyOrderEdit().set(0, daily.getDailyOrderEdit().get(0));
+	 */
 	
 	
 		

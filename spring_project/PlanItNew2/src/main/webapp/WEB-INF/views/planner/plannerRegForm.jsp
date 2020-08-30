@@ -88,6 +88,10 @@
 
 }
 
+
+
+
+
 </style>
 
 <title>플래너 작성</title>
@@ -177,7 +181,7 @@
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
 					
-					<div class="sortable"></div>
+					<div class="sortable" id="sortableSpace"></div>
 					
 					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div> 
 
@@ -207,9 +211,7 @@
 		}); 
 		 
 	/* 데일리 리스트 출력 */
-	
 	function dailyList() {
-		
 		
 		console.log(${loginInfo.uidx});
 		console.log(${pidx});		
@@ -230,16 +232,17 @@
 						document.getElementsByClassName("ddateList"))
 						.html());
 
+				 for (var j = 0; j < $('.dayOfPlan').length; j++) {
+					 
+					 $('.dayOfPlan').eq(j).parent('div').next().html('');
+
+				 }
+				
+				
+				
 				for (var i = 0; i < data.length; i++) {
 
-					
-
-					
-
-					
-					
 					html += '<div class="sortableBox" class="sortable">';
-
 					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'"><br>';
 					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'"><br>';
 					html += '	didx	<input type="text" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'"><br>';
@@ -258,20 +261,11 @@
 
 						if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
 							
-							$('.dayOfPlan').eq(i).parent('div').next().html(html);
+							$('.dayOfPlan').eq(j).parent('div').next().append(html);
 
 							html = '';
 						}
-							
-						
-						
-						
-						
-						
 					 }
-
-					
-					
 							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
 							/* $('#dailyList').append(html); */
 				
@@ -313,9 +307,14 @@
 			success : function(data) {
 				alert(data);
 				dailyList();
+				editDailyOrder();
+
 				document.getElementById('dailyRegForm').reset();
 
 			}
+		
+		
+		
 		});
 
 	}
@@ -802,7 +801,6 @@ function searchDetailAddrFromCoords(coords, callback) {
 
 			}
 			
-
 			
 			
 		});
