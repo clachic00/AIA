@@ -19,16 +19,20 @@
 
 		 <!-- jquery  -->
  	<!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
- 	 	<script src="http://code.jquery.com/jquery-1.7.js"></script>
+ 	 	
  	
  
 
 
 	<!-- SORTABLE  -->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="http://code.jquery.com/jquery-1.7.js"></script> -->
 	
-
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
 
 <style>
 
@@ -80,6 +84,12 @@
 	
 }
 
+.sortableBox{
+
+	border: 0.5px solid black;
+
+
+}
 
 .handle{
 	border: 0.5px solid black;
@@ -88,9 +98,18 @@
 
 }
 
+.items{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
-
-
+ul>li{
+	margin: 0;
+        padding: 0;
+        border: 0.5px,solid ,black;
+}
 
 </style>
 
@@ -129,7 +148,7 @@
 					<option value="white">하양</option>
 					</select>
 					<br>
-		ddate(날짜)	<input type="text" name="ddate" id="ddate1"><br>
+		ddate(날짜)	<input type="text" name="ddate" id="ddate1" value=$(this)><br>
 		ddidx(날짜순서)<input type="text" name="ddidx" id="ddidx"><br>
 		
 		
@@ -181,7 +200,7 @@
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
 					
-					<div class="sortable" id="sortableSpace"></div>
+					<ul class="sortable" id="sortableSpace"></ul>
 					
 					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div> 
 
@@ -213,10 +232,6 @@
 	/* 데일리 리스트 출력 */
 	function dailyList() {
 		
-		console.log(${loginInfo.uidx});
-		console.log(${pidx});		
-		
-		
 		$.ajax({
 			url : 'http://localhost:8080/it/planner/dailyRest',
 			type : 'GET',
@@ -242,21 +257,25 @@
 				
 				for (var i = 0; i < data.length; i++) {
 
-					html += '<div class="sortableBox" class="sortable">';
+				
+					
+					html += '<li class="sortableBox" class="sortable">';
 					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'"><br>';
 					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'"><br>';
-					html += '	didx	<input type="text" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'"><br>';
+					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
 					html += '	dloc	<input type="text" value="'+data[i].dloc+'"><br>';
-					html += '	dloclon	<input type="text" value="'+data[i].dloclon+'"><br>';
-					html += '	dloclat	<input type="text" value="'+data[i].dloclat+'"><br>';
-					html += '	dphoto	<input type="text" value="'+data[i].dphoto+'"><br>';
-					html += '	dtype	<input type="text" value="'+data[i].dtype+'"><br>';
-					html += '	pidx	<input type="text" value="'+data[i].pidx+'"><br>';
+					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
+					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
+					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
+					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
+					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
+					html += '		<input type="hidden" value="'+data[i].pidx+'">';
 					html += '	<a href="https://map.kakao.com/?sName=%27+종각+%27&eName=%27+홍대입구역 2호선">경로찾기</a>';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
-					html += '<span class="handle">↕</span>'
-					html += '</div>';
+					/* html += '<span class="handle">↕</span>' */
+						html += '</li>';
 					
+				
 					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
 
 						if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
@@ -785,14 +804,17 @@ function searchDetailAddrFromCoords(coords, callback) {
 	$(function() {
 		$(".sortable").sortable({
 			placeholder : "itemBoxHighlight",
-			connectWith : ".ddateList, .sortableBox, .sortable.ui-sortable",
+			connectWith : " .sortable.ui-sortable",
+			animation : 200,
+			axis:'y',
+			
 			/* handle: ".handle", */
 			start : function(event, ui) {
-				ui.item.data('start_pos', ui.item.index());
+				/* ui.item.data('start_pos', ui.item.index()); */
 			},
 			stop : function(event, ui) {
-				var spos = ui.item.data('start_pos');
-				var epos = ui.item.index();
+			/* 	var spos = ui.item.data('start_pos');
+				var epos = ui.item.index(); */
 				 	reorder();  //순서 조정
 				 
 				 	
@@ -804,33 +826,36 @@ function searchDetailAddrFromCoords(coords, callback) {
 			
 			
 		});
-		$("#sortable").disableSelection();
+		$(".sortable").disableSelection();
 		
 	});
 
 	
 	/* 순서 조정 */
 	function reorder() {
+		//ddidx 재배치
 	   $(".sortableBox").each(function(i, box) {
 	        $(box).find(".ddidx").val(i + 1);
 
 	    });
-	/*  $(".sortableBox").each(function(i, box) {
-		console.log($(".dayOfPlan").eq(i).val());
-		 $(box).find(".ddate").val($(".dayOfPlan").eq(i).val()); 
-	
-	    }); */
 
-	
+
+		//ddate 재배치
 		for(var i=0; i<$(".dayOfPlan").length; i++){
 					
 		$(".dayOfPlan").eq(i).parent('div').next().find("input.ddate").val($(".dayOfPlan").eq(i).val());
 		
 		}
 	    
-		
+		//색상 재배치 sortableBox
+		for(var i=0; i<$(".sortableBox").length; i++){
+
+	    $(".sortableBox").eq(i).css("background-color",$(".dtype").eq(i).val());
+	    
+	    
 	}
 	
+	}
 </script>
 	
 	
