@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dloc" column="dloc" />
 		<result property="dloclon" column="dloclon" />
 		<result property="dloclat" column="dloclat" />
+		<result property="daddr" column="daddr" />
 		<result property="dmsg" column="dmsg" />
 		<result property="dphoto" column="dphoto" />
 		<result property="dtype" column="dtype" />
@@ -40,8 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		useGeneratedKeys="true"
 		keyProperty="didx">
 
-		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, dmsg, dphoto, dtype, ddate, ddidx, pidx)
-		VALUES (#{dloc},#{dloclon},#{dloclat},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
+		INSERT INTO planit.daily_plan (dloc, dloclon, dloclat, daddr, dmsg, dphoto, dtype, ddate, ddidx, pidx)
+		VALUES (#{dloc},#{dloclon},#{dloclat},#{daddr},#{dmsg},#{dphoto},#{dtype},#{ddate},#{ddidx},#{pidx})
 	</insert>
 	
 	<!-- 데일리 전체 개수 -->
@@ -51,9 +52,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on p.pidx=d.pidx where p.pidx=#{pidx}
 	</select>
 	
-	
-
-	
+	<!-- 데일리 삭제 -->
+	<delete id="deleteDailyByIdx">
+	delete from planit.daily_plan where didx=#{didx};
+	</delete>
 
 		
 	<!-- 데일리 순서 수정 -->

@@ -7,8 +7,8 @@ import com.aia.it.daily.model.DailyOrderEditForm;
 
 public interface DailyDaoInterface {
 	
+	
 	public int insertDaily(Daily daily);
-
 	//pidx조인해서 뽑기
 	public int totalCnt(int pidx);
 
@@ -16,5 +16,5 @@ public interface DailyDaoInterface {
 
 	public int editDailyOrder(DailyOrderEditForm editDailyOrder);
 
-	
+	public int deleteDailyByIdx(int didx);
 }

@@ -5,13 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aia.it.daily.model.DailyRegRequest;
+import com.aia.it.daily.service.DailyDeleteService;
 import com.aia.it.daily.service.DailyListService;
 import com.aia.it.daily.service.DailyRegService;
 import com.aia.it.planner.model.PlannerJoinDaily;
@@ -24,9 +27,10 @@ public class DailyRestController {
 		private DailyListService listService;
 		
 		@Autowired
-		DailyRegService regService;
+		private DailyRegService regService;
 		
-		
+		@Autowired
+		private DailyDeleteService deleteService;
 		
 		@PostMapping
 		public int getDailyReg (DailyRegRequest regRequest,
@@ -52,7 +56,12 @@ public class DailyRestController {
 			
 		}
 	
-	
+		@DeleteMapping("/{didx}")
+		public int deleteDaily(
+				@PathVariable("didx") int didx
+				) {
+			return deleteService.deleteDaily(didx);
+		}
 		
 		
 	

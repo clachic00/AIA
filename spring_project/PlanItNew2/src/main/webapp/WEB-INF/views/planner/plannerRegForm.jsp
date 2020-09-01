@@ -133,26 +133,27 @@ ul>li{
   
    <form id="dailyRegForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
+   		ddate(날짜)	<input type="text" name="ddate" id="ddateModal" class="ddateModal" readonly><br>
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
-
 		dloc		<input type="text" name="dloc" id="dloc" >	<br>
 		dloclon		<input type="text" name="dloclon" id="dloclon"><br>
 		dloclat		<input type="text" name="dloclat" id="dloclat"><br>
+		daddr		<input type="text" name="daddr" id="daddr"><br>
 		dmsg		<input type="text" name="dmsg" id="dmsg"><br>
 		dphoto		<input type="file" name="dphoto" id="dphoto"><br>
 		dtype		<select name="dtype" id="dtype">
+					<option value="white">하양</option>
 					<option value="red">빨강</option>
 					<option value="blue">파랑</option>
 					<option value="green">초록</option>
 					<option value="pink">분홍</option>
-					<option value="white">하양</option>
+					
 					</select>
 					<br>
-		ddate(날짜)	<input type="text" name="ddate" id="ddate1" value=$(this)><br>
-		ddidx(날짜순서)<input type="text" name="ddidx" id="ddidx"><br>
+					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
-		
-			<input type="submit" value="제출" onclick="regDaily(); ">
+		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
+			
 </form>
 
 <div class="map_wrap" style="height:500px">
@@ -202,7 +203,7 @@ ul>li{
 					
 					<ul class="sortable" id="sortableSpace"></ul>
 					
-					<div class="addDailyButton" ><a href=#dailyModal rel="modal:open">+</a></div> 
+					<a href=#dailyModal rel="modal:open" class="${list}" onclick="writeddate(this);" >+</a>
 
 				
 			</c:forEach>
@@ -260,17 +261,19 @@ ul>li{
 				
 					
 					html += '<li class="sortableBox" class="sortable">';
-					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'"><br>';
-					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'"><br>';
+					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
+					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly><br>';
 					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
-					html += '	dloc	<input type="text" value="'+data[i].dloc+'"><br>';
+					html += '	dloc	<input type="text" value="'+data[i].dloc+'" readonly><br>';
 					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
 					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
+					html += '		<input type="text" class="daddr" value="'+data[i].daddr+'" readonly>';
 					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
 					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
-					html += '	<a href="https://map.kakao.com/?sName=%27+종각+%27&eName=%27+홍대입구역 2호선">경로찾기</a>';
+					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
+					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					/* html += '<span class="handle">↕</span>' */
 						html += '</li>';
@@ -283,13 +286,15 @@ ul>li{
 							$('.dayOfPlan').eq(j).parent('div').next().append(html);
 
 							html = '';
+							break;
 						}
 					 }
 							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
 							/* $('#dailyList').append(html); */
 				
-				reorder();
 			}
+				reorder();
+
 		}
 	});
 }
@@ -302,16 +307,14 @@ ul>li{
 		regFormData.append('dloc', $('#dloc').val());
 		regFormData.append('dloclon', $('#dloclon').val());
 		regFormData.append('dloclat', $('#dloclat').val());
+		regFormData.append('daddr', $('#daddr').val());
 		regFormData.append('dmsg', $('#dmsg').val());
-		/* regFormData.append('dphoto', $('#dphoto').val()); */
-
 		// 파일 첨부
 		if ($('#dphoto')[0].files[0] != null) {
 			regFormData.append('dphoto', $('#dphoto')[0].files[0]);
 		}
-		
 		regFormData.append('dtype', $('#dtype').val());
-		regFormData.append('ddate', $('#ddate1').val());
+		regFormData.append('ddate', $('#ddateModal').val());
 		regFormData.append('ddidx', $('#ddidx').val());
 
 		console.log(regFormData);
@@ -324,7 +327,6 @@ ul>li{
 			data : regFormData,
 
 			success : function(data) {
-				alert(data);
 				dailyList();
 				editDailyOrder();
 
@@ -347,32 +349,7 @@ ul>li{
 		console.log(params);
 		console.log(param);
 		
-		//var regFormData = new FormData();
-		//for (var i = 0; i < $('.didx').length; i++) {
 
-			/* 	 DailyOrderEdit.append('DailyOrderEdit['+i+'].didx', $('.didx').eq(i).val());
-				 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddate', $('.ddate').eq(i).val());
-				 DailyOrderEdit.append('DailyOrderEdit['+i+'].ddidx', $('.ddidx').eq(i).val()); */
-
-			/* console.log($('.ddidx').eq(i).val()); */
-
-			/* regFormData.append(
-				 
-			
-			
-				param[i].name, param[i].value
-			 
-			);  
-			
-			
-			
-			console.log(regFormData); */
-
-		//}
-		/* var formData = new FormData(document.getElementById('serialize'));
-
-		alert(formData);
-		console.log(formData); */
 
 		$.ajax({
 			url : 'http://localhost:8080/it/planner/dailyOrderEdit',
@@ -382,44 +359,25 @@ ul>li{
 			data : param,
 			//data: regFormData,
 			success : function(data) {
-				alert(data);
-
+				dailyList();
 			}
 		});
-
 	}
 
-	/* 데일리등록 낱개 연습  */
-	/* function editDailyOrder(){ */
+	function deleteDaily(didx) {
 
-	/* regFormData.append('didx', $('.didx').val()); */
-	/* 	regFormData.append('ddate', $('.ddate').val());
-		regFormData.append('ddidx', $('.ddidx').val());
-		
-		console.log($('.ddate').val());
-		console.log($('.ddidx').val());			
-		regFormData.get(ddidx);
-		regFormData.get(ddate);	 */
-
-	/*  $.ajax({  
-		url : 'http://localhost:8080/it/planner/dailyOrderEdit/'+$('.didx').val(),
-		type : 'post',
-
-		data : {
-			didx : $('.didx').val() ,
-			ddate : $('.ddate').val() ,
-			ddidx : $('.ddidx').val()
-			
-		},
-		
-		success : function(data){
-			alert(data); 
-			
-
+		if(confirm('정말 삭제하시겠습니까?')){
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+			type : 'delete',
+			success : function(data) {
+				alert(data);
+				dailyList();
+				}
+			});
 		}
-	}); 
+	}
 	
-	} */
 </script>
 	
 	<!-- 지도API  -->
@@ -581,6 +539,7 @@ function displayPlaces(places) {
                 infowindow.open(map, marker); 
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
+                $('#daddr').val(result[0].address.address_name);
 
                 relayout();
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -617,6 +576,7 @@ function displayPlaces(places) {
                 
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
+                $('#daddr').val(title);                
                 console.log('1번');
                 relayout();
             	map.setLevel(4);    
@@ -633,7 +593,7 @@ function displayPlaces(places) {
                 
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
-                
+                $('#daddr').val(title);                
                 $("#menu_wrap").css("display","none");
                 
                 console.log('2번');
@@ -856,6 +816,18 @@ function searchDetailAddrFromCoords(coords, callback) {
 	}
 	
 	}
+	
+	
+	function writeddate(e){
+		console.log($(e).attr('class'));
+		console.log($(e).parent('div').prev('div'));
+
+		
+		$(".ddateModal").val($(e).attr('class'));
+		
+	}
+	
+	
 </script>
 	
 	
