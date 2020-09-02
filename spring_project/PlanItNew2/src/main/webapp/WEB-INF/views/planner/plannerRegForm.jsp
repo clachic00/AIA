@@ -39,12 +39,12 @@
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.menu_wrap {position:absolute;top:0;left:0;bottom:0;width:350px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
+.menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+.menu_wrap .option{text-align: center;}
+.menu_wrap .option p {margin:10px 0;}  
+.menu_wrap .option button {margin-left:5px;}
 #placesList li {list-style: none;}
 #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;margin-top:4px;}
@@ -122,12 +122,11 @@ ul>li{
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-
-
-
 	<a type="submit" onclick="editDailyOrder();">에디트 저장</a>
 	
-  <div id="dailyModal" class="modal" >
+	
+	<!-- RegDaily -->
+  <div id="regDailyModal" class="modal">
   
   	<h2>데일리 작성</h2>
   
@@ -157,14 +156,13 @@ ul>li{
 </form>
 
 <div class="map_wrap" style="height:500px">
-    <!-- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> -->
-    <div id="map" style="height:500px;position:relative;overflow:hidden;"> 클릭1 </div>
+    <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
 
-    <div id="menu_wrap" class="bg_white">클릭2
-        <div class="option">클릭3
+    <div class="menu_wrap" class="bg_white">
+        <div class="option">
             <div>
-                <form onsubmit="searchPlaces(); return false;">클릭4
-                    키워드 : <input type="text" value="종각 맛집" id="keyword" size="15"> 
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="맛집" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -175,9 +173,7 @@ ul>li{
     </div>
             <input type="submit" onclick="showItemEl();" name="back" value="검색">
     
-    <hr>
-    <span id="Lat"></span>
-	<span id="Lng"></span>
+
     
 </div>
 
@@ -186,10 +182,73 @@ ul>li{
         <a href="#" rel="modal:close">닫기</a>
       </div>
        
-      
+       
+       
+       
+       
+       <!-- EditDaily -->
+      <div id="editDailyModal" class="modal" >
+  
+  	<h2>데일리 에디트</h2>
+  
+   <form id="dailyEditForm" onsubmit="return false;" >
+   <%-- action="<c:url value='/planner/dailyList'/>" --%>    
+   		didx		<input type="text" name="didx" id="didx"  readonly><br>
+   		ddate		<input type="text" name="ddate" id="eddateModal" class="ddateModal" readonly><br>
+		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="epidx">	<br>
+		dloc		<input type="text" name="dloc" id="edloc" >	<br>
+		dloclon		<input type="text" name="dloclon" id="edloclon"><br>
+		dloclat		<input type="text" name="dloclat" id="edloclat"><br>
+		daddr		<input type="text" name="daddr" id="edaddr"><br>
+		dmsg		<input type="text" name="dmsg" id="edmsg"><br>
+		dphoto		<input type="file" name="dphoto" id="edphoto"><br>
+		현재 사진 		<input type="text" name="oldfile" id="oldfile"><br>
+		
+		dtype		<select name="dtype" id="edtype">
+					<option value="white">하양</option>
+					<option value="red">빨강</option>
+					<option value="blue">파랑</option>
+					<option value="green">초록</option>
+					<option value="pink">분홍</option>
+					
+					</select>
+					<br>
+					<input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
+		
+		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
+			
+</form>
 
-	
-	<div id="">
+<div class="map_wrap" style="height:500px">
+    <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
+
+    <div class="menu_wrap" class="bg_white">
+        <div class="option">
+            <div>
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="맛집" id="keyword" size="15"> 
+                    <button type="submit">검색하기</button> 
+                </form>
+            </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div>
+            <input type="submit" onclick="showItemEl();" name="back" value="검색">
+    
+
+
+    
+</div>
+
+
+
+        <a href="#" rel="modal:close">닫기</a>
+      </div>
+      
+      
+	<div>
 		pidx <input type="text" name="pidx" value="${pidx}"><br>
 	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
 	<input type="text" name="pstartdate" value="${startdate}">/<input type="text" name="penddate" value="${enddate}"><br>
@@ -201,9 +260,9 @@ ul>li{
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
 					
-					<ul class="sortable" id="sortableSpace"></ul>
+					<ul class="sortable"></ul>
 					
-					<a href=#dailyModal rel="modal:open" class="${list}" onclick="writeddate(this);" >+</a>
+					<a href=#regDailyModal rel="modal:open" class="${list}" onclick="writeddate(this);" >+</a>
 
 				
 			</c:forEach>
@@ -225,7 +284,8 @@ ul>li{
 
 
 <!-- 비동기 통신  -->
-<script>
+<script >
+	/* 페이지 시작시 리스트 출력 */
 	$(document).ready(function(){
 		dailyList();
 		}); 
@@ -273,11 +333,12 @@ ul>li{
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
 					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
+					html += '		<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>';
 					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					/* html += '<span class="handle">↕</span>' */
 						html += '</li>';
-					
+					//<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>
 				
 					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
 
@@ -364,6 +425,7 @@ ul>li{
 		});
 	}
 
+	/* 데일리 삭제 */
 	function deleteDaily(didx) {
 
 		if(confirm('정말 삭제하시겠습니까?')){
@@ -378,6 +440,84 @@ ul>li{
 		}
 	}
 	
+	
+	
+	
+	/* 데일리 수정폼 */
+	
+	function editForm(didx){
+		$.ajax({
+			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+			type : 'GET',
+			success : function(data){
+				
+				$('#didx').val(data.didx);
+				$('#edloc').val(data.dloc);
+				$('#edloclon').val(data.dloclon);
+				$('#edloclat').val(data.dloclat);
+				$('#edaddr').val(data.daddr);
+				$('#edmsg').val(data.dmsg);
+				$('#oldfile').val(data.dphoto);
+				$('#edtype').val(data.dtype);
+				$('#eddateModal').val(data.ddate);
+				$('#eddidx').val(data.ddidx);
+		
+
+				
+				
+				
+				
+				
+			}
+		});
+	}
+	
+		/* 데일리 수정 */
+	
+		function editDaily(){
+
+			var regFormData = new FormData();
+			regFormData.append('dloc', $('#edloc').val());
+			regFormData.append('dloclon', $('#edloclon').val());
+			regFormData.append('dloclat', $('#edloclat').val());
+			regFormData.append('daddr', $('#edaddr').val());			
+			regFormData.append('dmsg', $('#edmsg').val());			
+			regFormData.append('oldFile', $('#oldfile').val());
+			// 파일 첨부
+			if($('#edphoto')[0].files[0] != null){
+				regFormData.append('dphoto',$('#edphoto')[0].files[0]);
+			}
+			regFormData.append('dtype', $('#edtype').val());
+			regFormData.append('ddate', $('#eddateModal').val());
+			regFormData.append('ddateModal', $('#eddateModal').val());			
+			regFormData.append('ddidx', $('#eddidx').val());			
+			
+			
+			
+			
+			
+			$.ajax({
+				url : 'http://localhost:8080/it/planner/dailyRest/'+$('#didx').val(),
+				type : 'POST',
+				processData: false, // File 전송시 필수
+				contentType: false, // multipart/form-data
+				data : regFormData,
+		
+				success : function(data){
+					alert(data); 
+					dailyList();
+					document.getElementById('dailyEditForm').reset();
+				}
+			});
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 </script>
 	
 	<!-- 지도API  -->
@@ -400,8 +540,8 @@ var geocoder = new daum.maps.services.Geocoder();
 
 function resizeMap() {
     var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '350px';
-    mapContainer.style.height = '450px'; 
+    mapContainer.style.width = '440px';
+    mapContainer.style.height = '500px'; 
 }
 
 
@@ -435,15 +575,6 @@ function panTo() {
 resizeMap();
 relayout();
 
-function zoomIn() {        
-    // 현재 지도의 레벨을 얻어옵니다
-    var level = map.getLevel();
-    
-    // 지도를 1레벨 내립니다 (지도가 확대됩니다)
-    map.setLevel(level - 9);
-    
-    
-}    
 
 
 
@@ -498,7 +629,7 @@ function placesSearchCB(data, status, pagination) {
 function displayPlaces(places) {
 
     var listEl = document.getElementById('placesList'), 
-    menuEl = document.getElementById('menu_wrap'),
+    menuEl = document.getElementsByClassName('menu_wrap'),
     fragment = document.createDocumentFragment(), 
     bounds = new kakao.maps.LatLngBounds(), 
     listStr = '';
@@ -577,7 +708,6 @@ function displayPlaces(places) {
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#daddr').val(title);                
-                console.log('1번');
                 relayout();
             	map.setLevel(4);    
   				var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -594,10 +724,7 @@ function displayPlaces(places) {
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#daddr').val(title);                
-                $("#menu_wrap").css("display","none");
-                
-                console.log('2번');
-
+                $(".menu_wrap").css("display","none");
                 relayout();
             	map.setLevel(4);    
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -685,7 +812,7 @@ function addMarker(position, idx, title) {
 
 
 var showItemEl = function() {
-	$("#menu_wrap").css("display","block");
+	$(".menu_wrap").css("display","block");
 	
 	
 };

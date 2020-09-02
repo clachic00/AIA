@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pidx" column="pidx" />		
 	</resultMap>
 
-<resultMap id="editDaily"
+	<resultMap id="editDaily"
 		type="com.aia.it.daily.model.DailyOrderEditForm">
 
 		<id property="didx" column="didx" />
@@ -31,7 +31,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="ddidx" column="ddidx" />		
 		
 	</resultMap>
-
 
 
 
@@ -57,7 +56,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete from planit.daily_plan where didx=#{didx};
 	</delete>
 
-		
+	
+	<!-- 하나의 데일리 가져오기 -->
+	<select id="selectByIdx" resultMap="resultDaily">
+	select * from planit.daily_plan where didx=#{didx};
+	</select>
+	
+	
+	
+	
+	
+	<!-- 데일리 수정 -->
+	<update id="editDaily"
+			parameterType="com.aia.it.daily.model.Daily"
+	>
+		update planit.daily_plan set dloc=#{dloc}, dloclon=#{dloclon}, dloclat=#{dloclat}, daddr=#{daddr}, dmsg=#{dmsg}, dphoto=#{dphoto}, dtype=#{dtype}, ddate=#{ddate}, ddidx=#{ddidx} where didx=#{didx}
+	</update>
+	
+	
+	
+	
+	
+	
 	<!-- 데일리 순서 수정 -->
 	<update id="editDailyOrder"
 			parameterType="com.aia.it.daily.model.DailyOrderEditForm"

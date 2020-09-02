@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aia.it.daily.model.Daily;
+import com.aia.it.daily.model.DailyEditRequest;
 import com.aia.it.daily.model.DailyRegRequest;
 import com.aia.it.daily.service.DailyDeleteService;
+import com.aia.it.daily.service.DailyEditService;
 import com.aia.it.daily.service.DailyListService;
 import com.aia.it.daily.service.DailyRegService;
+import com.aia.it.daily.service.DailyViewService;
 import com.aia.it.planner.model.PlannerJoinDaily;
 
 @RestController
@@ -31,6 +35,13 @@ public class DailyRestController {
 		
 		@Autowired
 		private DailyDeleteService deleteService;
+		
+		@Autowired
+		private DailyEditService editService;
+		
+		@Autowired
+		private DailyViewService viewService;
+		
 		
 		@PostMapping
 		public int getDailyReg (DailyRegRequest regRequest,
@@ -50,7 +61,7 @@ public class DailyRestController {
 			
 					) {
 			
-			System.out.println("u3555idx : "+uidx+" pidx : "+pidx);
+			System.out.println("Restcontroller pidx : "+uidx+" pidx : "+pidx);
 			
 			return listService.getView(uidx, pidx);
 			
@@ -62,6 +73,34 @@ public class DailyRestController {
 				) {
 			return deleteService.deleteDaily(didx);
 		}
+		
+		//하나의 데일리 정보 보기
+		@GetMapping("/{didx}")
+		public Daily getDaily(
+				@PathVariable("didx") int didx
+				){
+			return viewService.getDaily(didx);
+		}
+		
+		
+		//데일리 정보 수정
+		@PostMapping("/{didx}")
+		public int editDaily(
+				@PathVariable("didx") int didx,
+				 DailyEditRequest editRequest,
+				HttpServletRequest request
+				) {
+			
+			editRequest.setDidx(didx);
+
+			
+			
+			return editService.editDaily(editRequest, request);
+
+			
+		}
+
+		
 		
 		
 	
