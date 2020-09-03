@@ -18,22 +18,22 @@
 	
 
 		 <!-- jquery  -->
- 	<!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
+ 	 <script src="//code.jquery.com/jquery-1.12.4.js"></script> 
  	 	
  	
  
 
 
 	<!-- SORTABLE  -->
- 	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="http://code.jquery.com/jquery-1.7.js"></script> -->
 	
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<!--    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
- -->     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <!--  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>  -->
+     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
- 
+
 <style>
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -128,9 +128,15 @@ ul>li{
 	<!-- RegDaily -->
   <div id="regDailyModal" class="modal">
   
-  	<h2>데일리 작성</h2>
   
-   <form id="dailyRegForm" onsubmit="return false;" >
+ <%-- <c:set var="didx" value="$('#didx').val()"/> --%>
+   <c:if test="${ null eq didx }">
+   
+     	<h2>데일리 작성</h2>
+   
+   
+   
+      <form id="dailyRegForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
    		ddate(날짜)	<input type="text" name="ddate" id="ddateModal" class="ddateModal" readonly><br>
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
@@ -151,29 +157,20 @@ ul>li{
 					<br>
 					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
-		<a href="#mapModal" rel="modal:open">위치 찾기</a>
-		
 		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
 			
-	</form>
-
-
-
-        <a href="#" rel="modal:close">닫기</a>
-      </div>
-       
-       
-       
-       
-       
-       <!-- EditDaily -->
-      <div id="editDailyModal" class="modal" >
-  
-  	<h2>데일리 에디트</h2>
-  
-   <form id="dailyEditForm" onsubmit="return false;" >
-   <%-- action="<c:url value='/planner/dailyList'/>" --%>    
-   		didx		<input type="text" name="didx" id="didx"  readonly><br>
+</form>
+   
+   </c:if>
+      <c:if test="${ null ne didx }">   		
+      
+        	<h2>데일리 수정</h2>
+      
+      
+         <form id="dailyEditForm" onsubmit="return false;" >
+   			<%-- action="<c:url value='/planner/dailyList'/>" --%>   
+      
+      	didx		<input type="text" name="didx" id="didx" ><br>
    		ddate		<input type="text" name="ddate" id="eddateModal" class="ddateModal" readonly><br>
 		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="epidx">	<br>
 		dloc		<input type="text" name="dloc" id="edloc" >	<br>
@@ -195,20 +192,16 @@ ul>li{
 					<br>
 					<input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
-		<a href="#mapModal" rel="modal:open">위치 찾기</a>
+
 		
 		
 		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
-			
-	</form>
+		 
+		 			
+</form>
+		 
+		 </c:if>
 
-        <a href="#" rel="modal:close">닫기</a>
-      </div>
-      
-      
-      
-      <!-- 지도 MODAL -->
-      <div id="mapModal" class="modal">
 <div class="map_wrap" style="height:500px">
     <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
 
@@ -216,7 +209,7 @@ ul>li{
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="맛집" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="키워드로 검색해주세요" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -227,12 +220,15 @@ ul>li{
     </div>
             <input type="submit" onclick="showItemEl();" name="back" value="검색">
     
-    <a href="#mapModal" rel="modal:close"><input type="submit" value="닫기"></a>
-    
-	</div>
+
     
 </div>
 
+
+
+        <a href="#" rel="modal:close">닫기</a>
+      </div>
+       
        
        
        
@@ -288,11 +284,6 @@ $(document).ready(function(){
 		}); 
 
 
-$.modal.defaults={
-		
-	closeExisting: false	
-		
-};
 
 
 
@@ -342,7 +333,7 @@ $.modal.defaults={
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
 					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
-					html += '		<a href="#editDailyModal" rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>';
+					html += '		<a href="#regDailyModal"rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>';
 					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					/* html += '<span class="handle">↕</span>' */

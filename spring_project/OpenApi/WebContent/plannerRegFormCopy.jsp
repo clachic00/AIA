@@ -18,22 +18,22 @@
 	
 
 		 <!-- jquery  -->
- 	<!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
+ 	<!-- <script src="//code.jquery.com/jquery-1.12.4.js"></script> -->
  	 	
  	
  
 
 
 	<!-- SORTABLE  -->
- 	<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<!-- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="http://code.jquery.com/jquery-1.7.js"></script> -->
 	
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-<!--    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
- -->     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
- 
+
 <style>
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -122,7 +122,7 @@ ul>li{
 <body>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-	<a type="submit" class="icon-remove" onclick="editDailyOrder();">에디트 저장</a>
+	<a type="submit" onclick="editDailyOrder();">에디트 저장</a>
 	
 	
 	<!-- RegDaily -->
@@ -151,11 +151,31 @@ ul>li{
 					<br>
 					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
-		<a href="#mapModal" rel="modal:open">위치 찾기</a>
-		
 		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
 			
-	</form>
+</form>
+
+<div class="map_wrap" style="height:500px">
+    <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+        <div class="option">
+            <div>
+                <form onsubmit="searchPlaces(); return false;">
+                    키워드 : <input type="text" value="맛집" id="keyword" size="15"> 
+                    <button type="submit">검색하기</button> 
+                </form>
+            </div>
+        </div>
+        <hr>
+        <ul id="placesList"></ul>
+        <div id="pagination"></div>
+    </div>
+            <input type="submit" onclick="showItemEl();" name="back" value="검색">
+    
+
+    
+</div>
 
 
 
@@ -195,21 +215,11 @@ ul>li{
 					<br>
 					<input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
-		<a href="#mapModal" rel="modal:open">위치 찾기</a>
-		
-		
 		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
 			
-	</form>
+</form>
 
-        <a href="#" rel="modal:close">닫기</a>
-      </div>
-      
-      
-      
-      <!-- 지도 MODAL -->
-      <div id="mapModal" class="modal">
-<div class="map_wrap" style="height:500px">
+<!-- <div class="map_wrap" style="height:500px">
     <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
@@ -225,19 +235,17 @@ ul>li{
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-            <input type="submit" onclick="showItemEl();" name="back" value="검색">
+            <input type="submit" onclick="showItemEl();" name="back" value="검색"> -->
     
-    <a href="#mapModal" rel="modal:close"><input type="submit" value="닫기"></a>
-    
-	</div>
+
+
     
 </div>
 
-       
-       
-       
-       
-   
+
+
+        <a href="#" rel="modal:close">닫기</a>
+      </div>
       
       
 	<div>
@@ -254,7 +262,7 @@ ul>li{
 					
 					<ul class="sortable"></ul>
 					
-					<a href="#regDailyModal" rel="modal:open" class="${list}" onclick="resetEditForm(); searchReset(); showItemEl(); searchPlaces();" writeddate(this); >+</a>
+					<a href=#regDailyModal rel="modal:open" class="${list}" onclick="writeddate(this);" >+</a>
 
 				
 			</c:forEach>
@@ -277,27 +285,10 @@ ul>li{
 
 <!-- 비동기 통신  -->
 <script >
-
-	
-
-/* 페이지 시작시 리스트 출력 */
-$(document).ready(function(){
-	dailyList();
-
-
+	/* 페이지 시작시 리스트 출력 */
+	$(document).ready(function(){
+		dailyList();
 		}); 
-
-
-$.modal.defaults={
-		
-	closeExisting: false	
-		
-};
-
-
-
-
-	
 		 
 	/* 데일리 리스트 출력 */
 	function dailyList() {
@@ -342,7 +333,7 @@ $.modal.defaults={
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
 					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
-					html += '		<a href="#editDailyModal" rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>';
+					html += '		<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>';
 					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
 					/* html += '<span class="handle">↕</span>' */
@@ -460,7 +451,7 @@ $.modal.defaults={
 			type : 'GET',
 			success : function(data){
 				
-				$('#didx').val(data.didx); 
+				$('#didx').val(data.didx);
 				$('#edloc').val(data.dloc);
 				$('#edloclon').val(data.dloclon);
 				$('#edloclat').val(data.dloclat);
@@ -472,6 +463,11 @@ $.modal.defaults={
 				$('#eddidx').val(data.ddidx);
 		
 
+				
+				
+				
+				
+				
 			}
 		});
 	}
@@ -589,7 +585,7 @@ var ps = new kakao.maps.services.Places();
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
-//searchPlaces();
+searchPlaces();
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -629,20 +625,20 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 
-
-
-var listEl = document.getElementById('placesList'), 
-menuEl = document.getElementById('menu_wrap'),
-fragment = document.createDocumentFragment(), 
-bounds = new kakao.maps.LatLngBounds(), 
-listStr = '';
-
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
 
-
+    var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new kakao.maps.LatLngBounds(), 
+    listStr = '';
     
-	searchReset();
+    // 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
+
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
     
     
     
@@ -882,14 +878,7 @@ function searchDetailAddrFromCoords(coords, callback) {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
  
-function searchReset(){
-	
-    // 검색 결과 목록에 추가된 항목들을 제거합니다
-    removeAllChildNods(listEl);
 
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
-}
  
 
 </script>
@@ -955,7 +944,7 @@ function searchReset(){
 	
 	}
 	
-	/* 모달에ddate를 클래스명을 활용해서 옮기는 메서드 */
+	
 	function writeddate(e){
 		console.log($(e).attr('class'));
 		console.log($(e).parent('div').prev('div'));
@@ -965,12 +954,6 @@ function searchReset(){
 		
 	}
 	
-	
-	function resetEditForm(){
-		   $('#dailyEditForm')[0].reset();	 	
-
-	}
-
 	
 </script>
 	
