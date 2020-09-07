@@ -85,10 +85,19 @@
         list-style: none;
     }
 
-ul>li{
+/* ul>li{
 	margin: 0;
         padding: 0;
         border: 0.5px,solid ,black;
+        
+        
+} */
+
+.didxImg{
+
+width: 30px;
+height: 30px;
+
 }
 
 </style>
@@ -276,6 +285,8 @@ ul>li{
 		<hr>
 		
 		<form id="serialize">
+				<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
+		
 			<c:forEach items="${dateList}" var="list">
 				
 					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
@@ -335,7 +346,7 @@ $(document).ready(function(){
 				
 				
 				for (var i = 0; i < data.length; i++) {
-
+					
 					
 					html += '<li class="sortableBox" class="sortable">';
 					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
@@ -344,8 +355,10 @@ $(document).ready(function(){
 					html += '	dloc	<input type="text" value="'+data[i].dloc+'" readonly><br>';
 					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
 					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
-					html += '		<input type="text" class="daddr" value="'+data[i].daddr+'" readonly>';
+					html += '  daddr<input type="text" class="daddr" value="'+data[i].daddr+'" readonly><br>';
 					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
+/* 					html += '	img	<img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">';
+ */
 					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
