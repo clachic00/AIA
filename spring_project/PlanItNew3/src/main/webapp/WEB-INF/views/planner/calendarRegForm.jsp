@@ -16,7 +16,7 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script>
-                  $(function() {
+       /*            $(function() {
                 
                 //오늘 날짜를 출력
                 $("#today").text(new Date().toLocaleDateString());
@@ -55,7 +55,7 @@
                         $("#fromDate").datepicker( "option", "maxDate", selectedDate );
                     }                
                 });
-            });
+            }); */
 // if (Date.prototype.yyyymmdd === undefined) {
 //     Date.prototype.yyyymmdd = function() {
 //     var mm = this.getMonth() + 1; // getMonth() is zero-based
@@ -100,12 +100,15 @@ call( );
 
     
 <body>
+  <%@ include file="/WEB-INF/views/include/header.jsp" %> 
+
+
 <form method="post">
 	<p>uidx <input type="text" name="uidx" value="${loginInfo.uidx}"></p><br>
 		제목<input type="text" name="ptitle">
 	
-    <p>StartDate : <input type="text" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
-    <p>EndDate : <input type="text" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
+    <p>StartDate : <input type="date" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
+    <p>EndDate : <input type="date" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
     <div></div>
     <input type="submit" value="완료">
     </form>
