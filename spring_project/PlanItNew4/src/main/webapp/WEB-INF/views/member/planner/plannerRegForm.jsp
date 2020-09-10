@@ -1,6 +1,6 @@
 <%@ page import="com.aia.it.planner.model.PlannerJoinDaily"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
 
 <!DOCTYPE html>
@@ -8,10 +8,10 @@
 <head>
 <meta charset="UTF-8">
 
-<%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
- --%>	
+<%--    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+ --%>   
 
- 	<!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
+    <!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
 
 
 <style>
@@ -58,23 +58,23 @@
 
 .sortable{
 
-	border: 0.5px solid black;
-	text-align: center;
-	width : 500px;
-	
+   border: 0.5px solid black;
+   text-align: center;
+   width : 500px;
+   
 }
 
 .sortableBox{
 
-	border: 0.5px solid black;
+   border: 0.5px solid black;
 
 
 }
 
 .handle{
-	border: 0.5px solid black;
-	text-align: center;
-	float : right;
+   border: 0.5px solid black;
+   text-align: center;
+   float : right;
 
 }
 
@@ -86,7 +86,7 @@
     }
 
 /* ul>li{
-	margin: 0;
+   margin: 0;
         padding: 0;
         border: 0.5px,solid ,black;
         
@@ -108,9 +108,9 @@ height: 30px;
 <body>
  <%@ include file="/WEB-INF/views/include/header.jsp" %>
  
-	<a type="submit" class="icon-remove" onclick="editDailyOrder();">에디트 저장</a>
-	
-	 
+   <a type="submit" class="icon-remove" onclick="editDailyOrder();">에디트 저장</a>
+   
+    
        <!-- RegDaily MODAL -->
   
        <div class="modal fade" id="regDailyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,29 +129,29 @@ height: 30px;
    <form id="dailyRegForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
    
-   		ddate(날짜)	<input type="text" name="ddate" id="ddateModal" class="ddateModal" readonly>	<br>
-		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="pidx">	<br>
-		dloc		<input type="text" name="dloc" id="dloc" >	<br>
-		dloclon		<input type="text" name="dloclon" id="dloclon">	<br>
-		dloclat		<input type="text" name="dloclat" id="dloclat">	<br>
-		daddr		<input type="text" name="daddr" id="daddr">	<br>
-		dmsg		<input type="text" name="dmsg" id="dmsg">	<br>
-		dphoto		<input type="file" name="dphoto" id="dphoto">	<br>
-		dtype		<select name="dtype" id="dtype">
-					<option value="white">하양</option>
-					<option value="red">빨강</option>
-					<option value="blue">파랑</option>
-					<option value="green">초록</option>
-					<option value="pink">분홍</option>
-					</select>	<br>
-					
-					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
-		
-		<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
+         ddate(날짜)   <input type="text" name="ddate" id="ddateModal" class="ddateModal" readonly>   <br>
+      pidx      <input type="text" name="pidx" value="${planner.pidx}" id="pidx">   <br>
+      dloc      <input type="text" name="dloc" id="dloc" >   <br>
+      dloclon      <input type="text" name="dloclon" id="dloclon">   <br>
+      dloclat      <input type="text" name="dloclat" id="dloclat">   <br>
+      daddr      <input type="text" name="daddr" id="daddr">   <br>
+      dmsg      <input type="text" name="dmsg" id="dmsg">   <br>
+      dphoto      <input type="file" name="dphoto" id="dphoto">   <br>
+      dtype      <select name="dtype" id="dtype">
+               <option value="white">하양</option>
+               <option value="red">빨강</option>
+               <option value="blue">파랑</option>
+               <option value="green">초록</option>
+               <option value="pink">분홍</option>
+               </select>   <br>
+               
+               <input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
+      
+      <a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
 
-		<a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
-			
-	</form>
+      <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="regDaily(); "></a>
+         
+   </form>
 
 
 
@@ -185,34 +185,34 @@ height: 30px;
 
    <form id="dailyEditForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
-   		didx		<input type="text" name="didx" id="didx"  readonly><br>
-   		ddate		<input type="text" name="ddate" id="eddateModal" class="ddateModal" readonly><br>
-		pidx		<input type="text" name="pidx" value="${planner.pidx}" id="epidx">	<br>
-		dloc		<input type="text" name="dloc" id="edloc" >	<br>
-		dloclon		<input type="text" name="dloclon" id="edloclon"><br>
-		dloclat		<input type="text" name="dloclat" id="edloclat"><br>
-		daddr		<input type="text" name="daddr" id="edaddr"><br>
-		dmsg		<input type="text" name="dmsg" id="edmsg"><br>
-		dphoto		<input type="file" name="dphoto" id="edphoto"><br>
-		현재 사진 		<input type="text" name="oldfile" id="oldfile"><br>
-		
-		dtype		<select name="dtype" id="edtype">
-					<option value="white">하양</option>
-					<option value="red">빨강</option>
-					<option value="blue">파랑</option>
-					<option value="green">초록</option>
-					<option value="pink">분홍</option>
-					
-					</select>
-					<br>
-					<input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
-		
-		<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
-		
-		
-		 <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
-			
-	</form>
+         didx      <input type="text" name="didx" id="didx"  readonly><br>
+         ddate      <input type="text" name="ddate" id="eddateModal" class="ddateModal" readonly><br>
+      pidx      <input type="text" name="pidx" value="${planner.pidx}" id="epidx">   <br>
+      dloc      <input type="text" name="dloc" id="edloc" >   <br>
+      dloclon      <input type="text" name="dloclon" id="edloclon"><br>
+      dloclat      <input type="text" name="dloclat" id="edloclat"><br>
+      daddr      <input type="text" name="daddr" id="edaddr"><br>
+      dmsg      <input type="text" name="dmsg" id="edmsg"><br>
+      dphoto      <input type="file" name="dphoto" id="edphoto"><br>
+      현재 사진       <input type="text" name="oldfile" id="oldfile"><br>
+      
+      dtype      <select name="dtype" id="edtype">
+               <option value="white">하양</option>
+               <option value="red">빨강</option>
+               <option value="blue">파랑</option>
+               <option value="green">초록</option>
+               <option value="pink">분홍</option>
+               
+               </select>
+               <br>
+               <input type="hidden" name="ddidx" id="eddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
+      
+      <a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
+      
+      
+       <a href="#" rel="modal:close"><input type="submit" value="제출" onclick="editDaily(); "></a>
+         
+   </form>
 
 
 
@@ -260,12 +260,13 @@ height: 30px;
             <input type="submit" onclick="showItemEl(); " name="back" value="검색">
     
     
-	</div>
+   </div>
    
    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -274,267 +275,267 @@ height: 30px;
       
       
       <!-- 플래너 정보 -->
-	<div>
-	<input type="hidden" name="pidx" value="${pidx}">
-	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
-		 <input type="text" name="pstartdate" value="${startdate}">/
-		 <input type="text" name="penddate" value="${enddate}"><br>
-	제목<input type="text" name="ptitle" value="${ptitle}">
-		</div>
-		<hr>
-		
-		<form id="serialize">
-				<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
-		
-			<c:forEach items="${dateList}" var="list">
-				
-					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
-					
-					<ul class="sortable"></ul>
-					
-					<a data-toggle="modal" data-target="#regDailyModal" class="${list}" onclick="searchReset(); showItemEl(); searchPlaces(); writeddate(this);" >+데일리 등록</a>
+   <div>
+   <input type="hidden" name="pidx" value="${pidx}">
+   uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
+       <input type="text" name="pstartdate" value="${startdate}">/
+       <input type="text" name="penddate" value="${enddate}"><br>
+   제목<input type="text" name="ptitle" value="${ptitle}">
+      </div>
+      <hr>
+      
+      <form id="serialize">
+            <c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
+      
+         <c:forEach items="${dateList}" var="list">
+            
+               <div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
+               
+               <ul class="sortable"></ul>
+               
+               <a data-toggle="modal" data-target="#regDailyModal" class="${list}" onclick="searchReset(); showItemEl(); searchPlaces(); writeddate(this);" >+데일리 등록</a>
 
-			</c:forEach>
-		</form>
+         </c:forEach>
+      </form>
 
 
 
-	
-	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+   
+   <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 
-	
+   
 
 
 
 <!-- 비동기 통신  -->
 <script >
 
-	
+   
 
 /* 페이지 시작시 리스트 출력 */
 $(document).ready(function(){
-	dailyList();
+   dailyList();
 
 
-		}); 
+      }); 
 
-		 
-	/* 데일리 리스트 출력 */
-	function dailyList() {
-		
-		$.ajax({
-			url : 'http://localhost:8080/it/planner/dailyRest',
-			type : 'GET',
-			data : {
-				uidx : '${loginInfo.uidx}',
-				pidx : '${pidx}'
-			},
-			success : function(data) {
-				var html = '';
+       
+   /* 데일리 리스트 출력 */
+   function dailyList() {
+      
+      $.ajax({
+         url : 'http://localhost:8080/it/planner/dailyRest',
+         type : 'GET',
+         data : {
+            uidx : '${loginInfo.uidx}',
+            pidx : '${pidx}'
+         },
+         success : function(data) {
+            var html = '';
 
-				
-				console.log($(
-						document.getElementsByClassName("ddateList"))
-						.html());
+            
+            console.log($(
+                  document.getElementsByClassName("ddateList"))
+                  .html());
 
-				 for (var j = 0; j < $('.dayOfPlan').length; j++) {
-					 
-					 $('.dayOfPlan').eq(j).parent('div').next().html('');
+             for (var j = 0; j < $('.dayOfPlan').length; j++) {
+                
+                $('.dayOfPlan').eq(j).parent('div').next().html('');
 
-				 }
-				
-				
-				for (var i = 0; i < data.length; i++) {
-					
-					
-					html += '<li class="sortableBox" class="sortable">';
-					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
-					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly><br>';
-					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
-					html += '	dloc	<input type="text" value="'+data[i].dloc+'" readonly><br>';
-					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
-					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
-					html += '  daddr<input type="text" class="daddr" value="'+data[i].daddr+'" readonly><br>';
-					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
-/* 					html += '	img	<img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">';
+             }
+            
+            
+            for (var i = 0; i < data.length; i++) {
+               
+               
+               html += '<li class="sortableBox" class="sortable">';
+               html += '   ddidx   <input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
+               html += '   ddate   <input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly><br>';
+               html += '      <input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
+               html += '   dloc   <input type="text" value="'+data[i].dloc+'" readonly><br>';
+               html += '      <input type="hidden" value="'+data[i].dloclon+'">';
+               html += '      <input type="hidden" value="'+data[i].dloclat+'">';
+               html += '  daddr<input type="text" class="daddr" value="'+data[i].daddr+'" readonly><br>';
+               html += '      <input type="hidden" value="'+data[i].dphoto+'">';
+/*                html += '   img   <img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">';
  */
-					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
-					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
-					html += '		<input type="hidden" value="'+data[i].pidx+'">';
-					html += '		<a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
-					html += '		<a data-toggle="modal" data-target="#editDailyModal" onclick="editForm('+data[i].didx+'); searchReset(); showItemEl(); searchPlaces(); "  >수정</a>';
-					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
-					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
-					/* html += '<span class="handle">↕</span>' */
-						html += '</li>';
-					//<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>
-				
-					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
+               html += '      <input type="hidden" value="'+data[i].dmsg+'">';
+               html += '      <input type="hidden" class="dtype" value="'+data[i].dtype+'">';
+               html += '      <input type="hidden" value="'+data[i].pidx+'">';
+               html += '      <a href="https://map.kakao.com/?sName=%27+'+data[(i-1)<0?i:i-1].daddr+'+%27&eName=%27+'+data[i].daddr+'">경로찾기</a>';
+               html += '      <a data-toggle="modal" data-target="#editDailyModal" onclick="editForm('+data[i].didx+'); searchReset(); showItemEl(); searchPlaces(); "  >수정</a>';
+               html += '      <input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
+               //kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
+               /* html += '<span class="handle">↕</span>' */
+                  html += '</li>';
+               //<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>
+            
+                for (var j = 0; j < $('.dayOfPlan').length; j++) {
 
-						if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
-							
-							$('.dayOfPlan').eq(j).parent('div').next().append(html);
+                  if ($('.dayOfPlan').eq(j).val() == data[i].ddate) {
+                     
+                     $('.dayOfPlan').eq(j).parent('div').next().append(html);
 
-							html = '';
-							break;
-						}
-					 }
-							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
-							/* $('#dailyList').append(html); */
-				
-			}
-				reorder();
+                     html = '';
+                     break;
+                  }
+                }
+                     /* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
+                     /* $('#dailyList').append(html); */
+            
+         }
+            reorder();
 
-		}
-	});
+      }
+   });
 }
 
-	/* 데일리 등록 */
-	function regDaily() {
+   /* 데일리 등록 */
+   function regDaily() {
 
-		var regFormData = new FormData();
-		regFormData.append('pidx', $('#pidx').val());
-		regFormData.append('dloc', $('#dloc').val());
-		regFormData.append('dloclon', $('#dloclon').val());
-		regFormData.append('dloclat', $('#dloclat').val());
-		regFormData.append('daddr', $('#daddr').val());
-		regFormData.append('dmsg', $('#dmsg').val());
-		// 파일 첨부
-		if ($('#dphoto')[0].files[0] != null) {
-			regFormData.append('dphoto', $('#dphoto')[0].files[0]);
-		}
-		regFormData.append('dtype', $('#dtype').val());
-		regFormData.append('ddate', $('#ddateModal').val());
-		regFormData.append('ddidx', $('#ddidx').val());
+      var regFormData = new FormData();
+      regFormData.append('pidx', $('#pidx').val());
+      regFormData.append('dloc', $('#dloc').val());
+      regFormData.append('dloclon', $('#dloclon').val());
+      regFormData.append('dloclat', $('#dloclat').val());
+      regFormData.append('daddr', $('#daddr').val());
+      regFormData.append('dmsg', $('#dmsg').val());
+      // 파일 첨부
+      if ($('#dphoto')[0].files[0] != null) {
+         regFormData.append('dphoto', $('#dphoto')[0].files[0]);
+      }
+      regFormData.append('dtype', $('#dtype').val());
+      regFormData.append('ddate', $('#ddateModal').val());
+      regFormData.append('ddidx', $('#ddidx').val());
 
-		console.log(regFormData);
-		console.log($('#ddate').val());
-		$.ajax({
-			url : 'http://localhost:8080/it/planner/dailyRest',
-			type : 'post',
-			processData : false, // File 전송시 필수
-			contentType : false, // multipart/form-data
-			data : regFormData,
+      console.log(regFormData);
+      console.log($('#ddate').val());
+      $.ajax({
+         url : 'http://localhost:8080/it/planner/dailyRest',
+         type : 'post',
+         processData : false, // File 전송시 필수
+         contentType : false, // multipart/form-data
+         data : regFormData,
 
-			success : function(data) {
-				dailyList();
-				editDailyOrder();
+         success : function(data) {
+            dailyList();
+            editDailyOrder();
 
-				document.getElementById('dailyRegForm').reset();
+            document.getElementById('dailyRegForm').reset();
 
-			}
-		
-		});
+         }
+      
+      });
 
-	}
+   }
 
-	/* 데일리 순서 등록 */
-	function editDailyOrder() {
+   /* 데일리 순서 등록 */
+   function editDailyOrder() {
 
-		var params = $("#serialize").serialize();
-		var param = $("#serialize").serializeArray();
+      var params = $("#serialize").serialize();
+      var param = $("#serialize").serializeArray();
 
-		console.log(params);
-		console.log(param);
-		
+      console.log(params);
+      console.log(param);
+      
 
 
-		$.ajax({
-			url : 'http://localhost:8080/it/planner/dailyOrderEdit',
-			type : 'post',
-			/* processData: false, 
-			contentType: false,  */
-			data : param,
-			//data: regFormData,
-			success : function(data) {
-				dailyList();
-			}
-		});
-	}
+      $.ajax({
+         url : 'http://localhost:8080/it/planner/dailyOrderEdit',
+         type : 'post',
+         /* processData: false, 
+         contentType: false,  */
+         data : param,
+         //data: regFormData,
+         success : function(data) {
+            dailyList();
+         }
+      });
+   }
 
-	/* 데일리 삭제 */
-	function deleteDaily(didx) {
+   /* 데일리 삭제 */
+   function deleteDaily(didx) {
 
-		if(confirm('정말 삭제하시겠습니까?')){
-		$.ajax({
-			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
-			type : 'delete',
-			success : function(data) {
-				alert(data);
-				dailyList();
-				}
-			});
-		}
-	}
-	
-	
-	
-	/* 데일리 수정폼 */
-	
-	function editForm(didx){
-		$.ajax({
-			url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
-			type : 'GET',
-			success : function(data){
-				
-				$('#didx').val(data.didx); 
-				$('#edloc').val(data.dloc);
-				$('#edloclon').val(data.dloclon);
-				$('#edloclat').val(data.dloclat);
-				$('#edaddr').val(data.daddr);
-				$('#edmsg').val(data.dmsg);
-				$('#oldfile').val(data.dphoto);
-				$('#edtype').val(data.dtype);
-				$('#eddateModal').val(data.ddate);
-				$('#eddidx').val(data.ddidx);
-		
+      if(confirm('정말 삭제하시겠습니까?')){
+      $.ajax({
+         url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+         type : 'delete',
+         success : function(data) {
+            alert(data);
+            dailyList();
+            }
+         });
+      }
+   }
+   
+   
+   
+   /* 데일리 수정폼 */
+   
+   function editForm(didx){
+      $.ajax({
+         url : 'http://localhost:8080/it/planner/dailyRest/'+didx,
+         type : 'GET',
+         success : function(data){
+            
+            $('#didx').val(data.didx); 
+            $('#edloc').val(data.dloc);
+            $('#edloclon').val(data.dloclon);
+            $('#edloclat').val(data.dloclat);
+            $('#edaddr').val(data.daddr);
+            $('#edmsg').val(data.dmsg);
+            $('#oldfile').val(data.dphoto);
+            $('#edtype').val(data.dtype);
+            $('#eddateModal').val(data.ddate);
+            $('#eddidx').val(data.ddidx);
+      
 
-			}
-		});
-	}
-	
-		/* 데일리 수정 */
-	
-		function editDaily(){
+         }
+      });
+   }
+   
+      /* 데일리 수정 */
+   
+      function editDaily(){
 
-			var regFormData = new FormData();
-			regFormData.append('dloc', $('#edloc').val());
-			regFormData.append('dloclon', $('#edloclon').val());
-			regFormData.append('dloclat', $('#edloclat').val());
-			regFormData.append('daddr', $('#edaddr').val());			
-			regFormData.append('dmsg', $('#edmsg').val());			
-			regFormData.append('oldFile', $('#oldfile').val());
-			// 파일 첨부
-			if($('#edphoto')[0].files[0] != null){
-				regFormData.append('dphoto',$('#edphoto')[0].files[0]);
-			}
-			regFormData.append('dtype', $('#edtype').val());
-			regFormData.append('ddate', $('#eddateModal').val());
-			regFormData.append('ddateModal', $('#eddateModal').val());			
-			regFormData.append('ddidx', $('#eddidx').val());			
-			
-			
-			$.ajax({
-				url : 'http://localhost:8080/it/planner/dailyRest/'+$('#didx').val(),
-				type : 'POST',
-				processData: false, // File 전송시 필수
-				contentType: false, // multipart/form-data
-				data : regFormData,
-		
-				success : function(data){
-					alert(data); 
-					dailyList();
-					document.getElementById('dailyEditForm').reset();
-				}
-			});
-			
-		}
+         var regFormData = new FormData();
+         regFormData.append('dloc', $('#edloc').val());
+         regFormData.append('dloclon', $('#edloclon').val());
+         regFormData.append('dloclat', $('#edloclat').val());
+         regFormData.append('daddr', $('#edaddr').val());         
+         regFormData.append('dmsg', $('#edmsg').val());         
+         regFormData.append('oldFile', $('#oldfile').val());
+         // 파일 첨부
+         if($('#edphoto')[0].files[0] != null){
+            regFormData.append('dphoto',$('#edphoto')[0].files[0]);
+         }
+         regFormData.append('dtype', $('#edtype').val());
+         regFormData.append('ddate', $('#eddateModal').val());
+         regFormData.append('ddateModal', $('#eddateModal').val());         
+         regFormData.append('ddidx', $('#eddidx').val());         
+         
+         
+         $.ajax({
+            url : 'http://localhost:8080/it/planner/dailyRest/'+$('#didx').val(),
+            type : 'POST',
+            processData: false, // File 전송시 필수
+            contentType: false, // multipart/form-data
+            data : regFormData,
+      
+            success : function(data){
+               alert(data); 
+               dailyList();
+               document.getElementById('dailyEditForm').reset();
+            }
+         });
+         
+      }
 
-		
-		
+      
+      
 </script>
-	
-	<!-- 지도API  -->
+   
+   <!-- 지도API  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b554607ceeb060d931e9eedfa0d54dc&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
@@ -650,7 +651,7 @@ function displayPlaces(places) {
 
 
     
-	searchReset();
+   searchReset();
     
     
     
@@ -673,7 +674,7 @@ function displayPlaces(places) {
                 marker.setPosition(mouseEvent.latLng);
                 
                 marker.setMap(map);
-			
+         
 
                 infowindow.setContent(content);
                 infowindow.open(map, marker); 
@@ -718,8 +719,8 @@ function displayPlaces(places) {
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#daddr').val(title);                
                 relayout();
-            	map.setLevel(4);    
-  				var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
+               map.setLevel(4);    
+              var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
                 map.panTo(moveLatLon);
 
             }); 
@@ -735,7 +736,7 @@ function displayPlaces(places) {
                 $('#daddr').val(title);                
                 $("#menu_wrap").css("display","none");
                 relayout();
-            	map.setLevel(4);    
+               map.setLevel(4);    
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
                 map.panTo(moveLatLon);
                 
@@ -821,9 +822,9 @@ function addMarker(position, idx, title) {
 
 
 var showItemEl = function() {
-	$("#menu_wrap").css("display","block");
-	
-	
+   $("#menu_wrap").css("display","block");
+   
+   
 };
 
 
@@ -888,7 +889,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 }
  
 function searchReset(){
-	
+   
     // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl);
 
@@ -898,95 +899,95 @@ function searchReset(){
  
 
 </script>
-	<script>
+   <script>
 
-	/* @@@@SORTABLE@@@@ */
-	
-	
-	/** UI 설정 */ 
-	$(function() {
-		$(".sortable").sortable({
-			placeholder : "itemBoxHighlight",
-			connectWith : " .sortable.ui-sortable",
-			animation : 200,
-			axis:'y',
-			
-			/* handle: ".handle", */
-			start : function(event, ui) {
-				/* ui.item.data('start_pos', ui.item.index()); */
-			},
-			stop : function(event, ui) {
-			/* 	var spos = ui.item.data('start_pos');
-				var epos = ui.item.index(); */
-				 	reorder();  //순서 조정
-				 
-				 	
-				 
-				 editDailyOrder();
+   /* @@@@SORTABLE@@@@ */
+   
+   
+   /** UI 설정 */ 
+   $(function() {
+      $(".sortable").sortable({
+         placeholder : "itemBoxHighlight",
+         connectWith : " .sortable.ui-sortable",
+         animation : 200,
+         axis:'y',
+         
+         /* handle: ".handle", */
+         start : function(event, ui) {
+            /* ui.item.data('start_pos', ui.item.index()); */
+         },
+         stop : function(event, ui) {
+         /*    var spos = ui.item.data('start_pos');
+            var epos = ui.item.index(); */
+                reorder();  //순서 조정
+             
+                
+             
+             editDailyOrder();
 
-			}
-			
-			
-			
-		});
-		$(".sortable").disableSelection();
-		
-	});
+         }
+         
+         
+         
+      });
+      $(".sortable").disableSelection();
+      
+   });
 
-	
-	/* 순서 조정 */
-	function reorder() {
-		//ddidx 재배치
-	   $(".sortableBox").each(function(i, box) {
-	        $(box).find(".ddidx").val(i + 1);
+   
+   /* 순서 조정 */
+   function reorder() {
+      //ddidx 재배치
+      $(".sortableBox").each(function(i, box) {
+           $(box).find(".ddidx").val(i + 1);
 
-	    });
+       });
 
 
-		//ddate 재배치
-		for(var i=0; i<$(".dayOfPlan").length; i++){
-					
-		$(".dayOfPlan").eq(i).parent('div').next().find("input.ddate").val($(".dayOfPlan").eq(i).val());
-		
-		}
-	    
-		//색상 재배치 sortableBox
-		for(var i=0; i<$(".sortableBox").length; i++){
+      //ddate 재배치
+      for(var i=0; i<$(".dayOfPlan").length; i++){
+               
+      $(".dayOfPlan").eq(i).parent('div').next().find("input.ddate").val($(".dayOfPlan").eq(i).val());
+      
+      }
+       
+      //색상 재배치 sortableBox
+      for(var i=0; i<$(".sortableBox").length; i++){
 
-	    $(".sortableBox").eq(i).css("background-color",$(".dtype").eq(i).val());
-	    
-	    
-	}
-	
-	}
-	
-	/* 모달에ddate를 클래스명을 활용해서 옮기는 메서드 */
-	function writeddate(e){
-		console.log($(e).attr('class'));
-		console.log($(e).parent('div').prev('div'));
+       $(".sortableBox").eq(i).css("background-color",$(".dtype").eq(i).val());
+       
+       
+   }
+   
+   }
+   
+   /* 모달에ddate를 클래스명을 활용해서 옮기는 메서드 */
+   function writeddate(e){
+      console.log($(e).attr('class'));
+      console.log($(e).parent('div').prev('div'));
 
-		
-		$(".ddateModal").val($(e).attr('class'));
-		
-	}
-	
-	
-	function resetEditForm(){
-		   $('#dailyEditForm')[0].reset();	 	
+      
+      $(".ddateModal").val($(e).attr('class'));
+      
+   }
+   
+   
+   function resetEditForm(){
+         $('#dailyEditForm')[0].reset();       
 
-	}
+   }
 
-	
+   
 </script>
-	
-	
+   
+   
 </body>
 </html>
 
 
-	<!-- SORTABLE  -->
-	
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+   <!-- SORTABLE  -->
+   
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
      <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
