@@ -8,6 +8,16 @@
 <head>
 
 
+<style>
+
+
+#datechk{
+	display: none;
+}
+
+
+</style>
+
     <title>text Limit</title>
 <%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
  --%>
@@ -103,19 +113,59 @@ call( );
   <%@ include file="/WEB-INF/views/include/header.jsp" %> 
 
 
-<form method="post">
+<form method="post" id="regForm">
 	<p>uidx <input type="text" name="uidx" value="${loginInfo.uidx}"></p><br>
 		제목<input type="text" name="ptitle">
 	
     <p>StartDate : <input type="date" id="datepicker" name="pstartdate" onchange="call()" autocomplete="off"></p>
     <p>EndDate : <input type="date" id="datepicker2" name ="penddate" onchange="call()" autocomplete="off"></p>
-    <div></div>
+    <div id="checkmsg"></div>
+    <input type="checkbox" name="datechk" id="datechk">
+    
     <input type="submit" value="완료">
     </form>
+    
+    
+    
 </body>
 </html>
 
-
+    <script>
+    
+    $(document).ready(function() {
+    	
+    	
+    	
+    $('#datepicker2').mouseout(function(){
+    	
+    	if($('#datepicker').val()>$('#datepicker2').val()){
+    		$('#datechk').prop('checked',false);
+    		$('#checkmsg').text("시작일 이후로 설정해주세요.");
+    	
+    		
+    	} else{
+    		$('#checkmsg').text("");
+    		$('#datechk').prop('checked',true);
+    		
+    	}
+    	
+    });
+    
+    $('#regForm').submit(function() {
+		if (!$('#datechk').prop('checked')) {
+			
+			$('#datepicker2').focus();
+			return false;
+		}
+	});
+    
+    
+    
+    
+    
+    
+    });
+    </script>
 
 
 
