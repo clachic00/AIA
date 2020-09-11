@@ -8,99 +8,11 @@
 <head>
 <meta charset="UTF-8">
 
-<%-- 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
- --%>	
 
+<%--  	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
+ --%>
  	<!--  <script src="//code.jquery.com/jquery-1.12.4.js"></script>  -->
-
-
-<style>
-
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:350px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
-</style>
-
-<style>
-
-.sortable{
-
-	border: 0.5px solid black;
-	text-align: center;
-	width : 500px;
-	
-}
-
-.sortableBox{
-
-	border: 0.5px solid black;
-
-
-}
-
-.handle{
-	border: 0.5px solid black;
-	text-align: center;
-	float : right;
-
-}
-
-.items{
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-/* ul>li{
-	margin: 0;
-        padding: 0;
-        border: 0.5px,solid ,black;
-        
-        
-} */
-
-.didxImg{
-
-width: 30px;
-height: 30px;
-
-}
-
-</style>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/plannerRegForm.css">
 
 <title>플래너 작성</title>
 </head>
@@ -108,8 +20,6 @@ height: 30px;
 <body>
  <%@ include file="/WEB-INF/views/include/header.jsp" %>
  
-	<a type="submit" class="icon-remove" onclick="editDailyOrder();">에디트 저장</a>
-	
 	 
        <!-- RegDaily MODAL -->
   
@@ -138,11 +48,11 @@ height: 30px;
 		dmsg		<input type="text" name="dmsg" id="dmsg">	<br>
 		dphoto		<input type="file" name="dphoto" id="dphoto">	<br>
 		dtype		<select name="dtype" id="dtype">
-					<option value="white">하양</option>
-					<option value="red">빨강</option>
-					<option value="blue">파랑</option>
-					<option value="green">초록</option>
-					<option value="pink">분홍</option>
+					<option value="white">기본</option>
+					<option value="#FFD0D0">음식점</option>
+					<option value="#E6FCFD">숙소</option>
+					<option value="#E7FEE4">교통</option>
+					<option value="#FEFAC8">관광지</option>
 					</select>	<br>
 					
 					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
@@ -197,11 +107,11 @@ height: 30px;
 		현재 사진 		<input type="text" name="oldfile" id="oldfile"><br>
 		
 		dtype		<select name="dtype" id="edtype">
-					<option value="white">하양</option>
-					<option value="red">빨강</option>
-					<option value="blue">파랑</option>
-					<option value="green">초록</option>
-					<option value="pink">분홍</option>
+					<option value="white">기본</option>
+					<option value="#FFD0D0">음식점</option>
+					<option value="#E6FCFD">숙소</option>
+					<option value="#E7FEE4">교통</option>
+					<option value="#FEFAC8">관광지</option>
 					
 					</select>
 					<br>
@@ -274,26 +184,33 @@ height: 30px;
       
       
       <!-- 플래너 정보 -->
-	<div>
-	<input type="hidden" name="pidx" value="${pidx}">
-	uidx <input type="text" name="uidx" value="${loginInfo.uidx}"><br>
-		 <input type="text" name="pstartdate" value="${startdate}">/
-		 <input type="text" name="penddate" value="${enddate}"><br>
-	제목<input type="text" name="ptitle" value="${ptitle}">
+			<input type="hidden" name="pidx" value="${pidx}">
+			<input type="hidden" name="uidx" value="${loginInfo.uidx}">
+		<div>
+			<input type="text" name="ptitle" value="${ptitle}" id="ptitle"><br>
 		</div>
-		<hr>
+	 	<div style="background-color: #FAFAFA">
+		 	<span><input type="text" name="pstartdate" value="${startdate}" id="pstartdate"></span>~
+		 	<span><input type="text" name="penddate" value="${enddate}" id="penddate"></span>
+		</div>
 		
 		<form id="serialize">
 				<c:url value="${initParam['memberUploadPath']}" var="imagePath"/>
 		
 			<c:forEach items="${dateList}" var="list">
 				
-					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}"></div>
+					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}" readonly></div>
 					
 					<ul class="sortable"></ul>
 					
-					<a data-toggle="modal" data-target="#regDailyModal" class="${list}" onclick="searchReset(); showItemEl(); searchPlaces(); writeddate(this);" >+데일리 등록</a>
-
+					
+					<a data-toggle="modal" data-target="#regDailyModal" class="${list}" 
+					onclick="searchReset(); showItemEl(); searchPlaces(); writeddate(this);" >
+					+데일리 등록
+					</a>
+					
+					
+	
 			</c:forEach>
 		</form>
 
@@ -348,16 +265,15 @@ $(document).ready(function(){
 					
 					
 					html += '<li class="sortableBox" class="sortable">';
-					html += '	ddidx	<input type="text" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly><br>';
-					html += '	ddate	<input type="text" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly><br>';
+					html += '		<input type="hidden" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly>';
+					html += '		<input type="hidden" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly>';
 					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
-					html += '	dloc	<input type="text" value="'+data[i].dloc+'" readonly><br>';
+					html += '		<input type="text" class="dloc" value="'+data[i].dloc+'" readonly>';
 					html += '		<input type="hidden" value="'+data[i].dloclon+'">';
 					html += '		<input type="hidden" value="'+data[i].dloclat+'">';
-					html += '  daddr<input type="text" class="daddr" value="'+data[i].daddr+'" readonly><br>';
+					html += '  		<input type="hidden" class="daddr" value="'+data[i].daddr+'" readonly>';
 					html += '		<input type="hidden" value="'+data[i].dphoto+'">';
-/* 					html += '	img	<img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">';
- */
+				 /* html += '		img	<img alt="profile " class="didxImg" src="${imagePath}/'+data[i].dphoto+'">'; */
 					html += '		<input type="hidden" value="'+data[i].dmsg+'">';
 					html += '		<input type="hidden" class="dtype" value="'+data[i].dtype+'">';
 					html += '		<input type="hidden" value="'+data[i].pidx+'">';
@@ -365,8 +281,9 @@ $(document).ready(function(){
 					html += '		<a data-toggle="modal" data-target="#editDailyModal" onclick="editForm('+data[i].didx+'); searchReset(); showItemEl(); searchPlaces(); "  >수정</a>';
 					html += '		<input type="button" value="삭제" onclick="deleteDaily('+data[i].didx+')">';
 					//kakaomap://route?sp=37.51119865054613,127.02165424220854&ep=37.5705756133826,126.98531278713301&by=PUBLICTRANSIT
-					/* html += '<span class="handle">↕</span>' */
-						html += '</li>';
+					html += '<span class="handle">↕</span>' 
+					html += '</li>';
+					
 					//<a href=#editDailyModal rel="modal:open"  onclick="editForm('+data[i].didx+')" >수정</a>
 				
 					 for (var j = 0; j < $('.dayOfPlan').length; j++) {
@@ -381,7 +298,6 @@ $(document).ready(function(){
 					 }
 							/* $( '.ddateList:contains("'+data[i].ddate+'")').next().append(html); */
 							/* $('#dailyList').append(html); */
-				
 			}
 				reorder();
 
@@ -680,7 +596,9 @@ function displayPlaces(places) {
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#daddr').val(result[0].address.address_name);
-
+                $('#edloclon').val(marker.getPosition().getLng());
+                $('#edloclat').val(marker.getPosition().getLat());
+                $('#edaddr').val(result[0].address.address_name);
                 relayout();
                 var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
                 map.panTo(moveLatLon);
@@ -716,7 +634,10 @@ function displayPlaces(places) {
                 
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
-                $('#daddr').val(title);                
+                $('#daddr').val(title);     
+                $('#edloclat').val(marker.getPosition().getLat());
+                $('#edloclon').val(marker.getPosition().getLng());
+                $('#edaddr').val(title);
                 relayout();
             	map.setLevel(4);    
   				var moveLatLon = new kakao.maps.LatLng(marker.getPosition().getLat(),marker.getPosition().getLng());
@@ -733,6 +654,9 @@ function displayPlaces(places) {
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#daddr').val(title);                
+                $('#edloclat').val(marker.getPosition().getLat());
+                $('#edloclon').val(marker.getPosition().getLng());
+                $('#edaddr').val(title);
                 $("#menu_wrap").css("display","none");
                 relayout();
             	map.setLevel(4);    
@@ -906,18 +830,16 @@ function searchReset(){
 	/** UI 설정 */ 
 	$(function() {
 		$(".sortable").sortable({
-			placeholder : "itemBoxHighlight",
+			/* placeholder : "itemBoxHighlight", */
 			connectWith : " .sortable.ui-sortable",
 			animation : 200,
 			axis:'y',
 			
 			/* handle: ".handle", */
 			start : function(event, ui) {
-				/* ui.item.data('start_pos', ui.item.index()); */
+
 			},
 			stop : function(event, ui) {
-			/* 	var spos = ui.item.data('start_pos');
-				var epos = ui.item.index(); */
 				 	reorder();  //순서 조정
 				 
 				 	
@@ -950,11 +872,56 @@ function searchReset(){
 		
 		}
 	    
+		
+		
+		/* 
+		<option value="white">기본</option>
+		<option value="#FFD0D0">음식점</option>
+		<option value="#E6FCFD">숙소</option>
+		<option value="#E7FEE4">교통</option>
+		<option value="#FEFAC8">관광지</option>
+					 */
+		
+		
+		
 		//색상 재배치 sortableBox
 		for(var i=0; i<$(".sortableBox").length; i++){
 
 	    $(".sortableBox").eq(i).css("background-color",$(".dtype").eq(i).val());
 	    
+	    /* $(".sortableBox").eq(i).css("opacity","0.33"); */
+	    
+	    if($(".dtype").eq(i).val()=="#FFD0D0"){
+	    
+	    $(".sortableBox").eq(i).css("background-image","url('/it/resources/images/restaurant.png')");
+	    
+	    
+	    } else if ($(".dtype").eq(i).val()=="#E6FCFD"){
+	    	
+   		 $(".sortableBox").eq(i).css("background-image","url('/it/resources/images/room.png')");
+	    	
+	    } else if ($(".dtype").eq(i).val()=="#E7FEE4"){
+	    	
+	   		 $(".sortableBox").eq(i).css("background-image","url('/it/resources/images/transportation.png')");
+		    	
+	    } else if ($(".dtype").eq(i).val()=="#FEFAC8"){
+	    	
+	   		 $(".sortableBox").eq(i).css("background-image","url('/it/resources/images/tourism_area.png')");
+		    	
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    $(".sortableBox").eq(i).css("background-repeat","no-repeat");
+	    $(".sortableBox").eq(i).css("background-position","10px center");
+	    $(".sortableBox").eq(i).css("background-size","30px");
+	    $(".sortableBox").eq(i).css("minwidth","360px");
+	    $(".sortableBox").eq(i).css("width","100%");
+
 	    
 	}
 	

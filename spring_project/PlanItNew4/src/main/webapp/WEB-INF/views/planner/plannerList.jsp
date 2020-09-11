@@ -45,7 +45,6 @@ function deletePlanner(pidx){
 			type : 'DELETE',
 			success : function(data){
 				
-				alert(data);
 				plannerList();
 			}
 		});
@@ -63,7 +62,6 @@ function plannerList() {
 	
 		success: function(data){
 			//alert(JSON.stringify(data));
-			console.log(data);
 			//$('#memberList').html(JSON.stringify(data));
 			
 			var html = '';
