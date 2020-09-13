@@ -199,9 +199,9 @@
 		
 			<c:forEach items="${dateList}" var="list">
 				
-					<div class="ddateList" class="sortable"><input type="text" class="dayOfPlan" value="${list}" readonly></div>
+					<div class="ddateList" class=""><input type="text" class="dayOfPlan" value="${list}" readonly></div>
 					
-					<ul class="sortable"></ul>
+					<ul class="sortable sortableLeft"></ul>
 					
 					
 					<a data-toggle="modal" data-target="#regDailyModal" class="${list}" 
@@ -243,7 +243,7 @@ $(document).ready(function(){
 			url : 'http://localhost:8080/it/planner/dailyRest',
 			type : 'GET',
 			data : {
-				uidx : '${loginInfo.uidx}',
+				uidx : '${uidx}',
 				pidx : '${pidx}'
 			},
 			success : function(data) {
@@ -264,7 +264,7 @@ $(document).ready(function(){
 				for (var i = 0; i < data.length; i++) {
 					
 					
-					html += '<li class="sortableBox" class="sortable">';
+					html += '<li class="sortableBox sortableLeft" >';
 					html += '		<input type="hidden" class="ddidx" name="dailyOrderEdit['+i+'].ddidx" value="'+data[i].ddidx+'" readonly>';
 					html += '		<input type="hidden" class="ddate" name="dailyOrderEdit['+i+'].ddate" id="ddate" value="'+data[i].ddate+'" readonly>';
 					html += '		<input type="hidden" class="didx" name="dailyOrderEdit['+i+'].didx" value="'+data[i].didx+'">';
@@ -830,31 +830,52 @@ function searchReset(){
 	/** UI 설정 */ 
 	$(function() {
 		$(".sortable").sortable({
-			/* placeholder : "itemBoxHighlight", */
-			connectWith : " .sortable.ui-sortable",
-			animation : 200,
-			axis:'y',
-			
-			/* handle: ".handle", */
-			start : function(event, ui) {
-
-			},
-			stop : function(event, ui) {
-				 	reorder();  //순서 조정
-				 
-				 	
-				 
-				 editDailyOrder();
+				placeholder : "sortable-placeholder", 
+				connectWith : " .sortable.ui-sortable",
+				axis:'y',
+			   	cursorAt: { right: 5 },
+				cursor: "move",
+				handle: ".handle", 
+				helper: "clone",
+				delay: 500,
+				distance: 30,
+				start : function(event, ui) {
+				
+				},
+				stop : function(event, ui) {
+					 	reorder();  //순서 조정
+					 
+					 	
+					 
+					 editDailyOrder();
 
 			}
 			
 			
 			
 		});
+		
+		
+		
+		$(".sortableLeft").sortable({
+			axis:'x',
+
+		});
+		
+		
 		$(".sortable").disableSelection();
 		
 	});
-
+	
+	$(function() {
+		
+		$(".sortable").disableSelection();
+		
+	});
+	
+	
+	
+	
 	
 	/* 순서 조정 */
 	function reorder() {

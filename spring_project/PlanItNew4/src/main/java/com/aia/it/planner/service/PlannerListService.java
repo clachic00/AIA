@@ -32,6 +32,21 @@ public List<Planner> plannerList(int uidx) {
 	}
 	
 	
+public List<Planner> plannerListAdmin(){
+	
+	dao = sessionTemplate.getMapper(PlannerDaoInterface.class);
+	
+	
+	
+	
+	return dao.selectTotalList();
+}
+
+
+
+
+
+
 	
 	
 	
