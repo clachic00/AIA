@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Sortable</title>
+
+<link href='jquery-ui-css.css'/>  
+	<!-- SORTABLE  -->
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+     <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+
+ 
+
+<style type="text/css">
+
+  #sortable-1{
+
+  list-style-type : none;
+
+  margin : 0;
+
+  }
+
+  
+
+  #sortable-1 li{
+
+  margin :0 3px 3px 3px;
+
+  padding: 0.4em;
+
+  display : inline; 
+  /* ul의 li 값들을 수평선으로 나열하는 방식  */
+
+  }
+
+</style>
+
+ 
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+$('#sortable-1').sortable();  
+// 실질적으로 sortable 메소드만 실행하면 자동으로 활성화된다.
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+ 
+
+<ul id='sortable-1'>
+
+<li class='default'>product 1</li>
+
+<li class='default'>product 2</li>
+
+<li class='default'>product 3</li>
+
+<li class='default'>product 4</li>
+
+<li class='default'>product 5</li>
+
+</ul>
+
+</body>
+
+</html>

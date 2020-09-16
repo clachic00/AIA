@@ -27,11 +27,7 @@ body, html {
 	overflow: hidden;
 	min-width: 360px;
 	width: 100%;
-	
-	
 }
-
-
 
 #main-center {
 	height: 100%;

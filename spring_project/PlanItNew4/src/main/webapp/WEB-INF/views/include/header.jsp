@@ -8,6 +8,9 @@
 .navbar-heade{
 background-color : green;}
 
+.navbar-default{
+margin: 0;
+}
 
 
 </style>
@@ -29,8 +32,7 @@ background-color : green;}
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Plans <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<c:url value="/planner/calendar"/>">새로운 플랜</a></li>
-            <li><a href="<c:url value="/planner/calendar"/>">내가 짠 플랜</a></li>
-            <li><a href="<c:url value="/planner/calendar"/>">집가고 싶다.</a></li>
+            <li><a href="<c:url value="/planner/plannerList"/>">플랜 리스트</a></li>
           </ul>
         </li>
           
