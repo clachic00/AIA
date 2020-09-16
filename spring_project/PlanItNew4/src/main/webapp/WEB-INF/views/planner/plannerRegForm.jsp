@@ -13,14 +13,14 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <style>
-
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
+.map_wrap {position:relative;width:100%;height:450px;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:350px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -59,8 +59,12 @@
 border: white solid 1px;
 }
 .ui-icon-transferthick-e-w{-webkit-transform: rotate(90deg); }
-.sortable-placeholder { box-shadow: inset 0px 0px 20px 10px #fff; background-color: #bbb;  width: 768px;}
-.ui-sortable-helper {box-shadow: 0px 0px 10px 1px; max-width: 768px;}
+
+.sortable-placeholder { box-shadow: inset 0px 0px 20px 10px #fff; background-color: #bbb;  width: 768px; opacity: 0.2; border-radius: 10px;}
+.ui-sortable-helper {box-shadow: 0px 0px 10px 0.1px #E2DFDA;  max-width: 768px;}
+
+
+
 .addDailyButton{
 	border: red solid 1px;
 	border-radius: 100px 100px 100px 100px;
@@ -86,6 +90,26 @@ ul.sortable{
 	cursor: pointer;
 }
 
+.modal-header, .modal-content{
+	margin:auto;
+	width: 360px;
+	padding: 0;
+}
+
+div.modal-body{
+	padding:0px;
+}
+
+div.modal-dialog{
+	width:100%;
+	margin: 0;
+	margin-top: 120px; ;
+}
+
+div.modal-header, div.modal-footer{
+	border: 0px;
+}
+
 li.sortableBox{
 	width: 768px;
 }
@@ -100,21 +124,22 @@ li.sortableBox{
 .dloc{
 	margin-left:50px;
 	margin-top:4px;
-	font-weight:bolder; 
+	font-weight:bolder;
+	width:200px; 
 }
 
 .modalIconClose{
-	width: 20px;
-	height: 20px;
-	margin-top: 7px;
+	width: 10px;
+	height: 15px;
+	margin-top: 6px;
 	display: Inline-block;
 }
 
 .modalIconSubmit{
 	float: right;
-	width: 30px;
-	height: 30px;
-	margin-top: 2px;
+	width: 20px;
+	height: 20px;
+	margin-top: 4px;
 	display: Inline-block;
 }
 
@@ -134,12 +159,28 @@ li.sortableBox{
 .dtypeIcon{
 	width: 30px;
 	height: 30px;
+	cursor: pointer;
+	
+}
+.deleteIcon{
+	width: 31px;
+	height: 31px;
+	opacity: 0.3;
+	cursor: pointer;
 }
 
+table{
+width:340px;
+}
+td{
+border: 15px solid black;
+min-width:60px;
+}
+
+
+
 #dmsg, #edmsg{
-
 	height: 50px;
-
 }
 
 .items{
@@ -150,7 +191,7 @@ li.sortableBox{
 
 .dayOfPlan{
 	background-color:transparent;
-	font-size: 30px;
+	font-size: 25px;
 	border: 0;
 	padding-left: 15px;
 }
@@ -191,6 +232,11 @@ ul.sortable.ui-sortable{
 	margin: auto;
 }
 
+input[type=radio]{
+
+display:none ;
+
+}
 
 
 @media (max-width:768px){
@@ -246,18 +292,6 @@ li.sortableBox{
 	width: 100%
 }
 
-.dloc, #pstartdate, #penddate, #ptitle{
-	background-color:transparent;
-	font-size: 18px;
-	border: 0;
-	width: 96px;
-}
-
-.dloc{
-
-margin-left:50px;
-
-}
 
 
 
@@ -276,12 +310,7 @@ margin-left:50px;
 }
 
 
-.dayOfPlan{
-	background-color:transparent;
-	font-size: 30px;
-	border: 0;
-	padding-left: 15px;
-}
+
 
 ul.sortable>li {
 	height:35px;
@@ -343,23 +372,41 @@ margin: auto;
 
 
    <form id="dailyRegForm" onsubmit="return false;" >
-   <%-- action="<c:url value='/planner/dailyList'/>" --%>    
-   	 	분 류		<input type="radio" name ="dtype" id="normal" value="white" checked> 기본
-					<input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 		<img alt="음식" class="dtypeIcon" src="/it/resources/images/restaurant.png">
-					<input type="radio" name ="dtype" id="room" value="#E6FCFD"  > 				<img alt="숙소" class="dtypeIcon" src="/it/resources/images/room.png">
-					<input type="radio" name ="dtype" id="transportation" value="#E7FEE4"  > 	<img alt="교통" class="dtypeIcon" src="/it/resources/images/transportation.png">
-					<input type="radio" name ="dtype" id="tourismarea" value="#FEFAC8"  > 		<img alt="관광지" class="dtypeIcon" src="/it/resources/images/tourism_area.png"> 
-					<br>
-		장소명		<input type="text" name="dloc" id="dloc" >	<br>	
+   <%-- action="<c:url value='/planner/dailyList'/>" --%>  
+   <table>
+   <tr>
+     
+   	 <td>분 류</td>		<!-- <input type="radio" name ="dtype" onclick="checkBox();" id="normal" value="white" checked> 기본 -->
+					<td><input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 		<label for="restaurant"><img alt="식당" onclick="" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
+					<input type="radio" name ="dtype" id="tourismarea" value="#FEFAC8"  > 		<label for="tourismarea"><img alt="관광" class="dtypeIcon" src="/it/resources/images/tourism_area.png"><br>관광</label>
+					<input type="radio" name ="dtype" id="room" value="#E6FCFD"  > 				<label for="room"><img alt="숙소" class="dtypeIcon" src="/it/resources/images/room.png"><br>숙소</label>
+					<input type="radio" name ="dtype" id="transportation" value="#E7FEE4"  > 	<label for="transportation"><img alt="교통" class="dtypeIcon" src="/it/resources/images/transportation.png"><br>교통</label>
+					
+					<img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png">	
+					</td>
+	</tr>
+	<tr>
+	
+	<td>장소명</td>		<td><input type="text" name="dloc" id="dloc" ></td>	
 		
-		위 치		<input type="text" name="daddr" id="daddr">
-					<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
-					<br>
+	</tr>	
 		
-		메 모		<input type="text" name="dmsg" id="dmsg">	<br>
+		<tr>
 		
-		사 진		<input type="file" name="dphoto" id="dphoto">	<br>
+	<td>위 치</td>	<td><input type="text" name="daddr" id="daddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal"></td>
+					
+		</tr>
 		
+	<tr>
+		
+		<td>메 모</td>		<td><input type="text" name="dmsg" id="dmsg"></td>
+		
+	</tr>	
+	<tr>	
+		<td>사 진</td>		<td><input type="file" name="dphoto" id="dphoto"></td>
+		
+	</tr>	
+	</table>
 	   		  		<input type="hidden" name="ddate" id="ddateModal" class="ddateModal" readonly>
 					<input type="hidden" name="pidx" value="${planner.pidx}" id="pidx">		
 					<input type="hidden" name="dloclon" id="dloclon">
@@ -367,7 +414,6 @@ margin: auto;
 					<input type="hidden" name="ddidx" id="ddidx" value=999><br><!-- 순서 등록은 reorder에서 제배치한다 -->
 		
 	</form>
-
 
 
       </div>
@@ -404,25 +450,40 @@ margin: auto;
    <form id="dailyEditForm" onsubmit="return false;" >
    <%-- action="<c:url value='/planner/dailyList'/>" --%>    
    
-   		분 류 		<input type="radio" name ="edtype" id="enormal" value="white"> 기본
-					<input type="radio" name ="edtype" id="erestaurant" value="#FFD0D0"  > 		<img alt="음식점" class="dtypeIcon" src="/it/resources/images/restaurant.png">
-					<input type="radio" name ="edtype" id="eroom" value="#E6FCFD"  > 			<img alt="숙소" class="dtypeIcon" src="/it/resources/images/room.png">
-					<input type="radio" name ="edtype" id="etransportation" value="#E7FEE4"  > 	<img alt="교통" class="dtypeIcon" src="/it/resources/images/transportation.png">
-					<input type="radio" name ="edtype" id="etourismarea" value="#FEFAC8"  > 		<img alt="관광지" class="dtypeIcon" src="/it/resources/images/tourism_area.png">   
-   					<br>
    
-   		장소명		<input type="text" name="dloc" id="edloc" >	<br>
-   		
-   		위 치		<input type="text" name="daddr" id="edaddr">
-	   				<a data-toggle="modal" data-target="#mapModal" >위치 찾기</a>
-   					<br>
-   		
-		메 모		<input type="text" name="dmsg" id="edmsg"><br>
-
-		사 진		<input type="file" name="dphoto" id="edphoto"><br>
+   <table>
+   
+	<tr>
+   	<td>분 류</td> 		<!-- <input type="radio" name ="edtype" id="enormal" value="white"> 기본 -->
+				<td><input type="radio" name ="edtype" id="erestaurant" value="#FFD0D0"  > 			<label for="erestaurant"><img alt="식당" onclick="" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
+					<input type="radio" name ="edtype" id="etourismarea" value="#FEFAC8"  > 		<label for="etourismarea"><img alt="관광" class="dtypeIcon" src="/it/resources/images/tourism_area.png"><br>관광</label>
+					<input type="radio" name ="edtype" id="eroom" value="#E6FCFD"  > 				<label for="eroom"><img alt="숙소" onclick="" class="dtypeIcon" src="/it/resources/images/room.png"><br>숙소</label>
+					<input type="radio" name ="edtype" id="etransportation" value="#E7FEE4"  > 		<label for="etransportation"><img alt="교통" onclick="" class="dtypeIcon" src="/it/resources/images/transportation.png"><br>교통</label>
+   					<img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png">
+   				</td>
+   					
+   	</tr>				
+	<tr>
+   	<td>장소명</td>	<td><input type="text" name="dloc" id="edloc" ></td>
+   	</tr>
+   	<tr>	
+   	<td>위 치</td>	<td><input type="text" name="daddr" id="edaddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal"></td>
+   					
+	</tr>
+	<tr>
+			
+	<td>메 모</td>	<td><input type="text" name="dmsg" id="edmsg"></td>
+	</tr>
+	<tr>
+	
+	<td>사 진</td>	<td><input type="file" name="dphoto" id="edphoto"></td>
+	</tr>
+	<tr>
+			
+	<td>현재 사진</td><td><input type="text" name="oldfile" id="oldfile"></td>
+	</tr>	
 		
-		현재 사진 	<input type="text" name="oldfile" id="oldfile"><br>
-		
+		</table>
 					<input type="hidden" name="didx" id="didx"  readonly>
 					<input type="hidden" name="ddate" id="eddateModal" class="ddateModal" readonly>
 					<input type="hidden" name="pidx" value="${planner.pidx}" id="epidx">
@@ -527,9 +588,7 @@ margin: auto;
 
 <!-- 비동기 통신  -->
 <script >
-
 	
-
 /* 페이지 시작시 리스트 출력 */
 $(document).ready(function(){
 	dailyList();
@@ -682,7 +741,6 @@ $(document).ready(function(){
 	}
 	
 	
-	
 	/* 데일리 수정폼 */
 	
 	function editForm(didx){
@@ -765,8 +823,8 @@ var geocoder = new daum.maps.services.Geocoder();
 
 function resizeMap() {
     var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '440px';
-    mapContainer.style.height = '500px'; 
+    mapContainer.style.width = '357.78px';
+    mapContainer.style.height = '450px'; 
 }
 
 
@@ -1203,16 +1261,33 @@ function searchReset(){
 	
 	}
 	
+		/* 다시 눌렀을때 라디오박스 체크 푸는 메서드  */
+	function checkBox() {
+		
+
+		
+		  $(":input:radio[name='edtype']").prop("checked",false);
+		  $(":input:radio[name='dtype']").prop("checked",false);
 	
-	
-	
-	
-	
-	
-	
+		  
+			/* 		alert($('input:radio[name=dtype]').is(':checked'));
+			
+			
+			var radioVal = $('input[name="dtype"]:checked').val();
+			
+			alert(radioVal);
+			
+		if($('input:radio[name="dtype"]:radio[value='+radioVal+']').is(':checked')) {
+			
+			
+			$(":input:radio[name='dtype']").prop("checked",false);
+			
+		} */
+		  
+		  
+	}
 	
 </script>
-	
 	
 </body>
 </html>
@@ -1224,4 +1299,3 @@ function searchReset(){
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
      <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
- 
