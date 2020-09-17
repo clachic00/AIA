@@ -391,12 +391,13 @@ margin: auto;
    <tr>
      
    	 <td>분 류</td>		<!-- <input type="radio" name ="dtype" onclick="checkBox();" id="normal" value="white" checked> 기본 -->
-					<td><input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 		<label for="restaurant"><img alt="식당" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
+					<td><input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 	<label for="restaurant"><img alt="식당" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
 					<input type="radio" name ="dtype" id="tourismarea" value="#FEFAC8"  > 		<label for="tourismarea"><img alt="관광" class="dtypeIcon" src="/it/resources/images/tourism_area.png"><br>관광</label>
 					<input type="radio" name ="dtype" id="room" value="#E6FCFD"  > 				<label for="room"><img alt="숙소" class="dtypeIcon" src="/it/resources/images/room.png"><br>숙소</label>
 					<input type="radio" name ="dtype" id="transportation" value="#E7FEE4"  > 	<label for="transportation"><img alt="교통" class="dtypeIcon" src="/it/resources/images/transportation.png"><br>교통</label>
 					
-					<img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png">	
+					<a onclick="checkBox();">x</a>
+					<!-- <img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png"> -->	
 					</td>
 	</tr>
 	<tr>
@@ -408,7 +409,7 @@ margin: auto;
 		
 		<tr>
 		
-	<td>위 치</td>	<td><input type="text" name="daddr" id="daddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal">
+	<td>위 치</td>	<td><input type="text" name="daddr" id="daddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal" onclick="relayout();">
 					<a onclick="$('#daddr').val('')">x</a>
 					</td>
 					
@@ -422,8 +423,10 @@ margin: auto;
 		
 	</tr>	
 	<tr>	
-	<td>사 진</td>	<td><input type="file" name="dphoto" id="dphoto"></td>
-		
+	<td>사 진</td>	<td><input type="file" name="dphoto" id="dphoto">
+					<a onclick="$('#dphoto').val('')">x</a>
+					</td>
+			
 	</tr>	
 	</table>
 	   		  		<input type="hidden" name="ddate" id="ddateModal" class="ddateModal" readonly>
@@ -478,7 +481,8 @@ margin: auto;
 					<input type="radio" name ="edtype" id="etourismarea" value="#FEFAC8"  > 		<label for="etourismarea"><img alt="관광" class="dtypeIcon" src="/it/resources/images/tourism_area.png"><br>관광</label>
 					<input type="radio" name ="edtype" id="eroom" value="#E6FCFD"  > 				<label for="eroom"><img alt="숙소" onclick="" class="dtypeIcon" src="/it/resources/images/room.png"><br>숙소</label>
 					<input type="radio" name ="edtype" id="etransportation" value="#E7FEE4"  > 		<label for="etransportation"><img alt="교통" onclick="" class="dtypeIcon" src="/it/resources/images/transportation.png"><br>교통</label>
-   					<img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png">
+   					<a onclick="checkBox();">x</a>
+   					<!-- <img class="deleteIcon" onclick="checkBox();"  src="/it/resources/images/delete_Btn.png"> -->
    				</td>
    					
    	</tr>				
@@ -496,7 +500,7 @@ margin: auto;
 	</tr>
 	<tr>
 			
-	<td>메 모</td>	<td><input type="text" name="dmsg" id="edmsg">
+	<td>메 모</td>	<td><input type="text" name="dmsg" id="edmsg"> 
 					<a onclick="$('#edmsg').val('')">x</a>
 					</td>
 	</tr>
@@ -541,18 +545,15 @@ margin: auto;
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">위치 검색</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <input type="image" src="/it/resources/images/icon_ok.png" data-dismiss="modal" class="modalIconSubmit" >
+        <input type="submit" onclick="showItemEl(); " name="back" value="검색">
       </div>
       <div class="modal-body">
    
-   
-   <div class="map_wrap" style="height:500px">
+   <div class="map_wrap" style="height:500px ;">
     <div id="map" style="height:500px;position:relative;overflow:hidden;"></div>
 
-    <div id="menu_wrap" class="bg_white">
+    <div id="menu_wrap" class="bg_white" style="padding:0; margin:0;">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
@@ -565,16 +566,11 @@ margin: auto;
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-            <input type="submit" onclick="showItemEl(); " name="back" value="검색">
-    
     
 	</div>
    
-   
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -620,10 +616,14 @@ margin: auto;
 /* 페이지 시작시 리스트 출력 */
 $(document).ready(function(){
 	dailyList();
+	
 
 }); 
 
 		 
+$('#mapModal').on('shown.bs.modal', function () {
+	relayout();
+})
 	/* 데일리 리스트 출력 */
 	function dailyList() {
 		
@@ -867,6 +867,7 @@ function resizeMap() {
     var mapContainer = document.getElementById('map');
     mapContainer.style.width = '357.78px';
     mapContainer.style.height = '450px'; 
+    relayout();
 }
 
 
@@ -975,19 +976,15 @@ function displayPlaces(places) {
                                 '<span class="title">주소정보</span>' + 
                                 detailAddr +
                             '</div>'
-                            
                             ;
-                            
-                            
 
                   // 마커를 클릭한 위치에 표시합니다 
-                marker.setPosition(mouseEvent.latLng);
-                
+                marker.setPosition(mouseEvent.latLng); 
                 marker.setMap(map);
 			
 
                 infowindow.setContent(content);
-                infowindow.open(map, marker); 
+                /* infowindow.open(map, marker); */ 
                 $('#dloclon').val(marker.getPosition().getLng());
                 $('#dloclat').val(marker.getPosition().getLat());
                 $('#daddr').val(result[0].address.address_name);
@@ -1185,7 +1182,6 @@ function removeAllChildNods(el) {
 }
  
 function searchDetailAddrFromCoords(coords, callback) {
-    // 좌표로 법정동 상세 주소 정보를 요청합니다
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
  
@@ -1361,14 +1357,8 @@ function searchReset(){
 		 } */
 		 
 		 
-		 
-	 
-		
-		
-		
-		
-		
 	
+		 
 </script>
 	
 </body>
