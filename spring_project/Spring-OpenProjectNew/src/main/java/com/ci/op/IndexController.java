@@ -10,7 +10,7 @@ public class IndexController {
    
    @RequestMapping("/index")
    public String index() {
-      
+      System.out.println("인덱스 컨트롤러");
 //      String str = null;
 //	    str.toString();
       

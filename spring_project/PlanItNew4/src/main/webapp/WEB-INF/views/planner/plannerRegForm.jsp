@@ -55,6 +55,10 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
+[text="숙소"]{
+color: red;
+}
+
 .sortable{
 border: white solid 1px;
 }
@@ -63,7 +67,9 @@ border: white solid 1px;
 .sortable-placeholder { box-shadow: inset 0px 0px 20px 10px #fff; background-color: #bbb;  width: 768px; opacity: 0.2; border-radius: 10px;}
 .ui-sortable-helper {box-shadow: 0px 0px 10px 0.1px #E2DFDA;  max-width: 768px;}
 
-
+li{
+border-radius: 3px;
+}
 
 .addDailyButton{
 	border: red solid 1px;
@@ -113,6 +119,9 @@ div.modal-header, div.modal-footer{
 li.sortableBox{
 	width: 768px;
 }
+.ui-icon{
+	opacity: 0.6;
+}
 
 .dloc, #pstartdate, #penddate, #ptitle{
 	background-color:transparent;
@@ -141,6 +150,7 @@ li.sortableBox{
 	height: 20px;
 	margin-top: 4px;
 	display: Inline-block;
+
 }
 
 .ddateModal{
@@ -156,24 +166,32 @@ li.sortableBox{
     margin-left: -48px;
 }
 
+td>label{
+margin-right:15px;
+opacity: 0.3;
+}
+
 .dtypeIcon{
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
-	
 }
+
+
 .deleteIcon{
 	width: 31px;
 	height: 31px;
 	opacity: 0.3;
 	cursor: pointer;
+	vertical-align:top;
+	
 }
 
 table{
 width:340px;
 }
 td{
-border: 15px solid black;
+border: 15px solid white;
 min-width:60px;
 }
 
@@ -199,6 +217,7 @@ min-width:60px;
 ul.sortable>li {
 	height:35px;
 	margin: auto;
+	margin-bottom: 1px;
 } 
 
 li>a{
@@ -232,11 +251,9 @@ ul.sortable.ui-sortable{
 	margin: auto;
 }
 
-input[type=radio]{
-
-display:none ;
-
-}
+ input[type=radio]{
+display:none;
+} 
 
 
 @media (max-width:768px){
@@ -291,9 +308,6 @@ ul.sortable{
 li.sortableBox{
 	width: 100%
 }
-
-
-
 
 .items{
         margin: 0;
@@ -377,7 +391,7 @@ margin: auto;
    <tr>
      
    	 <td>분 류</td>		<!-- <input type="radio" name ="dtype" onclick="checkBox();" id="normal" value="white" checked> 기본 -->
-					<td><input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 		<label for="restaurant"><img alt="식당" onclick="" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
+					<td><input type="radio" name ="dtype" id="restaurant" value="#FFD0D0"  > 		<label for="restaurant"><img alt="식당" class="dtypeIcon" src="/it/resources/images/restaurant.png"><br>식당</label>
 					<input type="radio" name ="dtype" id="tourismarea" value="#FEFAC8"  > 		<label for="tourismarea"><img alt="관광" class="dtypeIcon" src="/it/resources/images/tourism_area.png"><br>관광</label>
 					<input type="radio" name ="dtype" id="room" value="#E6FCFD"  > 				<label for="room"><img alt="숙소" class="dtypeIcon" src="/it/resources/images/room.png"><br>숙소</label>
 					<input type="radio" name ="dtype" id="transportation" value="#E7FEE4"  > 	<label for="transportation"><img alt="교통" class="dtypeIcon" src="/it/resources/images/transportation.png"><br>교통</label>
@@ -387,23 +401,28 @@ margin: auto;
 	</tr>
 	<tr>
 	
-	<td>장소명</td>		<td><input type="text" name="dloc" id="dloc" ></td>	
-		
+	<td>장소명</td>	<td><input type="text" name="dloc" id="dloc" >
+					<a onclick="$('#dloc').val('')">x</a>
+					</td>	
 	</tr>	
 		
 		<tr>
 		
-	<td>위 치</td>	<td><input type="text" name="daddr" id="daddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal"></td>
+	<td>위 치</td>	<td><input type="text" name="daddr" id="daddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal">
+					<a onclick="$('#daddr').val('')">x</a>
+					</td>
 					
 		</tr>
 		
 	<tr>
 		
-		<td>메 모</td>		<td><input type="text" name="dmsg" id="dmsg"></td>
+	<td>메 모</td>	<td><input type="text" name="dmsg" id="dmsg">
+					<a onclick="$('#dmsg').val('')">x</a>
+					</td>
 		
 	</tr>	
 	<tr>	
-		<td>사 진</td>		<td><input type="file" name="dphoto" id="dphoto"></td>
+	<td>사 진</td>	<td><input type="file" name="dphoto" id="dphoto"></td>
 		
 	</tr>	
 	</table>
@@ -464,19 +483,28 @@ margin: auto;
    					
    	</tr>				
 	<tr>
-   	<td>장소명</td>	<td><input type="text" name="dloc" id="edloc" ></td>
+   	<td>장소명</td>	<td><input type="text" name="dloc" id="edloc" >
+   					<a onclick="$('#edloc').val('')">x</a>
+   					</td>
+   	
    	</tr>
    	<tr>	
-   	<td>위 치</td>	<td><input type="text" name="daddr" id="edaddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal"></td>
+   	<td>위 치</td>	<td><input type="text" name="daddr" id="edaddr" placeholder="지도 찾아보기" autocomplete="off" data-toggle="modal" data-target="#mapModal">
+   					<a onclick="$('#edaddr').val('')">x</a>
+   					</td>
    					
 	</tr>
 	<tr>
 			
-	<td>메 모</td>	<td><input type="text" name="dmsg" id="edmsg"></td>
+	<td>메 모</td>	<td><input type="text" name="dmsg" id="edmsg">
+					<a onclick="$('#edmsg').val('')">x</a>
+					</td>
 	</tr>
 	<tr>
 	
-	<td>사 진</td>	<td><input type="file" name="dphoto" id="edphoto"></td>
+	<td>사 진</td>	<td><input type="file" name="dphoto" id="edphoto">
+					<a onclick="$('#edphoto').val('')">x</a>
+					</td>
 	</tr>
 	<tr>
 			
@@ -756,10 +784,24 @@ $(document).ready(function(){
 				$('#edmsg').val(data.dmsg);
 				$('#oldfile').val(data.dphoto);
 				$(":input:radio[name=edtype]:radio[value="+data.dtype+"]").prop("checked",true);
+				
+				var radioValEdit = $('input[name=edtype]:checked').val();
+				
+				if($('input:radio[name=edtype]:radio[value='+radioValEdit+']').prop('checked')==true){
+					
+					var dtypeButton = $('input:radio[name=edtype]:radio[value='+radioValEdit+']');
+					
+					 $('label').css("opacity",0.3); 
+					dtypeButton.next().css("opacity",1);
+					
+				}
+				
 				$('.ddateModal').val(data.ddate);
 				$('#eddidx').val(data.ddidx);
-		
+				
+				
 
+			
 			}
 		});
 	}
@@ -1264,28 +1306,68 @@ function searchReset(){
 		/* 다시 눌렀을때 라디오박스 체크 푸는 메서드  */
 	function checkBox() {
 		
-
-		
 		  $(":input:radio[name='edtype']").prop("checked",false);
 		  $(":input:radio[name='dtype']").prop("checked",false);
-	
-		  
-			/* 		alert($('input:radio[name=dtype]').is(':checked'));
-			
-			
-			var radioVal = $('input[name="dtype"]:checked').val();
-			
-			alert(radioVal);
-			
-		if($('input:radio[name="dtype"]:radio[value='+radioVal+']').is(':checked')) {
-			
-			
-			$(":input:radio[name='dtype']").prop("checked",false);
-			
-		} */
-		  
+		  $('label').css("opacity",0.3);
 		  
 	}
+		
+		
+		
+		/* 라디오 박스의 opacity */
+	 $(document).ready(function() {
+		
+		 
+		 $('label').click(function(){
+			 
+			 
+			 $('label').css("opacity",0.3);
+			 
+			 $(this).css("opacity",1);
+			 
+			 
+			 
+
+				
+				
+	
+			 
+			
+		 });
+		 
+	});
+		
+		/* 	 var radioValReg = $('input[name=dtype]:checked').val();
+	 var radioValEdit = $('input[name=edtype]:checked').val();
+	 console.log(radioValReg);
+	 console.log(radioValEdit);			 
+	if($('input:radio[name=dtype]:radio[value='+radioValReg+']').is(':checked')==true){
+		$(this).css("opacity",1);
+	}
+	
+		if($('input:radio[name=edtype]:radio[value='+radioValEdit+']').is(':checked')==true){
+			
+			$(this).css("opacity",1); 
+		}
+	
+		 */
+		 
+		/* 중복검사 */	
+	 /*  $('label').click(function(){ });  */
+		 
+		/*   var radioValEdit = $('input[name=edtype]:checked').val();
+		 if($('input:radio[name=edtype]:radio[value='+radioValEdit+']').is(':checked')==true){
+			 $(":input:radio[name='edtype']").prop("checked",false);
+		 } */
+		 
+		 
+		 
+	 
+		
+		
+		
+		
+		
 	
 </script>
 	
