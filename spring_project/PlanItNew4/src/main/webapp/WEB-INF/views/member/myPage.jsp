@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/include/sessionCheck.jsp" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +80,6 @@
 			<table class="table table-c">
 				<tr>
 					<th colspan="2" class="active">나의 계정 정보</th>
-
 				</tr>
 				<tr>
 					<th colspan="2" id = "tableProfileImg">

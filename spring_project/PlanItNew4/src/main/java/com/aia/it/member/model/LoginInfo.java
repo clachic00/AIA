@@ -6,7 +6,7 @@ public class LoginInfo {
 	
 	private String uid;
 	private String uname; 
-	private String photo;
+	private String uphoto;
 	private String uphonenum;
 	private char ukakao;
 	
@@ -14,24 +14,24 @@ public class LoginInfo {
 	public LoginInfo() {
 	}
 	
-	public LoginInfo(String uid, String uname, String photo) {
+	public LoginInfo(String uid, String uname, String uphoto) {
 		this.uid = uid;
 		this.uname = uname;
-		this.photo = photo;
+		this.uphoto = uphoto;
 	}
 	
-	public LoginInfo(int uidx, String uid, String uname, String photo) {
+	public LoginInfo(int uidx, String uid, String uname, String uphoto) {
 		this.uidx= uidx;
 		this.uid = uid;
 		this.uname = uname;
-		this.photo = photo;
+		this.uphoto = uphoto;
 	}
 	
-	public LoginInfo(String uid, String uname, String uphonenum, String photo, char ukakao) {
+	public LoginInfo(String uid, String uname, String uphonenum, String uphoto, char ukakao) {
 		this.uid = uid;
 		this.uname = uname;
 		this.uphonenum = uphonenum; 
-		this.photo = photo;
+		this.uphoto = uphoto;
 		this.ukakao = ukakao;
 	}
 	
@@ -43,14 +43,14 @@ public class LoginInfo {
 		return uname;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getUphoto() {
+		return uphoto;
 	}
 	
 
 	@Override
 	public String toString() {
-		return "LoginInfo [uidx=" + uidx + ", uid=" + uid + ", uname=" + uname + ", photo=" + photo + "]";
+		return "LoginInfo [uidx=" + uidx + ", uid=" + uid + ", uname=" + uname + ", uphoto=" + uphoto + "]";
 	}
 
 	public int getUidx() {
