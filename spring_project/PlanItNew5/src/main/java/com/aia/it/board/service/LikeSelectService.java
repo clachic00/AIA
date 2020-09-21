@@ -71,7 +71,7 @@ dao=sessionTemplate.getMapper(LikeDaoInterface.class);
 		System.out.println(likeCount);
 		System.out.println(likeCheck);
 
-		countList= new LikeCountList(likeCount, likeCheck);
+		countList= new LikeCountList(list.getLikeInsert().get(i).getUidx(),list.getLikeInsert().get(i).getBidx(), likeCount, likeCheck);
 		
 		System.out.println(countList);
 		

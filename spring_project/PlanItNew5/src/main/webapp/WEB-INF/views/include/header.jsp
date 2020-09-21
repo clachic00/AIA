@@ -23,7 +23,7 @@ color: red;}
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#" style="color: white;">plan it</a>
+      <a class="navbar-brand" href="<c:url value="/mainHome?uidx=${loginInfo.uidx}"/>" style="color: white;">plan it</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
