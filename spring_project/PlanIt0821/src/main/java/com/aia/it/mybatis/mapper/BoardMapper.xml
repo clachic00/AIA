@@ -40,13 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2},#{pidx})
 	</insert>
 	
-	
-		<insert id="insertBoardNull"
-		parameterType="com.aia.it.board.model.Board" useGeneratedKeys="true"
-		keyProperty="bidx">
-		INSERT INTO planit.board(uidx,btitle,bmsg,bphoto1,bphoto2)
-		VALUES(#{uidx},#{btitle},#{bmsg},#{bphoto1},#{bphoto2})
-	</insert>
 
 	<!-- 게시판 리스트 출력 -->
 	<select id="selectTotalList" resultMap="resultBoard">
@@ -132,6 +125,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="int">
 		select count(*) from planit.board where pidx=#{pidx}
 	</select>
+	
+	<select id="totalCnt1" resultType="int">
+		select count(*) from planit.board b join planit.member m on b.uidx = m.uidx where b.uidx=#{uidx}
+	</select> 
 	
 
  

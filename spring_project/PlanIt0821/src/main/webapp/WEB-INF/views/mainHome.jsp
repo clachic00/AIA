@@ -237,7 +237,7 @@ a {
 				
 				<div class = "main-empty-box" id = "main-empty-box">
 					
-					<a href="<c:url value="/board/boardWrite"/>"><span class="fa fa-plus-circle"></span></a>
+					<a href="<c:url value="/planner/calendar"/>"><span class="fa fa-plus-circle"></span></a>
 					<p style ="margin-top: 10px;"> 플랜잇을 통해 당신의 <br> 여행 첫 플랜을 만들어서공유해 보세요! </p>
 				
 				

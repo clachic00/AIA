@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/include/sessionCheck.jsp"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +49,7 @@
    left: 160px;
    width: 339px;
    bottom: -0.7px;
-   border-bottom: 1px solid grey;
+border-bottom: 1px solid lightgrey;
 }
 
 /* 파일 이름 */
@@ -68,71 +67,10 @@
    left: 160px;
    width: 339px;
    bottom: -0.7px;
-   border-bottom: 1px solid grey;
+   border-bottom: 1px solid lightgrey;
 }
 
 /* 버튼 css시작 */
-.button, button {
-   background: #fff;
-   border: none;
-   padding: 2px;
-   cursor: pointer;
-   display: block;
-   position: relative;
-   overflow: hidden;
-   transition: all .35s ease-in-out .35s;
-   margin: 0 auto;
-   text-align: center;
-}
-
-.span {
-   display: block;
-   padding: 5px 10px;
-   background: #fff;
-   z-index: 100;
-   position: relative;
-   transition: all .35s ease-in-out .35s;
-}
-
-.button:hover span {
-   background: #1abc9c;
-   color: #fff;
-   transition: all .35s ease-in-out .35s;
-}
-
-.button:after {
-   bottom: -100%;
-   right: -100%;
-   content: "";
-   width: 100%;
-   height: 100%;
-   position: absolute;
-   background: #1abc9c;
-   transition: all .35s ease-in-out .5s;
-}
-
-.button:hover:after {
-   right: 0;
-   bottom: 0;
-   transition: all ease-in-out .35s;
-}
-
-.button:before {
-   top: -100%;
-   left: -100%;
-   content: "";
-   width: 100%;
-   height: 100%;
-   position: absolute;
-   background: #1abc9c;
-   transition: all .35s ease-in-out .5s;
-}
-
-.button:hover:before {
-   left: 0;
-   top: 0;
-   transition: all ease-in-out .35s;
-}
 
 /*전체를 감싸는 테그*/
 .boardListcontainer {
@@ -147,15 +85,20 @@
 table {
    width: 100%;
 }
-
-
-#submitTableTd{
-
-border-bottom: 1px solid white;
-height: 70px;
+/* white */
+#submitTableTd {
+   border-bottom: 1px solid white;
+   height: 70px;
 }
-tr {
+
+td {
+   width: 30px;
+   height: 40px;
    border-bottom: 1px solid lightgrey;
+}
+
+#file_box_td{
+ border-bottom: 1px solid lightgrey;
 }
 
 /*작성자 입력란  */
@@ -208,7 +151,6 @@ input:focus, textarea {
    height: 400px;
 }
 
-
 #modalTilelabelTd {
    padding-top: 7px;
 }
@@ -220,54 +162,80 @@ input:focus, textarea {
    text-align: center;
 }
 
-#main-h6-title{
-    font-weight: bolder;
-    text-align: left;
-    font-size: 13px; 
-    color: dimgrey;
-    padding-left: 3px;
-    font-family: 'Nanum Gothic', sans-serif;
-    
+#main-h6-title {
+   font-weight: bolder;
+   text-align: left;
+   font-size: 13px;
+   color: dimgrey;
+   padding-left: 3px;
+   font-family: 'Nanum Gothic', sans-serif;
 }
 
-#main-ptitle-a{
+#main-ptitle-a {
    color: dimgrey;
    font-weight: 500;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 13.5px;
+   font-family: 'Nanum Gothic', sans-serif;
+   font-size: 13.5px;
 }
 
-#main-ptitle-a, #board-content-title{
+#main-ptitle-a, #board-content-title {
    color: dimgrey;
    font-weight: 500;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-size: 13.5px;
+   font-family: 'Nanum Gothic', sans-serif;
+   font-size: 13.5px;
 }
 
-
-#start-end-date{
+#start-end-date {
    margin-bottom: 0px;
    font-size: 11px;
 }
 
-
-#main-board-uname{
-    font-size: 10px;
-    color: dimgrey;
+#main-board-uname {
+   font-size: 10px;
+   color: dimgrey;
 }
 
+/* 버튼 설정 */
+#writeButton {
+   margin-left: 2px;
+   text-decoration: none;
+   font-size: 12px;
+   color: grey;
+      text-align: center;
+      padding: 5px 14px;
+}
+
+#writeButton:hover {
+   color: white;
+   background-color: #1abc9c;
+}
+
+.pager {
+   display: inline-block;
+   
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-radius: 15px;
+
+   margin: 20px 0;
+
+}
+
+.span{
+text-align: center;
+}
 
 /* 모달 설정 시작 */
 /* 모달 백그라운드*/
 .modal {
-   position: relative; 
-   width : 600px; /* Full width */
+   position: relative;
+   width: 600px; /* Full width */
    height: 200px; /* Full height */
    /*background-color: rgb(0,0,0);  Fallback color */
    background-color: white; /*Black w/ opacity,0.4 */
    margin: auto;
    border: 1px solid darkslategray;
-   border-radius : 10px;
+   border-radius: 10px;
 }
 /* Modal Content/Box */
 .modal-content {
@@ -294,6 +262,26 @@ input:focus, textarea {
    color: black;
    text-decoration: none;
    cursor: pointer;
+}
+
+/* 썸머노트 에디터 설정 */
+.note-editor .note-editing-area .note-editable {
+   outline: none;
+   height: 500px;
+}
+
+.jumbotron {
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+   background-color: white !important;
+}
+
+.note-toolbar {
+   background-color: #1ABC9C !important;
+}
+
+.note-btn {
+   color: #1ABC9C !important;
 }
 </style>
 </head>
@@ -354,28 +342,37 @@ input:focus, textarea {
 
                </tr>
                <tr>
-                  <td><label for="bmsg">메시지</label></td>
-                  <td id="inputTd"><textarea name="bmsg" id="bmsg" rows="10"
-                        cols="20" maxlength="1000" required></textarea></td>
+                  <td colspan="2" id="inputTd" class="jumbotron p-1"><label
+                     id="insertText" onclick="insertText()" type="button"
+                     data-toggle="collapse" data-target="#view-comments">여행
+                        정보를 입력해 주세요</label>
+
+
+
+                     <div id="view-comments" class="collapse">
+                        <textarea id="bmsg" class="summernote" name="bmsg"
+                           placeholder="내용을 입력해 주세요"></textarea>
+                     </div></td>
                </tr>
 
                <tr>
-                  <td>
+                  <td id="file_box_td">
                      <div class="file_box">
-                        <label for="input_file">사진첨부</label> <input type="file"
-                           id="input_file" class="file_hidden1" name="bphoto1"> <input
-                           class="bphoto1" value="선택파일 없음"
+                        <label for="input_file">사진첨부</label> 
+                        <input type="file" name="bphoto1"
+                           id="input_file" class="file_hidden1"> <input
+                           class="bphoto1" value="선택파일 없음" 
                            disabled="disabled" id="bphoto1">
                      </div>
                   </td>
                </tr>
 
-               <tr>
-                  <td>
+               <tr >
+                  <td id="file_box_td">
                      <div class="file_box">
                         <label for="input_file1">사진첨부</label> <input type="file"
                            id="input_file1" class="file_hidden2" name="bphoto2"> <input
-                           class="bphoto2" value="선택파일 없음"
+                           class="bphoto2"  name="bphoto2"
                            disabled="disabled" id="bphoto2">
                      </div>
                   </td>
@@ -383,26 +380,34 @@ input:focus, textarea {
 
 
 
-
-
-
-
-
             </table>
+            
+            
+            <br><br>
             <table id="submitTable">
                <tr>
+               <td id="submitTableTd"></td>
                   <td id="submitTableTd">
-                     <button type="submit" class="button" id="writeButton"
+                     <button type="submit" class="pager" id="writeButton"
                         name="submit" value="Submit">
                         <span class="span" style="font-size: 14px;">작성완료 </span>
                      </button>
                   </td>
                   <td id="submitTableTd">
 
-                     <button type="reset" class="button" id="writeButton">
+                     <button type="reset" class="pager" id="writeButton">
                         <span class="span" style="font-size: 14px;">내용지우기 </span>
                      </button>
                   </td>
+
+                  <td id="submitTableTd">
+
+                     <button type="reset" class="pager" id="writeButton">
+                        <a href="<c:url value="/board/boardList"/>" class="span"
+                           style="font-size: 14px;">작성취소 </a>
+                     </button>
+                  </td>
+                  <td id="submitTableTd"></td>
                </tr>
 
             </table>
@@ -431,13 +436,12 @@ input:focus, textarea {
                         <td class="indexNum-p"></td>
 
                         <!--글쓴이 이름으로 대체할 부분!  -->
-                        <td><label for="editPlanner" class="listButton"> 
-                        <button class="ptitle" id="${daily.pidx}">${daily.ptitle}
+                        <td><label for="editPlanner" class="listButton">
+                              <button class="ptitle" id="${daily.pidx}">${daily.ptitle}
                               </button>
-                        </label>
-                           </td>
-                              
-                              <td><p id="start-end-date">${daily.pstartdate}~
+                        </label></td>
+
+                        <td><p id="start-end-date">${daily.pstartdate}~
                               ${daily.penddate}</p></td>
 
                         <!--제목으로 대체할 부분!  -->
@@ -485,9 +489,92 @@ input:focus, textarea {
 
    </div>
    <!--1번  끝-->
+
+
+
+
+
+
+
+
+
+
+   <script>
+
+        $(document).ready(function () {
+     
+
+            // 실행시 언어 설정을 한글로 설정 
+
+            $.summernote.options.lang = 'ko-KR';
+
+            $.summernote.options.airMode = false;
+
+        });
+
+ 
+
+        var a = $('.summernote');
+
+ 
+
+        
+        var insertText = function () {
+
+            // 현재 커서 위치에 'hello world'라는 텍스트 생성 
+
+            a.summernote('editor.insertText', '');
+
+        };
+
+ 
+
+ 
+
+        var empty = function () {
+
+            // summer note empty 여부 확인 
+
+            if (!a.summernote('isEmpty')) {
+
+                alert('에디터 안에 글 존재함');
+
+            }
+
+        };
+
+    
+
+
+
+    </script>
+
+
+
+
 </body>
 </html>
 <script>
+/* 썸머노트 사용 */
+$(document).ready(function() {
+   //여기 아래 부분
+   
+   
+   
+
+    $('.summernote').summernote({
+      height: 900,                 // 에디터 높이
+        minHeight: null,             // 최소 높이
+        maxHeight: 900,             // 최대 높이
+        focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+        lang: "ko-KR",               // 한글 설정
+             }); 
+});
+ 
+
+     
+     
+     
    //Get the modal
    var modal = document.getElementById("myModal");
 
@@ -560,11 +647,6 @@ input:focus, textarea {
       $(this).siblings('.bphoto2').val(filename);
    });
    /* 파일명 가져오기 end */
-   
-   
-   
-   
-   
    
    
    /* *박*일로 표시하게하는거 */
