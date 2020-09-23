@@ -43,14 +43,14 @@ public class KakaoLoginController {
 //	}
 
 	// 리다이렉트로부터 토큰값을 받아 카카오 로그인정보를 세션에 저장하고 리턴하는 메서드
-	@RequestMapping(value = "/kakaoLogin ", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/kakaoLogin", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
 	public String kakaoLogin(@RequestParam("code") String code, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 
 		// kakaoController로 부터 코드를 통해 발급받은 토큰값을 Json 형태로 저장
 		JsonNode node = KakaoApiController.getAccessToken(code);
 		
-		// 발급 받은 토큰을 Json 형태로 저장
+		// 발급 받은 토큰을 Json 형태로 저장z
 		JsonNode accessToken = node.get("access_token");
 
 		// 엑세스 토큰을 통해 로그인 한 사용자의 정보를 Json형태로 저장
@@ -61,7 +61,7 @@ public class KakaoLoginController {
 		// json 형태로 저장된 사용자 정보를 추출하여 저장하는 과정
 		String id = userInfo.path("id").asText();                              
 		String nickname = null;
-//		String uid = null;
+//		String uid = null;photo
 		String profile_image = null;
 		
 		JsonNode properties = userInfo.path("properties");
@@ -80,7 +80,7 @@ public class KakaoLoginController {
 		// 추출한 사용자 정보를 세션에 저장
 		session.setAttribute("uid", id);
 		session.setAttribute("uname", nickname);
-		session.setAttribute("photo", profile_image);
+		session.setAttribute("uphoto", profile_image);
 //		session.setAttribute("uid", uid);
 
 		// 새로운 페이지로 리턴

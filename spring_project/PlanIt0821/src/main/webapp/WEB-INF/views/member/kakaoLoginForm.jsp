@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>카카오 로그인 확인</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>

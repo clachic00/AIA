@@ -18,7 +18,7 @@
 
 		<script>
 			alert('로그인 되었습니다.');
-			location.href = '<c:url value="../home"/>';
+			location.href = '<c:url value="../mainHome?uidx=${loginInfo.uidx}"/>';
 		</script>
 
 	</c:if>
