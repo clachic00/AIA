@@ -132,7 +132,8 @@ public class tree {
 			}
 			
 			for(int i=1;i<=n*2-1;i++){
-				System.out.print(j);
+				if(j>=10) {int f=j%10;System.out.print(f);}
+				else{System.out.print(j);}
 				if(i==j*2-1) {
 					break;
 				}

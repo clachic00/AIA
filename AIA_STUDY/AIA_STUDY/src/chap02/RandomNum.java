@@ -3,6 +3,7 @@ package chap02;
 import java.util.Random;
 
 public class RandomNum {
+	
 	//Q1
 	public static void main(String[] args) {
 		int[] height=null;
@@ -17,21 +18,16 @@ public class RandomNum {
 		
 		for(int i=0;i<num;i++) {
 			
-		
 		System.out.println("키는 이래요");
 		
 		height[i] =120+ rand.nextInt(70);
 		
-		
 		System.out.println(height[i]);
-		
 		}
-		
 		
 		int max = max(height);
 		
 		System.out.println("제일 큰 키는 "+max+"입니다.");
-		
 	}
 
 	//Q1

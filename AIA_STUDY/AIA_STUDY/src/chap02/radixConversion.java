@@ -12,14 +12,12 @@ public class RadixConversion {
 		System.out.println("변환하는 음이 아닌 정수를 입력해주세요");int x=sc.nextInt();sc.nextLine();
 		System.out.println("어떤 진수로 변환할까요");int r=sc.nextInt();sc.nextLine();
 		
-		
 		System.out.println(r+" |   "+x);
 		int[] d=cardConv(x, r);
 	
 		System.out.print(r+"진수로 ");
 		for(int i=0;i<d.length;i++) {
 			System.out.print(d[i]);
-		
 		}
 		System.out.println(" 입니다.");
 	}
@@ -34,7 +32,6 @@ public class RadixConversion {
 		int[] d;
 		f=x;
 		while(f!=0) {
-			
 			f=f/r;
 			i++;
 			

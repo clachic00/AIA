@@ -45,18 +45,19 @@ public class CopyArray {
 			System.out.print(a[i]+" ");
 		}
 		
-		
-		
-		
 	}
-
+	
 	
 	//Q4
 	static int[] copy(int[] a, int[] b) {
 		 
-		for(int i=0;i<b.length;i++){
-			a[i]=b[i];
-		}
+		/*
+		 * for(int i=0;i<b.length;i++){ a[i]=b[i]; }
+		 */
+		
+		/* System.arraycopy(b, 0, a, 0, b.length); */
+		
+		a=b.clone();
 		
 		return a;
 	

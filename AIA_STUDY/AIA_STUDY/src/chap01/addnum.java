@@ -12,7 +12,6 @@ public class addnum {
 		int add= addnum1(a);
 		System.out.println("정답은 :"+add);
 		
-		
 		System.out.println("숫자를 입력해주세요");int b = sc.nextInt();sc.nextLine();
 		int add2= addnum2(b);
 		System.out.println("정답은 :"+add2);

@@ -22,7 +22,6 @@ public class ChangeOrder {
 		}
 
 		changeArrayOrder(n);
-		
 		sum = sumOf(n);
 		System.out.println(sum);
 	}

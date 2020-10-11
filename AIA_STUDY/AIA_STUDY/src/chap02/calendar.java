@@ -25,7 +25,6 @@ public class Calendar {
 		long f = (a-b)/1000/60/60/24;
 		long g = (c-a)/1000/60/60/24;
 		
-		
 		System.out.println(f);
 		
 		System.out.println(g);
