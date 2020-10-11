@@ -2,7 +2,7 @@ package chap02;
 
 import java.util.Random;
 
-public class random {
+public class RandomNum {
 	//Q1
 	public static void main(String[] args) {
 		int[] height=null;

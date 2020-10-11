@@ -2,7 +2,7 @@ package chap02;
 
 import java.util.Random;
 
-public class copyArray {
+public class CopyArray {
 
 	public static void main(String[] args) {
 		int[] a=null;

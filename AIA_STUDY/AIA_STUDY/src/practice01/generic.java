@@ -1,6 +1,6 @@
 package practice01;
 
-public class generic {
+public class Generic {
 
 	
 	

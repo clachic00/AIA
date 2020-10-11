@@ -1,4 +1,4 @@
-package practice01;
+package implementRunnable;
 
 public class Sum {
 
@@ -6,6 +6,5 @@ public class Sum {
 	public Sum() {num=0;}
 	public void addNum(int n) {num+=n;}
 	public int getNum() {return num;}
-	
 	
 }

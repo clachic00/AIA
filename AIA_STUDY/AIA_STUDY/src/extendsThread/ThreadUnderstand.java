@@ -1,4 +1,4 @@
-package practice01;
+package extendsThread;
 
 public class ThreadUnderstand {
 
