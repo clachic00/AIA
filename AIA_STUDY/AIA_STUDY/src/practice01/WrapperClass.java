@@ -12,7 +12,7 @@ public class WrapperClass {
 		int i2 = i.intValue();
 //		int i2 = i;
 		
-		System.out.println(i2);
+		System.out.println(i2); 
 		
 		
 	}
