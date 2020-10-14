@@ -9,7 +9,7 @@ class IncThread extends Thread {
 
 	public void run() {
 		for (int i = 0; i < 1000; i++)
-			for (int j = 0; j < 1000; j++)
+			for (int j = 0; j < 10000; j++)
 				inc.increment();
 	}
 }

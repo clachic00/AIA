@@ -44,14 +44,14 @@ public class SeqSearchSenVerFor {
 		for(i=0;i<n;i++) {
 			
 			System.out.print("   |");
-			for(int f=0; f<i;f++){
+			for(int f=0; f<i;f++){ 
 				
 				System.out.print("   ");
 		
 			}
-			System.out.printf("%3s","*");
+			System.out.printf("%3s\n","*");
 	
-			System.out.println();
+			/* System.out.println(); */
 			System.out.printf("%3d",i);
 			System.out.print("|");
 			for(int k=0;k<n;k++) {
