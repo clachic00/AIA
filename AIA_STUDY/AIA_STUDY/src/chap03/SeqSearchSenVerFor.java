@@ -1,5 +1,6 @@
 package chap03;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SeqSearchSenVerFor {
@@ -49,6 +50,12 @@ public class SeqSearchSenVerFor {
 				System.out.print("   ");
 		
 			}
+		
+			ArrayList<Integer> array = new ArrayList<>();
+			
+			
+			
+			
 			System.out.printf("%3s\n","*");
 	
 			/* System.out.println(); */
@@ -62,17 +69,6 @@ public class SeqSearchSenVerFor {
 			
 			if(a[i]==key)break;
 		}
-		
-		
 		return i==n?-1:i;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
