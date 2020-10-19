@@ -3,16 +3,14 @@ package chap04;
 import java.util.Scanner;
 // int형 스택의 사용 예
 
-class IntStackTester {
+class Q1IntStackTester {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		IntStack s = new IntStack(64);	// 최대 64개를 푸시할 수 있는 스택
 
 		while (true) {
-			System.out.println("현재 데이터 수：" + s.size() + " / "
-															  + s.capacity());
-			System.out.print("(1)푸시　(2)팝　(3)피크　" +
-								  "(4)덤프 (5)indexOf　(0)종료：");
+			System.out.println("현재의 데이터 수：" + s.size() + " / " + s.capacity());
+			System.out.print("(1)푸시 (2)팝 (3)피크 " + "(4)덤프 (5)검색 (6)비움  " + "(7)정보표시 (0)종료：");
 
 			int menu = sc.nextInt();
 			if (menu == 0) break;
@@ -65,17 +63,11 @@ class IntStackTester {
 					s.clear();
 					System.out.println("스택이 비워졌습니다.");
 					break;
-			 case 7: 							// capacity
-					s.capacity();
-					break;
-			 case 8: 							// size
-					s.size();
-					break;
-			 case 9: 							// isEmpty
-					s.isEmpty();
-					break;
-			 case 10: 							// isFull
-					s.isFull();
+				case 7: // 정보표시
+					System.out.println("용량：" + s.capacity());
+					System.out.println("데이터 수：" + s.size());
+					System.out.println("비어 " + (s.isEmpty() ? "있습니다." : "있지 않습니다."));
+					System.out.println("가득 " + (s.isFull() ? "찼습니다." : "차지 않았습니다."));
 					break;
 				
 			}
