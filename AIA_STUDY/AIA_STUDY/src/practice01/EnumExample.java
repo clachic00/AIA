@@ -23,7 +23,7 @@ public class EnumExample {
 		a.add(gender2);
 		System.out.println(0);
 		gender1 = Gender1.MALE;
-		gender1.setColor("brown");
+//		gender1.setColor("brown");
 		System.out.println(gender1.color);
 		System.out.println(1);
 		// gender2 = Gender.FEMALE;
